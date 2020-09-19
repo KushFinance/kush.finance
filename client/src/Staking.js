@@ -202,6 +202,7 @@ state = {
             &times;
           </span>
           <h1>Stake kSEED to mine kKUSH</h1>
+          <h1>small UI/UX bug - to Stake / Unstake use amounts starting with 1 as digit. FIX SOON!</h1>
           <div className="amount-staked-box">
             <div className="inline-block amount-staked-image">
               <img className="balance-logo-image" alt="nyan logo" src={nyanLogo}/>

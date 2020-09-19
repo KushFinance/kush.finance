@@ -215,7 +215,9 @@ state = {
             <div>
                 <p>20% of all minted kushOG will go to a funding contract.</p>
             </div>
-          
+            <div>
+                <p>UNDER CONSTRUCTION! STAY TUNED AND MINT kKUSH</p>
+            </div>
             {/* <div>
                 <p>kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH. </p>
             </div> */}
