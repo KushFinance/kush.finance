@@ -44,7 +44,7 @@ state = {
   getkOGUniAmount = async () => {
     let _kogUniAmount = await this.kOGUniInstance.methods.balanceOf(this.accounts[0]).call();
     this.setState({
-      kOGUniAmount: this.web3.utils.fromWei(_dUniAmount)
+      kOGUniAmount: this.web3.utils.fromWei(_kOGUniAmount)
     })
   }
 
@@ -164,21 +164,21 @@ state = {
 
       console.log(this.web3.eth)
 
-      this.DarkNyanUniInstance = new this.web3.eth.Contract(
-        DarkNyanUni,
+      this.kOGUniInstance = new this.web3.eth.Contract(
+        kOGUni,
         "0xdd0e143868b34d97355f249a4ddffbee03fd0481"
       );
 
 
-      this.darkNyanInstance = new this.web3.eth.Contract(
-        DarkNyan.abi,
+      this.kOGInstance = new this.web3.eth.Contract(
+        kOG.abi,
         "0x23b7f3a35bda036e3b59a945e441e041e6b11101",
       );
 
-      this.getDNyanUniStakeAmount();
-      this.getDNyanSupply();
-      this.getDNyanUniAllowance();
-      this.getDUniAmount();
+      this.getkOGUniStakeAmount();
+      this.getkOGSupply();
+      this.getkOGUniAllowance();
+      this.getkOGUniAmount();
       this.getRewardsAmount();
 
     //   this.getMyStakeAmount();
