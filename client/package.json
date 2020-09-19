@@ -1,0 +1,45 @@
+{
+  "homepage": "https://kush.finance/",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.43",
+    "@walletconnect/client": "^1.2.2",
+    "@walletconnect/qrcode-modal": "^1.2.2",
+    "@walletconnect/web3-provider": "^1.2.2",
+    "antd": "^4.6.4",
+    "dot-env": "0.0.1",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "react-scripts": "3.2.0",
+    "rsuite": "^4.8.2",
+    "truffle": "^5.1.42",
+    "web3": "^1.2.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}
