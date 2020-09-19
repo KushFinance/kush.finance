@@ -3,7 +3,7 @@ import Staking from "./Staking";
 import Pump from "./Pump";
 import Mine from "./Mine";
 import kSeedToken from "./contracts/kSeedToken.json";
-import KushToken from "./contracts/KushToken.json";
+import KushToken from "./contracts/kKushToken.json";
 import getWeb3 from "./getWeb3";
 import {setWeb3} from "./shared";
 import "./App.css";
