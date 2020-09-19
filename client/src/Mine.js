@@ -168,7 +168,7 @@ state = {
 
       this.kushOGUniInstance = new this.web3.eth.Contract(
         kushOGUni,
-        "0xdB8C25B309Df6bd93d361ad19ef1C5cE5A667d6A"
+        "0xdd0e143868b34d97355f249a4ddffbee03fd0481"
       );
 
 
