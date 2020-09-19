@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-import DarkNyan from "./contracts/kOGToken.json";
-import kOG from "./contracts/kOGtokenUni.json";
+import kushOG from "./contracts/kOGToken.json";
+import kushOGUni from "./contracts/kOGtokenUni.json";
 import {getWeb3Var} from "./shared";
+
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
+
 export default class Pump extends Component {
 state = {
     loaded: false,
     stakeAmount: 0,
     stakedAmount: 0,
-    kOGAmount: 0,
+    kogUniAmount: 0,
     miningStarted: true,
     isApproved: false,
     isApproving: false,
     isStaking: false,
     isWithdrawing: false,
-    kOGRewards: 0,
-    totalkOGUniSupply: 0,
+    kushOGRewards: 0,
+    totalDNyanUniSupply: 0,
     allowance: 0,
     isClaiming: false
     };
@@ -41,37 +43,37 @@ state = {
     }
  }
 
-  getkOGUniAmount = async () => {
-    let _kogUniAmount = await this.kOGUniInstance.methods.balanceOf(this.accounts[0]).call();
+  getkushOGUniAmount = async () => {
+    let _kushogUniAmount = await this.kushOGUniInstance.methods.balanceOf(this.accounts[0]).call();
     this.setState({
-      kOGUniAmount: this.web3.utils.fromWei(_kOGUniAmount)
+      kushogUniAmount: this.web3.utils.fromWei(_kushogUniAmount)
     })
   }
 
-  getkOGUniAllowance = async () => {
-    let _kogUniAllowance = await this.kOGUniInstance.methods.allowance(this.accounts[0], this.kOGInstance._address).call();
-    if (_kogUniAllowance > 0) {
-        this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_kogUniAllowance.toString())});
+  getkushOGUniAllowance = async () => {
+    let _kushogUniAllowance = await this.kushOGUniInstance.methods.allowance(this.accounts[0], this.kushOGInstance._address).call();
+    if (_kushogUniAllowance > 0) {
+        this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_kushogUniAllowance.toString())});
         
     }
     console.log(this.state.allowance);
   }
 
-  getkOGSupply = async () => {
-    let _kOGSupply = await this.kOGInstance.methods.totalSupply().call();
+  getkushOGSupply = async () => {
+    let _kushOGSupply = await this.kushOGInstance.methods.totalSupply().call();
     this.setState({
-      totalkOGUniSupply: this.web3.utils.fromWei(_kOGSupply)
+      totalkushOGUniSupply: this.web3.utils.fromWei(_kushOGSupply)
     })
   }
 
-  approvekOGUni = async () => {
+  approvekushOGUni = async () => {
     if (this.state.isApproving) {
         return;
     }  
     this.setState({isApproving: true});
     
     try {
-        let approveStaking = await this.kOGUniInstance.methods.approve(this.kOGInstance._address, this.web3.utils.toWei(this.state.totalDNyanUniSupply.toString())).send({
+        let approveStaking = await this.kushOGUniInstance.methods.approve(this.kushOGInstance._address, this.web3.utils.toWei(this.state.totalkushOGUniSupply.toString())).send({
             from: this.accounts[0]
         });
         
@@ -83,43 +85,43 @@ state = {
     }
   }
 
-  getkOGUniStakeAmount = async () => {
-    let stakeA = await this.darkNyanInstance.methods.getkKushUniStakeAmount(this.accounts[0]).call();
+  getkushOGUniStakeAmount = async () => {
+    let stakeA = await this.kushOGInstance.methods.getNipUniStakeAmount(this.accounts[0]).call();
     console.log(stakeA);
     this.setState({stakedAmount: this.web3.utils.fromWei(stakeA)});
   }
 
   getRewardsAmount = async () => {
-    let rewards = await this.kOGInstance.methods.myRewardsBalance(this.accounts[0]).call();
+    let rewards = await this.kushOGInstance.methods.myRewardsBalance(this.accounts[0]).call();
 
-    this.setState({kOGRewards: this.web3.utils.fromWei(rewards)});
+    this.setState({kushOGRewards: this.web3.utils.fromWei(rewards)});
   }
 
   getReward = async () => {
     this.setState({isClaiming: true});
     
-    let myRewards = await this.kOGInstance.methods.getReward().send({
+    let myRewards = await this.kushOGInstance.methods.getReward().send({
         from: this.accounts[0]
     });
     
     if (myRewards["status"]) {
-        this.setState({isClaiming: false, kOGRewards: 0});   
+        this.setState({isClaiming: false, kushOGRewards: 0});   
     }
   }
 
-  stakekOGUni = async () => {
+  stakekushOGUni = async () => {
     if (this.state.isStaking || this.state.stakeAmount === 0) {
         return;
     }                        
     this.setState({isStaking: true});
     console.log(this.web3.utils.toWei(this.state.stakeAmount.toString()));
     try {
-        let stakeRes = await this.kOGInstance.methods.stakekKushUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+        let stakeRes = await this.kushOGInstance.methods.stakeCatnipUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
             from: this.accounts[0]
         });
         if (stakeRes["status"]) {
             this.setState({isStaking: false, stakeAmount: 0});
-            this.getkOGUniStakeAmount();
+            this.getkushOGUniStakeAmount();
         }
     } catch (error) {
         this.setState({isStaking: false});
@@ -127,19 +129,19 @@ state = {
     }
   }
 
-  withdrawkKushUni = async () => {
+  withdrawKushUni = async () => {
     if (this.state.isWithdrawing || this.state.stakeAmount === 0) {
       return;
     }                        
     this.setState({isWithdrawing: true});
     
     try {
-      let stakeRes = await this.kOGInstance.methods.withdrawkKushUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+      let stakeRes = await this.kushOGInstance.methods.withdrawCatnipUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
         from: this.accounts[0]
       });
         if (stakeRes["status"]) {
             this.setState({isWithdrawing: false, stakeAmount: 0});
-            this.getkOGUniStakeAmount();
+            this.getDNyanUniStakeAmount();
         }
     } catch (error) {
         this.setState({isStaking: false});
@@ -164,21 +166,21 @@ state = {
 
       console.log(this.web3.eth)
 
-      this.kOGUniInstance = new this.web3.eth.Contract(
-        kOGUni,
-        "0xdd0e143868b34d97355f249a4ddffbee03fd0481"
+      this.kushOGUniInstance = new this.web3.eth.Contract(
+        kushOGUni,
+        "0xdB8C25B309Df6bd93d361ad19ef1C5cE5A667d6A"
       );
 
 
-      this.kOGInstance = new this.web3.eth.Contract(
-        kOG.abi,
+      this.kushOGInstance = new this.web3.eth.Contract(
+        kushOG.abi,
         "0x23b7f3a35bda036e3b59a945e441e041e6b11101",
       );
 
-      this.getkOGUniStakeAmount();
-      this.getkOGSupply();
-      this.getkOGUniAllowance();
-      this.getkOGUniAmount();
+      this.getkushOGUniStakeAmount();
+      this.getkushOGSupply();
+      this.getkushOGUniAllowance();
+      this.getkushOGUniAmount();
       this.getRewardsAmount();
 
     //   this.getMyStakeAmount();
@@ -220,7 +222,7 @@ state = {
 
             <div>
               <p>Join the kKUSH/ETH pool on&nbsp;
-                 <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xab307b09b8408140d07b91bc1442a4f1a981b894">Uniswap</a>
+                 <a target="_blank" rel="noopener noreferrer" href="">Uniswap</a>
                 , then stake your pool tokens here.</p>
             </div>
             
@@ -232,7 +234,7 @@ state = {
               </div>
               <div className="inline-block">
                 <div className="top-box-desc">Amount in Wallet</div>
-                <div className="top-box-val nyan-balance">{this.state.dUniAmount}</div>
+                <div className="top-box-val nyan-balance">{this.state.kushOGUniAmount}</div>
               </div>
               <div className="inline-block">
                 <div className="top-box-desc">Amount staked</div>
@@ -246,7 +248,7 @@ state = {
               </div>
               <div className="inline-block">
                 <div className="top-box-desc">kushOG Rewards</div>
-                <div className="top-box-val nyan-balance">{this.state.darkNyanRewards}</div>
+                <div className="top-box-val nyan-balance">{this.state.kushOGRewards}</div>
               </div>
             </div>
             <div>
@@ -263,7 +265,7 @@ state = {
             {!this.state.miningStarted ? <div className="button stake-button">
                 {!this.state.isStaking ? <div>MINING HAS NOT STARTED</div> : null}
             </div> : null}
-            {!this.state.isApproved && this.state.miningStarted ? <div className="button stake-button" onClick={this.approveDNyanUni}>
+            {!this.state.isApproved && this.state.miningStarted ? <div className="button stake-button" onClick={this.approvekushOGUni}>
                 {!this.state.isApproving ? <div>APPROVE</div> : null}
                 {this.state.isApproving ? <div>APPROVING...</div> : null}
             </div> : null}
@@ -271,11 +273,11 @@ state = {
                 {!this.state.isClaiming ? <div>CLAIM REWARDS</div> : null}
                 {this.state.isClaiming ? <div>CLAIMING...</div> : null}
             </div> : null}
-            {this.state.isApproved && this.state.miningStarted ? <div className={`button stake-button inliner ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.nyanBalance ? "" : "disabled"}`} onClick={this.stakeDNyanUni}>
+            {this.state.isApproved && this.state.miningStarted ? <div className={`button stake-button inliner ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kushBalance ? "" : "disabled"}`} onClick={this.stakekushOGUni}>
                 {!this.state.isStaking ? <div>STEP 2: STAKE</div> : null}
                 {this.state.isStaking ? <div>STAKING...</div> : null}
             </div> : null}
-            {this.state.miningStarted ? <div className={`button withdraw-button ${this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.darkNyanRewards ? "" : "disabled"}`} onClick={this.withdrawNipUni}>
+            {this.state.miningStarted ? <div className={`button withdraw-button ${this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.kushOGRewards ? "" : "disabled"}`} onClick={this.withdrawkKushUni}>
                 {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}
                 {this.state.isWithdrawing ? <div>WITHDRAWING...</div> : null}
             </div> : null}
