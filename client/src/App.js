@@ -218,7 +218,7 @@ class App extends Component {
     // }
     return (
       <div className="App">
-        <div className="Logo">KUSH.FINANCE</div>
+        <div className="Logo">KUSH.FINANCE Chill and YIELD</div>
         <div className="top-box-container">
           <div className="top-box balance-box">
             <img className="balance-logo-image" alt="balance logo" src={kushLogo}/>
