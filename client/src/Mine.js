@@ -168,13 +168,13 @@ state = {
 
       this.kushOGUniInstance = new this.web3.eth.Contract(
         kushOGUni,
-        ""
+        "0xdd0e143868b34d97355f249a4ddffbee03fd0481"
       );
 
 
       this.kushOGInstance = new this.web3.eth.Contract(
         kushOG.abi,
-        "0x23b7f3a35bda036e3b59a945e441e041e6b11101",
+        "0x8ddf8af6a26d316ac07269dd490bbfb31718a3d4",
       );
 
       this.getkushOGUniStakeAmount();

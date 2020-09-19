@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
-
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/SafeERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
+
 
 contract kSeedGifting {
     

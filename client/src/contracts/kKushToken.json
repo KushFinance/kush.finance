@@ -14515,7 +14515,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-09-19T07:12:10.996Z",
+  "updatedAt": "2020-09-19T12:50:10.334Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
