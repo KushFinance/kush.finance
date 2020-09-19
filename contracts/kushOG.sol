@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract kOGToken is ERC20{
+contract kushOGToken is ERC20{
     
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
@@ -14,7 +14,7 @@ contract kOGToken is ERC20{
         uint256 lastBlockChecked;
         uint256 rewards;
         uint256 kkushPoolTokens;
-        uint256 kOGPoolTokens;
+        uint256 kushOGPoolTokens;
     }
     
     mapping(address => stakeTracker) private stakedBalances;
@@ -32,13 +32,13 @@ contract kOGToken is ERC20{
     uint256 public miningDifficulty = 50000;
     
     IERC20 private kkush;
-    IERC20 private kOG;
+    IERC20 private kushOG;
     
     IERC20 private kkushV2;
     address public kkushUniswapV2Pair;
     
-    IERC20 private kOGV2;
-    address public kOGV2UniswapV2Pair;
+    IERC20 private kushOGV2;
+    address public kushOGV2UniswapV2Pair;
     
     uint256 totalLiquidityStaked;
 
@@ -50,8 +50,8 @@ contract kOGToken is ERC20{
     
     modifier updateStakingReward(address _account) {
         uint256 liquidityBonus;
-        if (stakedBalances[_account].kOGPoolTokens > 0) {
-            liquidityBonus = stakedBalances[_account].kOGPoolTokens/ liquidityMultiplier;
+        if (stakedBalances[_account].kushOGPoolTokens > 0) {
+            liquidityBonus = stakedBalances[_account].kushOGPoolTokens/ liquidityMultiplier;
         }
         if (block.number > stakedBalances[_account].lastBlockChecked) {
             uint256 rewardBlocks = block.number
@@ -81,11 +81,11 @@ contract kOGToken is ERC20{
     
     event kkushUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
-    event kOGUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
+    event kushOGUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
     event kkushUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
-    event kOGUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
+    event kushOGUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
     event Rewards(address indexed user, uint256 reward);
     
@@ -95,7 +95,7 @@ contract kOGToken is ERC20{
     
     event kkushPairAddressChanged(address indexed user, address kkushPairAddress);
     
-    event kOGPairAddressChanged(address indexed user, address kOGPairAddress);
+    event kushOGPairAddressChanged(address indexed user, address kOGPairAddress);
     
     event difficultyChanged(address indexed user, uint256 difficulty);
 
@@ -125,9 +125,9 @@ contract kOGToken is ERC20{
     }
 
     function setpkKushPairAddress(address _uniV2address) public _onlyOwner {
-        kOGV2UniswapV2Pair = _uniV2address;
-        kOGV2 = IERC20(kOGV2UniswapV2Pair);
-        emit kOGPairAddressChanged(msg.sender, kOGV2UniswapV2Pair);
+        kushOGV2UniswapV2Pair = _uniV2address;
+        kushOGV2 = IERC20(kushOGV2UniswapV2Pair);
+        emit kushOGPairAddressChanged(msg.sender, kushOGV2UniswapV2Pair);
     }
     
      function setMiningDifficulty(uint256 amount) public _onlyOwner {
@@ -151,32 +151,32 @@ contract kOGToken is ERC20{
     
     
     
-    function stakekOGUni(uint256 amount) public updateStakingReward(msg.sender) {
-        kOGV2.safeTransferFrom(msg.sender, address(this), amount);
-        stakedBalances[msg.sender].kOGPoolTokens = stakedBalances[msg.sender].kOGPoolTokens.add(amount);
+    function stakekushOGUni(uint256 amount) public updateStakingReward(msg.sender) {
+        kushOGV2.safeTransferFrom(msg.sender, address(this), amount);
+        stakedBalances[msg.sender].kushOGPoolTokens = stakedBalances[msg.sender].kushOGPoolTokens.add(amount);
         totalLiquidityStaked = totalLiquidityStaked.add(amount);                                                                              
-        emit kOGUniStaked(msg.sender, amount, totalLiquidityStaked);
+        emit kushOGUniStaked(msg.sender, amount, totalLiquidityStaked);
     }
     
-    function withdrawkOGUni(uint256 amount) public updateStakingReward(msg.sender) {
-        kOGV2.safeTransfer(msg.sender, amount);
-        stakedBalances[msg.sender].kOGPoolTokens = stakedBalances[msg.sender].kOGPoolTokens.sub(amount);
+    function withdrawkushOGUni(uint256 amount) public updateStakingReward(msg.sender) {
+        kushOGV2.safeTransfer(msg.sender, amount);
+        stakedBalances[msg.sender].kushOGPoolTokens = stakedBalances[msg.sender].kushOGPoolTokens.sub(amount);
         totalLiquidityStaked = totalLiquidityStaked.sub(amount);                                                                              
-        emit kOGUniWithdrawn(msg.sender, amount, totalLiquidityStaked);
+        emit kushOGUniWithdrawn(msg.sender, amount, totalLiquidityStaked);
     }
     
     function getkKushUniStakeAmount(address _account) public view returns (uint256) {
         return stakedBalances[_account].kkushPoolTokens;
     }
     
-    function getDNyanUniStakeAmount(address _account) public view returns (uint256) {
-        return stakedBalances[_account].kOGPoolTokens;
+    function getkushOGUniStakeAmount(address _account) public view returns (uint256) {
+        return stakedBalances[_account].kushOGPoolTokens;
     }
     
     function myRewardsBalance(address _account) public view returns(uint256) {
         uint256 liquidityBonus;
-        if (stakedBalances[_account].kOGPoolTokens > 0) {
-            liquidityBonus = stakedBalances[_account].kOGPoolTokens / liquidityMultiplier;
+        if (stakedBalances[_account].kushOGPoolTokens > 0) {
+            liquidityBonus = stakedBalances[_account].kushOGPoolTokens / liquidityMultiplier;
         }
         
         if (block.number > stakedBalances[_account].lastBlockChecked) {
@@ -210,7 +210,7 @@ contract kOGToken is ERC20{
         isSendingFunds = !isSendingFunds;
     }
     
-    function sendkOGToFund(uint256 amount) public {
+    function sendkushOGToFund(uint256 amount) public {
         if (!isSendingFunds) {
             return;
         }
