@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 @import '~antd/dist/antd.css';
 Body {
-  background-color: #fdfafa;
+  background: radial-gradient(circle, rgba(63,251,91,0.5382528011204482) 0%, rgba(232,70,252,0.4542191876750701) 70%);
   box-sizing: border-box;
 }
 
