@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
 
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/SafeERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
 
 contract kSeedGifting {
     
@@ -9,7 +9,7 @@ contract kSeedGifting {
     using SafeMath for uint256;
     
     
-    address private kseed = 0x9ed02d3B4B7a719154314F34aFB11bE9bD548510;
+    address private kseed = 0x3F09400313e83d53366147e3ea0e4e2279D80850;
     IERC20 private kseedToken = IERC20(kseed);
     
     constructor() public payable {
