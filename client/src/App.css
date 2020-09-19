@@ -25,7 +25,7 @@ Body {
 
 .top-box-desc {
   text-align: left;
-  color: rgb(192,123,196);
+  color: rgb(31, 117, 53);
   font-weight: 600;
   font-size: 12px;
 }
@@ -202,7 +202,7 @@ Body {
 .links-box a {
   font-weight: 600;
   text-decoration: none;
-  color: #ff95da;
+  color: #21c251;
 }
 
 .addr-name {
@@ -350,7 +350,7 @@ Body {
 }
 
 button.as-link {
-  color: #ff95da;
+  color: #47d347;
   background: none;
   border: none;
   font-size: 14px;
@@ -373,9 +373,9 @@ button.as-link {
 .button {
   padding: 10px;
   margin: 0 auto;
-  background-color: #fca3dc;
+  background-color: #367c2f;
   color: #282c34;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
   border-radius: 6px;
