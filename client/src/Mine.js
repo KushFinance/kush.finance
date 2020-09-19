@@ -86,7 +86,7 @@ state = {
   }
 
   getkushOGUniStakeAmount = async () => {
-    let stakeA = await this.kushOGInstance.methods.getNipUniStakeAmount(this.accounts[0]).call();
+    let stakeA = await this.kushOGInstance.methods.getkKushUniStakeAmount(this.accounts[0]).call();
     console.log(stakeA);
     this.setState({stakedAmount: this.web3.utils.fromWei(stakeA)});
   }
@@ -116,7 +116,7 @@ state = {
     this.setState({isStaking: true});
     console.log(this.web3.utils.toWei(this.state.stakeAmount.toString()));
     try {
-        let stakeRes = await this.kushOGInstance.methods.stakeCatnipUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+        let stakeRes = await this.kushOGInstance.methods.stakekKushUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
             from: this.accounts[0]
         });
         if (stakeRes["status"]) {
@@ -136,12 +136,12 @@ state = {
     this.setState({isWithdrawing: true});
     
     try {
-      let stakeRes = await this.kushOGInstance.methods.withdrawCatnipUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+      let stakeRes = await this.kushOGInstance.methods.withdrawkKushUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
         from: this.accounts[0]
       });
         if (stakeRes["status"]) {
             this.setState({isWithdrawing: false, stakeAmount: 0});
-            this.getDNyanUniStakeAmount();
+            this.getkushOGUniStakeAmount();
         }
     } catch (error) {
         this.setState({isStaking: false});
@@ -168,7 +168,7 @@ state = {
 
       this.kushOGUniInstance = new this.web3.eth.Contract(
         kushOGUni,
-        "0xdd0e143868b34d97355f249a4ddffbee03fd0481"
+        ""
       );
 
 
