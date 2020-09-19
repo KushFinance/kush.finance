@@ -219,8 +219,8 @@ state = {
             </div> */}
 
             <div>
-              <p>Join the kKUSH/UNI pool on&nbsp;
-                 <a target="_blank" rel="noopener noreferrer" href="">Uniswap</a>
+              <p>Join the UNI/kKUSH pool on&nbsp;
+                 <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xab307b09b8408140d07b91bc1442a4f1a981b894">Uniswap</a>
                 , then stake your pool tokens here.</p>
             </div>
             
