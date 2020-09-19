@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract PurpleKush is ERC20{
+contract kOGToken is ERC20{
     
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
@@ -13,8 +13,8 @@ contract PurpleKush is ERC20{
     struct stakeTracker {
         uint256 lastBlockChecked;
         uint256 rewards;
-        uint256 kushPoolTokens;
-        uint256 pKushPoolTokens;
+        uint256 kkushPoolTokens;
+        uint256 kOGPoolTokens;
     }
     
     mapping(address => stakeTracker) private stakedBalances;
@@ -31,14 +31,14 @@ contract PurpleKush is ERC20{
     uint256 public liquidityMultiplier = 80;
     uint256 public miningDifficulty = 50000;
     
-    IERC20 private kush;
-    IERC20 private pKush;
+    IERC20 private kkush;
+    IERC20 private kOG;
     
-    IERC20 private kushV2;
-    address public kushUniswapV2Pair;
+    IERC20 private kkushV2;
+    address public kkushUniswapV2Pair;
     
-    IERC20 private pKushV2;
-    address public pKushUniswapV2Pair;
+    IERC20 private kOGV2;
+    address public kOGV2UniswapV2Pair;
     
     uint256 totalLiquidityStaked;
 
@@ -50,8 +50,8 @@ contract PurpleKush is ERC20{
     
     modifier updateStakingReward(address _account) {
         uint256 liquidityBonus;
-        if (stakedBalances[_account].pKushPoolTokens > 0) {
-            liquidityBonus = stakedBalances[_account].pKushPoolTokens/ liquidityMultiplier;
+        if (stakedBalances[_account].kOGPoolTokens > 0) {
+            liquidityBonus = stakedBalances[_account].kOGPoolTokens/ liquidityMultiplier;
         }
         if (block.number > stakedBalances[_account].lastBlockChecked) {
             uint256 rewardBlocks = block.number
@@ -59,9 +59,9 @@ contract PurpleKush is ERC20{
                                         
                                         
              
-            if (stakedBalances[_account].kushPoolTokens > 0) {
+            if (stakedBalances[_account].kkushPoolTokens > 0) {
                 stakedBalances[_account].rewards = stakedBalances[_account].rewards
-                                                                            .add(stakedBalances[_account].kushPoolTokens)
+                                                                            .add(stakedBalances[_account].kkushPoolTokens)
                                                                             .add(liquidityBonus)
                                                                             .mul(rewardBlocks)
                                                                             / miningDifficulty;
@@ -79,13 +79,13 @@ contract PurpleKush is ERC20{
     
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     
-    event kushUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
+    event kkushUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
-    event pKushUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
+    event kOGUniStaked(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
-    event kushUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
+    event kkushUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
-    event pKushUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
+    event kOGUniWithdrawn(address indexed user, uint256 amount, uint256 totalLiquidityStaked);
     
     event Rewards(address indexed user, uint256 reward);
     
@@ -93,16 +93,16 @@ contract PurpleKush is ERC20{
     
     event votingAddressChanged(address indexed user, address votingAddress);
     
-    event kushPairAddressChanged(address indexed user, address kushPairAddress);
+    event kkushPairAddressChanged(address indexed user, address kkushPairAddress);
     
-    event pKushPairAddressChanged(address indexed user, address pKushPairAddress);
+    event kOGPairAddressChanged(address indexed user, address kOGPairAddress);
     
     event difficultyChanged(address indexed user, uint256 difficulty);
 
 
-    constructor() public payable ERC20("purpleKUSH", "pKUSH") {
+    constructor() public payable ERC20("kushOG", "kOG") {
         owner = msg.sender;
-        uint256 supply = 420;
+        uint256 supply = 42;
         _mint(msg.sender, supply.mul(10 ** 18));
         lastBlockSent = block.number;
     }
@@ -118,16 +118,16 @@ contract PurpleKush is ERC20{
         emit votingAddressChanged(msg.sender, fundVotingAddress);
     }
     
-    function setKushPairAddress(address _uniV2address) public _onlyOwner {
-        kushUniswapV2Pair = _uniV2address;
-        kushV2 = IERC20(kushUniswapV2Pair);
-        emit kushPairAddressChanged(msg.sender, kushUniswapV2Pair);
+    function setkKushPairAddress(address _uniV2address) public _onlyOwner {
+        kkushUniswapV2Pair = _uniV2address;
+        kkushV2 = IERC20(kkushUniswapV2Pair);
+        emit kkushPairAddressChanged(msg.sender, kkushUniswapV2Pair);
     }
 
-    function setpKushPairAddress(address _uniV2address) public _onlyOwner {
-        pKushUniswapV2Pair = _uniV2address;
-        pKushV2 = IERC20(pKushUniswapV2Pair);
-        emit pKushPairAddressChanged(msg.sender, pKushUniswapV2Pair);
+    function setpkKushPairAddress(address _uniV2address) public _onlyOwner {
+        kOGV2UniswapV2Pair = _uniV2address;
+        kOGV2 = IERC20(kOGV2UniswapV2Pair);
+        emit kOGPairAddressChanged(msg.sender, kOGV2UniswapV2Pair);
     }
     
      function setMiningDifficulty(uint256 amount) public _onlyOwner {
@@ -135,48 +135,48 @@ contract PurpleKush is ERC20{
        emit difficultyChanged(msg.sender, miningDifficulty);
    }
     
-    function stakeKushUni(uint256 amount) public updateStakingReward(msg.sender) {
-        kushV2.safeTransferFrom(msg.sender, address(this), amount);
-        stakedBalances[msg.sender].kushPoolTokens = stakedBalances[msg.sender].kushPoolTokens.add(amount);
+    function stakekKushUni(uint256 amount) public updateStakingReward(msg.sender) {
+        kkushV2.safeTransferFrom(msg.sender, address(this), amount);
+        stakedBalances[msg.sender].kkushPoolTokens = stakedBalances[msg.sender].kkushPoolTokens.add(amount);
         totalLiquidityStaked = totalLiquidityStaked.add(amount);                                                                              
-        emit kushUniStaked(msg.sender, stakedBalances[msg.sender].kushPoolTokens, totalLiquidityStaked);
+        emit kkushUniStaked(msg.sender, stakedBalances[msg.sender].kkushPoolTokens, totalLiquidityStaked);
     }
     
-    function withdrawKushUni(uint256 amount) public updateStakingReward(msg.sender) {
-        kushV2.safeTransfer(msg.sender, amount);
-        stakedBalances[msg.sender].kushPoolTokens = stakedBalances[msg.sender].kushPoolTokens.sub(amount);
+    function withdrawkKushUni(uint256 amount) public updateStakingReward(msg.sender) {
+        kkushV2.safeTransfer(msg.sender, amount);
+        stakedBalances[msg.sender].kkushPoolTokens = stakedBalances[msg.sender].kkushPoolTokens.sub(amount);
         totalLiquidityStaked = totalLiquidityStaked.sub(amount);                                                                              
-        emit kushUniWithdrawn(msg.sender, amount, totalLiquidityStaked);
+        emit kkushUniWithdrawn(msg.sender, amount, totalLiquidityStaked);
     }
     
     
     
-    function stakeDarkNyanUni(uint256 amount) public updateStakingReward(msg.sender) {
-        pKushV2.safeTransferFrom(msg.sender, address(this), amount);
-        stakedBalances[msg.sender].pKushPoolTokens = stakedBalances[msg.sender].pKushPoolTokens.add(amount);
+    function stakekOGUni(uint256 amount) public updateStakingReward(msg.sender) {
+        kOGV2.safeTransferFrom(msg.sender, address(this), amount);
+        stakedBalances[msg.sender].kOGPoolTokens = stakedBalances[msg.sender].kOGPoolTokens.add(amount);
         totalLiquidityStaked = totalLiquidityStaked.add(amount);                                                                              
-        emit pKushUniStaked(msg.sender, amount, totalLiquidityStaked);
+        emit kOGUniStaked(msg.sender, amount, totalLiquidityStaked);
     }
     
-    function withdrawDarkNyanUni(uint256 amount) public updateStakingReward(msg.sender) {
-        pKushV2.safeTransfer(msg.sender, amount);
-        stakedBalances[msg.sender].pKushPoolTokens = stakedBalances[msg.sender].pKushPoolTokens.sub(amount);
+    function withdrawkOGUni(uint256 amount) public updateStakingReward(msg.sender) {
+        kOGV2.safeTransfer(msg.sender, amount);
+        stakedBalances[msg.sender].kOGPoolTokens = stakedBalances[msg.sender].kOGPoolTokens.sub(amount);
         totalLiquidityStaked = totalLiquidityStaked.sub(amount);                                                                              
-        emit pKushUniWithdrawn(msg.sender, amount, totalLiquidityStaked);
+        emit kOGUniWithdrawn(msg.sender, amount, totalLiquidityStaked);
     }
     
-    function getKushUniStakeAmount(address _account) public view returns (uint256) {
-        return stakedBalances[_account].kushPoolTokens;
+    function getkKushUniStakeAmount(address _account) public view returns (uint256) {
+        return stakedBalances[_account].kkushPoolTokens;
     }
     
     function getDNyanUniStakeAmount(address _account) public view returns (uint256) {
-        return stakedBalances[_account].pKushPoolTokens;
+        return stakedBalances[_account].kOGPoolTokens;
     }
     
     function myRewardsBalance(address _account) public view returns(uint256) {
         uint256 liquidityBonus;
-        if (stakedBalances[_account].pKushPoolTokens > 0) {
-            liquidityBonus = stakedBalances[_account].pKushPoolTokens / liquidityMultiplier;
+        if (stakedBalances[_account].kOGPoolTokens > 0) {
+            liquidityBonus = stakedBalances[_account].kOGPoolTokens / liquidityMultiplier;
         }
         
         if (block.number > stakedBalances[_account].lastBlockChecked) {
@@ -185,9 +185,9 @@ contract PurpleKush is ERC20{
                                         
                                         
              
-            if (stakedBalances[_account].kushPoolTokens > 0) {
+            if (stakedBalances[_account].kkushPoolTokens > 0) {
                 return stakedBalances[_account].rewards
-                                                .add(stakedBalances[_account].kushPoolTokens)
+                                                .add(stakedBalances[_account].kkushPoolTokens)
                                                 .add(liquidityBonus)
                                                 .mul(rewardBlocks)
                                                 / miningDifficulty;
@@ -210,7 +210,7 @@ contract PurpleKush is ERC20{
         isSendingFunds = !isSendingFunds;
     }
     
-    function sendDarkNyanToFund(uint256 amount) public {
+    function sendkOGToFund(uint256 amount) public {
         if (!isSendingFunds) {
             return;
         }

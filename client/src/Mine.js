@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import DarkNyan from "./contracts/PurpleKush.json";
-import DarkNyanUni from "./contracts/PurpleKushUni.json";
+import DarkNyan from "./contracts/kOGToken.json";
+import kOG from "./contracts/kOGtokenUni.json";
 import {getWeb3Var} from "./shared";
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
@@ -10,14 +10,14 @@ state = {
     loaded: false,
     stakeAmount: 0,
     stakedAmount: 0,
-    dUniAmount: 0,
+    kOGAmount: 0,
     miningStarted: true,
     isApproved: false,
     isApproving: false,
     isStaking: false,
     isWithdrawing: false,
-    darkNyanRewards: 0,
-    totalDNyanUniSupply: 0,
+    kOGRewards: 0,
+    totalkOGUniSupply: 0,
     allowance: 0,
     isClaiming: false
     };
@@ -41,37 +41,37 @@ state = {
     }
  }
 
-  getDUniAmount = async () => {
-    let _dUniAmount = await this.DarkNyanUniInstance.methods.balanceOf(this.accounts[0]).call();
+  getkOGUniAmount = async () => {
+    let _kogUniAmount = await this.kOGUniInstance.methods.balanceOf(this.accounts[0]).call();
     this.setState({
-      dUniAmount: this.web3.utils.fromWei(_dUniAmount)
+      kOGUniAmount: this.web3.utils.fromWei(_dUniAmount)
     })
   }
 
-  getDNyanUniAllowance = async () => {
-    let _dUniAllowance = await this.DarkNyanUniInstance.methods.allowance(this.accounts[0], this.darkNyanInstance._address).call();
-    if (_dUniAllowance > 0) {
-        this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_dUniAllowance.toString())});
+  getkOGUniAllowance = async () => {
+    let _kogUniAllowance = await this.kOGUniInstance.methods.allowance(this.accounts[0], this.kOGInstance._address).call();
+    if (_kogUniAllowance > 0) {
+        this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_kogUniAllowance.toString())});
         
     }
     console.log(this.state.allowance);
   }
 
-  getDNyanSupply = async () => {
-    let _dNyanSupply = await this.darkNyanInstance.methods.totalSupply().call();
+  getkOGSupply = async () => {
+    let _kOGSupply = await this.kOGInstance.methods.totalSupply().call();
     this.setState({
-      totalDNyanUniSupply: this.web3.utils.fromWei(_dNyanSupply)
+      totalkOGUniSupply: this.web3.utils.fromWei(_kOGSupply)
     })
   }
 
-  approveDNyanUni = async () => {
+  approvekOGUni = async () => {
     if (this.state.isApproving) {
         return;
     }  
     this.setState({isApproving: true});
     
     try {
-        let approveStaking = await this.DarkNyanUniInstance.methods.approve(this.darkNyanInstance._address, this.web3.utils.toWei(this.state.totalDNyanUniSupply.toString())).send({
+        let approveStaking = await this.kOGUniInstance.methods.approve(this.kOGInstance._address, this.web3.utils.toWei(this.state.totalDNyanUniSupply.toString())).send({
             from: this.accounts[0]
         });
         
@@ -83,43 +83,43 @@ state = {
     }
   }
 
-  getDNyanUniStakeAmount = async () => {
-    let stakeA = await this.darkNyanInstance.methods.getNipUniStakeAmount(this.accounts[0]).call();
+  getkOGUniStakeAmount = async () => {
+    let stakeA = await this.darkNyanInstance.methods.getkKushUniStakeAmount(this.accounts[0]).call();
     console.log(stakeA);
     this.setState({stakedAmount: this.web3.utils.fromWei(stakeA)});
   }
 
   getRewardsAmount = async () => {
-    let rewards = await this.darkNyanInstance.methods.myRewardsBalance(this.accounts[0]).call();
+    let rewards = await this.kOGInstance.methods.myRewardsBalance(this.accounts[0]).call();
 
-    this.setState({darkNyanRewards: this.web3.utils.fromWei(rewards)});
+    this.setState({kOGRewards: this.web3.utils.fromWei(rewards)});
   }
 
   getReward = async () => {
     this.setState({isClaiming: true});
     
-    let myRewards = await this.darkNyanInstance.methods.getReward().send({
+    let myRewards = await this.kOGInstance.methods.getReward().send({
         from: this.accounts[0]
     });
     
     if (myRewards["status"]) {
-        this.setState({isClaiming: false, darkNyanRewards: 0});   
+        this.setState({isClaiming: false, kOGRewards: 0});   
     }
   }
 
-  stakeDNyanUni = async () => {
+  stakekOGUni = async () => {
     if (this.state.isStaking || this.state.stakeAmount === 0) {
         return;
     }                        
     this.setState({isStaking: true});
     console.log(this.web3.utils.toWei(this.state.stakeAmount.toString()));
     try {
-        let stakeRes = await this.darkNyanInstance.methods.stakeCatnipUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+        let stakeRes = await this.kOGInstance.methods.stakekKushUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
             from: this.accounts[0]
         });
         if (stakeRes["status"]) {
             this.setState({isStaking: false, stakeAmount: 0});
-            this.getDNyanUniStakeAmount();
+            this.getkOGUniStakeAmount();
         }
     } catch (error) {
         this.setState({isStaking: false});
@@ -127,19 +127,19 @@ state = {
     }
   }
 
-  withdrawNipUni = async () => {
+  withdrawkKushUni = async () => {
     if (this.state.isWithdrawing || this.state.stakeAmount === 0) {
       return;
     }                        
     this.setState({isWithdrawing: true});
     
     try {
-      let stakeRes = await this.darkNyanInstance.methods.withdrawCatnipUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+      let stakeRes = await this.kOGInstance.methods.withdrawkKushUni(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
         from: this.accounts[0]
       });
         if (stakeRes["status"]) {
             this.setState({isWithdrawing: false, stakeAmount: 0});
-            this.getDNyanUniStakeAmount();
+            this.getkOGUniStakeAmount();
         }
     } catch (error) {
         this.setState({isStaking: false});
@@ -219,7 +219,7 @@ state = {
             </div> */}
 
             <div>
-              <p>Join the UNI/kKUSH pool on&nbsp;
+              <p>Join the kKUSH/ETH pool on&nbsp;
                  <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xab307b09b8408140d07b91bc1442a4f1a981b894">Uniswap</a>
                 , then stake your pool tokens here.</p>
             </div>
