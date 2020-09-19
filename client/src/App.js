@@ -266,7 +266,7 @@ class App extends Component {
             <a target="_blank" rel="noopener noreferrer" href={"https://twitter.com/KushFinance"}>
               <div className="social-icon twit"></div>
             </a> 
-            <a target="_blank" rel="noopener noreferrer" href={"https://t.me/nyanfinance"}>
+            <a target="_blank" rel="noopener noreferrer" href={"https://T.me/kushfinance"}>
               <div className="social-icon tele"></div>
             </a>
 

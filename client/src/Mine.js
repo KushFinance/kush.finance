@@ -166,7 +166,7 @@ state = {
 
       this.DarkNyanUniInstance = new this.web3.eth.Contract(
         DarkNyanUni,
-        "0xdB8C25B309Df6bd93d361ad19ef1C5cE5A667d6A"
+        "0xdd0e143868b34d97355f249a4ddffbee03fd0481"
       );
 
 
@@ -219,7 +219,7 @@ state = {
             </div> */}
 
             <div>
-              <p>Join the kKUSH/ETH pool on&nbsp;
+              <p>Join the kKUSH/UNI pool on&nbsp;
                  <a target="_blank" rel="noopener noreferrer" href="">Uniswap</a>
                 , then stake your pool tokens here.</p>
             </div>
