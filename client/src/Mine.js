@@ -44,16 +44,16 @@ state = {
  }
 
   getkushOGUniAmount = async () => {
-    let _kushogUniAmount = await this.kushOGUniInstance.methods.balanceOf(this.accounts[0]).call();
+    let _kushOGUniAmount = await this.kushOGUniInstance.methods.balanceOf(this.accounts[0]).call();
     this.setState({
-      kushogUniAmount: this.web3.utils.fromWei(_kushogUniAmount)
+      kushOGUniAmount: this.web3.utils.fromWei(_kushOGUniAmount)
     })
   }
 
   getkushOGUniAllowance = async () => {
-    let _kushogUniAllowance = await this.kushOGUniInstance.methods.allowance(this.accounts[0], this.kushOGInstance._address).call();
-    if (_kushogUniAllowance > 0) {
-        this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_kushogUniAllowance.toString())});
+    let _kushOGUniAllowance = await this.kushOGUniInstance.methods.allowance(this.accounts[0], this.kushOGInstance._address).call();
+    if (_kushOGUniAllowance > 0) {
+        this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_kushOGUniAllowance.toString())});
         
     }
     console.log(this.state.allowance);
