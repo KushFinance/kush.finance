@@ -39,7 +39,7 @@ export default class Pump extends Component {
                     be proportionately distributed to kSEED holders.</p>
             </div>
 
-            <div className="vote-nyan"></div>
+            
 
             <div className="button launch-date">Voting starts late October</div>
         </div>
