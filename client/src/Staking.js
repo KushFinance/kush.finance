@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import kSeedToken from "./contracts/kSeedToken.json";
 import kKushToken from "./contracts/kKushToken.json";
 import {getWeb3Var} from "./shared";
-
+import { Button } from 'antd';
 import nyanLogo from './assets/logo.png';
-
 export default class Staking extends Component {
 
 state = {
@@ -246,7 +245,8 @@ state = {
             <div>
               <div className="align-left"><h1>GET KUSH</h1></div>
               <div className="align-right max-container">
-                <button className="as-link" onClick={this.getkKushRewards}>UPDATE</button>
+              <Button onClick={this.getkKushRewards} type="primary" loading>UPDATE</Button>
+                
               </div>
               <div className="clear"></div>
             </div>
