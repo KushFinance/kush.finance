@@ -5,7 +5,7 @@ import {getWeb3Var} from "./shared";
 
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
-import kOGLogo from './assets/kOGLogo.png';
+import kOGLogo from './assets/kOGlogo.png';
 
 export default class Pump extends Component {
 state = {
