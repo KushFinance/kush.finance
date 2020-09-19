@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import kSeedToken from "./contracts/kSeedToken.json";
-import kKushToken from "./contracts/kKushToken.json";
-import {getWeb3Var} from "./shared";
 import { Button } from 'antd';
-import nyanLogo from './assets/logo.png';
 import { Input, Tooltip } from 'antd';
+import kSeedToken from "../contracts/kSeedToken.json";
+import kKushToken from "../contracts/kKushToken.json";
+import {getWeb3Var} from "../shared";
+import nyanLogo from '../assets/logo.png';
 export default class Staking extends Component {
 
 state = {

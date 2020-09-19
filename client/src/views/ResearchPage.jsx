@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import kushOG from "./contracts/kushOGToken.json";
-import kushOGUni from "./contracts/kushOGtokenUni.json";
-import {getWeb3Var} from "./shared";
+import kushOG from "../contracts/kushOGToken.json";
+import kushOGUni from "../contracts/kushOGtokenUni.json";
+import {getWeb3Var} from "../shared";
 
-import ethLogo from './assets/eth.png';
-import kKUSHicon from './assets/kKUSH.png';
-import kOGLogo from './assets/kOGlogo.png';
+import ethLogo from '../assets/eth.png';
+import kKUSHicon from '../assets/kKUSH.png';
+import kOGLogo from '../assets/kOGlogo.png';
  
 export default class Pump extends Component {
 state = {
