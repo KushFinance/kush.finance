@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import kSeedToken from "./contracts/kSeedToken.json";
-import KushToken from "./contracts/KushToken.json";
+import kKushToken from "./contracts/kKushToken.json";
 import {getWeb3Var} from "./shared";
 
 import nyanLogo from './assets/logo.png';
@@ -15,7 +15,7 @@ state = {
     isApproving: false,
     isStaking: false,
     isWithdrawing: false,
-    kushRewards: 0,
+    kkushRewards: 0,
     totalkSeedSupply: 0,
     allowance: 0
     };
@@ -26,7 +26,7 @@ state = {
 
   /** getters */
   getAllowance = async () => {
-    let _kseedAllowance = await this.kseedInstance.methods.allowance(this.accounts[0], this.kushInstance._address).call();
+    let _kseedAllowance = await this.kseedInstance.methods.allowance(this.accounts[0], this.kkushInstance._address).call();
     if (_kseedAllowance > 0) {
         this.setState({isApproved: true, allowance: this.web3.utils.fromWei(_kseedAllowance.toString())})
     }
@@ -47,16 +47,16 @@ state = {
   }
 
   getMyStakeAmount = async () => {
-    let stakeA = await this.kushInstance.methods.getAddressStakeAmount(this.accounts[0]).call();
+    let stakeA = await this.kkushInstance.methods.getAddressStakeAmount(this.accounts[0]).call();
     
     this.setState({stakedAmount: this.web3.utils.fromWei(stakeA)});
   }
 
-  getKushRewards = async () => {
+  getkKushRewards = async () => {
     
-    let cRewards = await this.kushInstance.methods.myRewardsBalance(this.accounts[0]).call();
+    let cRewards = await this.kkushInstance.methods.myRewardsBalance(this.accounts[0]).call();
 
-    this.setState({kushRewards: this.web3.utils.fromWei(cRewards)});
+    this.setState({kkushRewards: this.web3.utils.fromWei(cRewards)});
   }
 
   /** setters & modifiers */
@@ -84,7 +84,7 @@ state = {
 
     this.setState({isStaking: true});
     try {
-        let stakeRes = await this.kushInstance.methods.stake(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+        let stakeRes = await this.kkushInstance.methods.stake(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
             from: this.accounts[0]
         });
         if (stakeRes["status"]) {
@@ -102,7 +102,7 @@ state = {
     }
     this.setState({isWithdrawing: true});
     try {
-        let unstakeRes = await this.kushInstance.methods.withdraw(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
+        let unstakeRes = await this.kkushInstance.methods.withdraw(this.web3.utils.toWei(this.state.stakeAmount.toString())).send({
             from: this.accounts[0]
         });
     
@@ -123,7 +123,7 @@ state = {
     }  
     this.setState({isApproving: true});
     
-    let approveStaking = await this.kseedInstance.methods.approve(this.kushInstance._address, this.web3.utils.toWei(this.state.totalkSeedSupply.toString())).send({
+    let approveStaking = await this.kseedInstance.methods.approve(this.kkushInstance._address, this.web3.utils.toWei(this.state.totalkSeedSupply.toString())).send({
         from: this.accounts[0]
     });
     
@@ -146,12 +146,12 @@ state = {
   }
 
   claimRewards = async () => {
-    if(this.state.kushRewards > 0){
-      await this.kushInstance.methods.getReward().send({
+    if(this.state.kkushRewards > 0){
+      await this.kkushInstance.methods.getReward().send({
         from: this.accounts[0]
       });
       
-      this.getKushRewards();
+      this.getkKushRewards();
     }
   }
 
@@ -173,8 +173,8 @@ state = {
         process.env.REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS
       );
      
-      this.kushInstance = new this.web3.eth.Contract(
-        KushToken.abi,
+      this.kkushInstance = new this.web3.eth.Contract(
+        kKushToken.abi,
         process.env.REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS
       );
 
@@ -182,7 +182,7 @@ state = {
       this.getkSeedSupply();
       this.getkSeedBalance();
       this.getMyStakeAmount();
-      this.getKushRewards();
+      this.getkKushRewards();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -246,7 +246,7 @@ state = {
             <div>
               <div className="align-left"><h1>GET KUSH</h1></div>
               <div className="align-right max-container">
-                <button className="as-link" onClick={this.getKushRewards}>UPDATE</button>
+                <button className="as-link" onClick={this.getkKushRewards}>UPDATE</button>
               </div>
               <div className="clear"></div>
             </div>
@@ -256,11 +256,11 @@ state = {
             </div>
             <div>
                 <input className="input" disabled 
-                value={this.state.kushRewards}
-                placeholder={this.state.kushRewards} type="number"></input>
+                value={this.state.kkushRewards}
+                placeholder={this.state.kkushRewards} type="number"></input>
             </div>
             <br />
-            <div className={`button stake-button ${this.state.kushRewards > 0 ? "" : "disabled"}`} onClick={this.claimRewards}>CLAIM</div>
+            <div className={`button stake-button ${this.state.kkushRewards > 0 ? "" : "disabled"}`} onClick={this.claimRewards}>CLAIM</div>
         </div>
       </div>
     );
