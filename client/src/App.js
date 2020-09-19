@@ -259,7 +259,18 @@ class App extends Component {
         <div className="links-box">
           <a href="https://etherscan.io/token/0x3f09400313e83d53366147e3ea0e4e2279d80850">k.SEED Token Etherscan</a> . <a href="https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513">k.SEED-ETH Uniswap</a>
         </div>
+        <div className="social-box">
+            <a target="_blank" rel="noopener noreferrer" href={"https://github.com/KushFinance/kush.finance"}>
+              <div className="social-icon git"></div>
+            </a>
+            <a target="_blank" rel="noopener noreferrer" href={"https://twitter.com/KushFinance"}>
+              <div className="social-icon twit"></div>
+            </a> 
+            <a target="_blank" rel="noopener noreferrer" href={"https://t.me/nyanfinance"}>
+              <div className="social-icon tele"></div>
+            </a>
 
+        </div>
         {/* <div className="gift-icon"></div>
         <div className="gift-box">
           <textarea></textarea>

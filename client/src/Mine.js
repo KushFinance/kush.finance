@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import DarkNyan from "./contracts/PurpleKush.json";
 import DarkNyanUni from "./contracts/PurpleKushUni.json";
 import {getWeb3Var} from "./shared";
-
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
