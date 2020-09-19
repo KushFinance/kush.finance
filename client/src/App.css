@@ -43,7 +43,6 @@ Body {
 
 .reward-logo-image {
   margin-right: 49px;
-  top: 10px;
   left: 24px;
   height: 44px;
   position: relative;
@@ -110,8 +109,9 @@ Body {
 
 .Option h3 {
   position: absolute;
-  bottom: -20px;
+  bottom: 10px;
   left: 20px;
+  font-size: 25px;
 }
 
 .Option:hover {
@@ -363,6 +363,7 @@ button.as-link {
   background-color: #f2f2f2;
   width: 97%;
   padding: 10px;
+  display: flex;
 }
 
 .amount-staked-image {
@@ -382,13 +383,13 @@ button.as-link {
 }
 
 .inliner {
-  width: 190px;
-  margin-right: 10px;
+  width: 100%;
+  margin: 1rem 0;
   display: inline-block;
 }
 
 .withdraw-button {
-  margin-top: 10px;
+
 }
 
 .launch-date {
