@@ -229,7 +229,7 @@ state = {
                 {!this.state.isApproving ? <div>STEP 1/2: APPROVE</div> : null}
                 {this.state.isApproving ? <div>APPROVING...</div> : null}
             </Button> : null}
-            {this.state.isApproved ? <Button type="primary"  className={`button stake-button ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kseedBalance ? "" : "enabled"}`} onClick={this.stakekSeed}block>
+            {this.state.isApproved ? <Button type="primary"  className={`button stake-button ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kseedBalance ? "" : "disabled"}`} onClick={this.stakekSeed}block>
                 {!this.state.isStaking ? <div>STEP 2/2: STAKE</div> : null}
                 {this.state.isStaking ? <div>STAKING...</div> : null}
             </Button> : null}
