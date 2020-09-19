@@ -224,7 +224,7 @@ state = {
 
             <div>
               <p>Join the kKUSH/ETH pool on&nbsp;
-                 <a target="_blank" rel="noopener noreferrer" href="">Uniswap</a>
+                 <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481">Uniswap</a>
                 , then stake your pool tokens here.</p>
             </div>
             
