@@ -4,6 +4,7 @@ import kKushToken from "./contracts/kKushToken.json";
 import {getWeb3Var} from "./shared";
 import { Button } from 'antd';
 import nyanLogo from './assets/logo.png';
+import { Input, Tooltip } from 'antd';
 export default class Staking extends Component {
 
 state = {
@@ -220,14 +221,8 @@ state = {
               <button className="as-link" onClick={this.setMaxkSeed.bind(this)}>Max amount</button>
             </div>
             <div>
-                <input 
-                className="input-amount" 
-                placeholder="Amount..."
-                value={this.setInputField()} 
-                onChange={this.updateStakingInput.bind(this)}
-                type="number"
-                autoFocus={true}>
-                </input>
+            <Input prefix="kSEED" onChange={this.updateStakingInput.bind(this)} value={this.setInputField()}  />
+              
             </div>
             <br />
             {!this.state.isApproved ? <Button type="primary" className="button stake-button" onClick={this.approvekSeed} block>
