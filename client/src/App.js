@@ -253,9 +253,9 @@ class App extends Component {
         {this.state.isViewingPump ? <Pump toggle={this.togglePumpView} /> : null}
         {this.state.isViewingMine ? <Mine toggle={this.toggleMineView} /> : null}
 
-        <div className="address ny"><div className="addr-name">kSEED address:</div> <div className="addr-pink">0x3f09400313e83d53366147e3ea0e4e2279d80850</div></div>
-        <div className="address ct"><div className="addr-name">KUSH address:</div> <div className="addr-pink">0x538b4b507d57bf9ebd8847ec395b7b061c150181</div> </div>
-        <div className="address dny"><div className="addr-name">purpleKUSH address:</div> <div className="addr-pink"></div> </div>
+        <div className="address ny"><div className="addr-name">kSEED address:</div> <a href="https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850" className="addr-pink">0x3f09400313e83d53366147e3ea0e4e2279d80850</a></div>
+        <div className="address ct"><div className="addr-name">kKUSH address:</div> <a href="https://etherscan.io/address/0x538b4b507d57bf9ebd8847ec395b7b061c150181" className="addr-pink">0x538b4b507d57bf9ebd8847ec395b7b061c150181</a> </div>
+        <div className="address ct"><div className="addr-name">kushOG address:</div> <a href="https://etherscan.io/address/0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" className="addr-pink">0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4</a> </div>
         <div className="links-box">
           <a href="https://etherscan.io/token/0x3f09400313e83d53366147e3ea0e4e2279d80850">k.SEED Token Etherscan</a> . <a href="https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513">k.SEED-ETH Uniswap</a>
         </div>
