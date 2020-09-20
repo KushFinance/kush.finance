@@ -251,13 +251,8 @@ state = {
               </div>
             </div>
             <div>
-                <input 
-                className="input-amount" 
-                placeholder="Amount..."
-                value={this.setInputField()} 
-                onChange={this.updateStakingInput.bind(this)}
-                autoFocus={true}>
-                </input>
+            <Input onChange={this.updateStakingInput.bind(this)} value={this.setInputField()}  />
+
             </div>
 
             {!this.state.miningStarted ? <div className="button stake-button">
@@ -275,7 +270,7 @@ state = {
                 {!this.state.isStaking ? <div>STEP 2: STAKE</div> : null}
                 {this.state.isStaking ? <div>STAKING...</div> : null}
             </div> : null}
-            {this.state.miningStarted ? <div className={`button withdraw-button ${this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.kushOGRewards ? "" : "disabled"}`} onClick={this.withdrawkKushUni}>
+            {this.state.miningStarted ? <div className={`button withdraw-button ${this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.kushOGRewards ? "enabled" : "enabled"}`} onClick={this.withdrawkKushUni}>
                 {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}
                 {this.state.isWithdrawing ? <div>WITHDRAWING...</div> : null}
             </div> : null}
