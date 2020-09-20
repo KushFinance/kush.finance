@@ -8,7 +8,7 @@ import getWeb3 from "./getWeb3";
 import {setWeb3} from "./shared";
 import "./App.css";
 import { Statistic, Button, Card, Meta } from 'antd';
-
+const { Meta } = Card;
 
 
 import kushLogo from './assets/logo.png';
