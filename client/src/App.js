@@ -7,7 +7,7 @@ import KushToken from "./contracts/kKushToken.json";
 import getWeb3 from "./getWeb3";
 import {setWeb3} from "./shared";
 import "./App.css";
-import { Statistic, Row, Col, Button } from 'antd';
+import { Statistic, Button } from 'antd';
 
 
 
