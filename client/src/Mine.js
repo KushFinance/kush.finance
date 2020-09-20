@@ -6,7 +6,7 @@ import {getWeb3Var} from "./shared";
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
- 
+import { Input, Tooltip } from 'antd';
 export default class Pump extends Component {
 state = {
     loaded: false,
