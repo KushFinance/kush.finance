@@ -142,7 +142,11 @@ state = {
   }
 
   setMaxkSeed() {
-    this.setState({stakeAmount: this.state.kseedBalance});
+    this.setState({ stakeAmount: this.state.kseedBalance });
+  }
+
+  setMaxkSeedUnstake() {
+    this.setState({ stakeAmount: this.state.stakedAmount });
   }
 
   claimRewards = async () => {
@@ -218,7 +222,9 @@ state = {
             </div>
           </div>
             <div className="max-container">
-              <button className="as-link" onClick={this.setMaxkSeed.bind(this)}>Max amount</button>
+              <button className="as-link" onClick={this.setMaxkSeedUnstake.bind(this)}>Max amount to unstake</button>
+
+              <button className="as-link" onClick={this.setMaxkSeed.bind(this)}>Max amount to stake</button>
             </div>
             <div>
             <Input prefix="kSEED" onChange={this.updateStakingInput.bind(this)} value={this.setInputField()}  />
