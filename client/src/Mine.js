@@ -6,7 +6,7 @@ import {getWeb3Var} from "./shared";
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
-import { Input, Tooltip, Alert } from 'antd';
+import { Input, Tooltip, Alert, Divider } from 'antd';
 export default class Pump extends Component {
 state = {
     loaded: false,
@@ -206,8 +206,8 @@ state = {
             &times;
           </span>
           <h1>Farm the kushOG hybird</h1>
-            <h3>Create the bridge to the Polkadot network!</h3>
-
+            
+            <Divider>Create the bridge to the Polkadot network!</Divider>
             <div>
                 <p>kushOG is an extension to the KUSH.FINANCE ecosystem that will allow kSEED voters to acquire non ERC20 assets.</p>
             </div>
@@ -218,11 +218,17 @@ state = {
             {/* <div>
                 <p>kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH. </p>
             </div> */}
-
+              <Divider>How too farm $kushOG?</Divider>
             <div>
+            <Alert
+      message="Instructions"
+      description="1. Go to Uniswap kKush/ETH pair. 2.Add Liquidity. 3. Come back to kush.finance 4. Farm $kushOG"
+      type="info"
+      showIcon
+    />
               <p>Join the kKUSH/ETH pool on&nbsp;
                  <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481">Uniswap</a>
-                , then stake your pool tokens here.</p>
+                , then stake your Liquidity Pool tokens here.</p>
             </div>
             
             <div className="amount-staked-box">
@@ -236,7 +242,7 @@ state = {
                 <div className="top-box-val nyan-balance">{this.state.kushOGUniAmount}</div>
               </div>
               <div className="inline-block">
-                <div className="top-box-desc">Amount staked</div>
+                <div className="top-box-desc">Amount farming</div>
                 <div className="top-box-val nyan-balance">{this.state.stakedAmount}</div>
               </div>
             </div>
@@ -259,7 +265,7 @@ state = {
 
              </div>
             {!this.state.miningStarted ? <div className="button stake-button">
-                {!this.state.isStaking ? <div>MINING HAS NOT STARTED</div> : null}
+                {!this.state.isStaking ? <div>FARMING HAS NOT STARTED</div> : null}
             </div> : null}
             {!this.state.isApproved && this.state.miningStarted ? <div className="button stake-button" onClick={this.approvekushOGUni}>
                 {!this.state.isApproving ? <div>APPROVE</div> : null}
@@ -270,8 +276,8 @@ state = {
                 {this.state.isClaiming ? <div>CLAIMING...</div> : null}
             </div> : null}
             {this.state.isApproved && this.state.miningStarted ? <div className={`button stake-button inliner ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kushBalance ? "enabled" : "enabled"}`} onClick={this.stakekushOGUni}>
-                {!this.state.isStaking ? <div>STEP 2: STAKE</div> : null}
-                {this.state.isStaking ? <div>STAKING...</div> : null}
+                {!this.state.isStaking ? <div>STEP 2: FARM</div> : null}
+                {this.state.isStaking ? <div>FARMING...</div> : null}
             </div> : null}
             {this.state.miningStarted ? <div className={`button withdraw-button ${this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.kushOGRewards ? "enabled" : "enabled"}`} onClick={this.withdrawkKushUni}>
                 {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}

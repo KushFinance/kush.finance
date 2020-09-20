@@ -207,7 +207,7 @@ state = {
           <span className="close" onClick={this.handleClick}>
             &times;
           </span>
-          <h1>Stake kSEED to mine kKUSH</h1>
+          <h1>Stake $kSEED to mine $kKUSH</h1>
           <h1></h1>
           <div> <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" showIcon/>
           <Divider />
@@ -249,7 +249,7 @@ state = {
             </div>
 
             <div>
-              <div className="align-left"><h1>GET KUSH</h1></div>
+              <div className="align-left"><h1>GET $kKUSH</h1></div>
               <div className="align-right max-container">
               <Button onClick={this.getkKushRewards} type="primary">UPDATE</Button>
                 
