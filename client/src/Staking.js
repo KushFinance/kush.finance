@@ -4,7 +4,7 @@ import kKushToken from "./contracts/kKushToken.json";
 import {getWeb3Var} from "./shared";
 import { Button } from 'antd';
 import nyanLogo from './assets/logo.png';
-import { Input, Tooltip, Alert  } from 'antd';
+import { Input, Tooltip, Alert, Divider  } from 'antd';
 
 export default class Staking extends Component {
 
@@ -209,7 +209,9 @@ state = {
           </span>
           <h1>Stake kSEED to mine kKUSH</h1>
           <h1></h1>
-          <div> <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" showIcon/></div>
+          <div> <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" showIcon/>
+          <Divider />
+          </div>
           <div className="amount-staked-box">
             <div className="inline-block amount-staked-image">
               <img className="balance-logo-image" alt="nyan logo" src={nyanLogo}/>
