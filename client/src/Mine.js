@@ -6,7 +6,7 @@ import {getWeb3Var} from "./shared";
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
-import { Input, Tooltip, Alert, Divider, Button } from 'antd';
+import { Input, Tooltip, Alert, Divider, Button, Space } from 'antd';
 export default class Pump extends Component {
 state = {
     loaded: false,
@@ -262,6 +262,7 @@ state = {
              <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" showIcon/>
 
              </div>
+             <Space></Space>
             {!this.state.miningStarted ? <div className="button stake-button">
                 {!this.state.isStaking ? <div>FARMING HAS NOT STARTED</div> : null}
             </div> : null}
