@@ -215,9 +215,10 @@ state = {
             <div>
                 <p>20% of all minted kushOG will go to a funding contract.</p>
             </div>
-            {/* <div>
+            {
                 <p>kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH. </p>
-            </div> */}
+            }
+            <div>
               <Divider>How to farm $kushOG?</Divider>
             
             <Alert
@@ -227,7 +228,7 @@ state = {
       showIcon
     />
     <Button danger>Join kKUSH/ETH Uniswap Pool</Button>
-
+    </div>
             
             <div className="amount-staked-box">
               <div className="inline-block amount-staked-image">
