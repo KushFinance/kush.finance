@@ -254,9 +254,8 @@ state = {
                 <input 
                 className="input-amount" 
                 placeholder="Amount..."
-                value={this.setInputField()} 
-                onChange={this.updateStakingInput.bind(this)}
-                type="number"
+                value= {}
+                onChange={}
                 autoFocus={true}>
                 </input>
             </div>
