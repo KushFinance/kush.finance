@@ -29,7 +29,7 @@ state = {
   };
 
   setInputField() {
-    if (this.state.stakeAmount > 0) {
+    if (this.state.stakeAmount > 10) {
       return this.state.stakeAmount;
     } else {
       return null
@@ -254,8 +254,8 @@ state = {
                 <input 
                 className="input-amount" 
                 placeholder="Amount..."
-                value= {}
-                onChange={}
+                value={this.setInputField()} 
+                onChange={this.updateStakingInput.bind(this)}
                 autoFocus={true}>
                 </input>
             </div>
