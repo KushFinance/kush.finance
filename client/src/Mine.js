@@ -282,7 +282,7 @@ state = {
                 {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}
                 {this.state.isWithdrawing ? <div>WITHDRAWING...</div> : null}
             </div> : null}
-        </div>
+       
       
     );
   }
