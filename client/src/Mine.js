@@ -227,7 +227,7 @@ state = {
       type="info"
       showIcon
     />
-    <Button size="large "href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481" danger>Join kKUSH/ETH Uniswap Pool</Button>
+    <Button size="large "href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481" target="_ablank" danger>Join kKUSH/ETH Uniswap Pool</Button>
     </div>
             
             <div className="amount-staked-box">
