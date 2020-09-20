@@ -266,7 +266,7 @@ state = {
                 {!this.state.isClaiming ? <div>CLAIM REWARDS</div> : null}
                 {this.state.isClaiming ? <div>CLAIMING...</div> : null}
             </div> : null}
-            {this.state.isApproved && this.state.miningStarted ? <div className={`button stake-button inliner ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kushBalance ? "" : "disabled"}`} onClick={this.stakekushOGUni}>
+            {this.state.isApproved && this.state.miningStarted ? <div className={`button stake-button inliner ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kushBalance ? "enabled" : "enabled"}`} onClick={this.stakekushOGUni}>
                 {!this.state.isStaking ? <div>STEP 2: STAKE</div> : null}
                 {this.state.isStaking ? <div>STAKING...</div> : null}
             </div> : null}
