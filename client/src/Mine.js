@@ -6,7 +6,7 @@ import {getWeb3Var} from "./shared";
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
-import { Input, Tooltip, Alert, Divider } from 'antd';
+import { Input, Tooltip, Alert, Divider, Button } from 'antd';
 export default class Pump extends Component {
 state = {
     loaded: false,
@@ -218,18 +218,16 @@ state = {
             {/* <div>
                 <p>kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH. </p>
             </div> */}
-              <Divider>How too farm $kushOG?</Divider>
+              <Divider>How to farm $kushOG?</Divider>
             <div>
             <Alert
       message="Instructions"
-      description="1. Go to Uniswap kKush/ETH pair. 2.Add Liquidity. 3. Come back to kush.finance 4. Farm $kushOG"
+      description="1. Go to Uniswap kKush/ETH https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481  pair. 2.Add Liquidity. 3. Come back to kush.finance 4. Farm $kushOG"
       type="info"
       showIcon
     />
-              <p>Join the kKUSH/ETH pool on&nbsp;
-                 <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481">Uniswap</a>
-                , then stake your Liquidity Pool tokens here.</p>
-            </div>
+    <Button danger>Join kKUSH/ETH Uniswap Pool</Button>
+
             
             <div className="amount-staked-box">
               <div className="inline-block amount-staked-image">
