@@ -29,7 +29,7 @@ state = {
   };
 
   setInputField() {
-    if (this.state.stakeAmount > 10) {
+    if (this.state.stakeAmount > 0) {
       return this.state.stakeAmount;
     } else {
       return null
@@ -129,7 +129,7 @@ state = {
     }
   }
 
-  withdrawKushUni = async () => {
+  withdrawkKushUni = async () => {
     if (this.state.isWithdrawing || this.state.stakeAmount === 0) {
       return;
     }                        
