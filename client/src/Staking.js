@@ -235,14 +235,14 @@ state = {
                 </input>
             </div>
             <br />
-            {!this.state.isApproved ? <Button type="primary" className="button stake-button" onClick={this.approvekSeed} block>
+            {!this.state.isApproved ? <div type="primary" className="button stake-button" onClick={this.approvekSeed} block>
                 {!this.state.isApproving ? <div>STEP 1/2: APPROVE</div> : null}
                 {this.state.isApproving ? <div>APPROVING...</div> : null}
-            </Button> : null}
-            {this.state.isApproved ? <Button type="primary"  className={`button stake-button ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kseedBalance ? "" : "disabled"}`} onClick={this.stakekSeed}block>
+            </div> : null}
+            {this.state.isApproved ? <div type="primary"  className={`button stake-button ${this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kseedBalance ? "" : "disabled"}`} onClick={this.stakekSeed}block>
                 {!this.state.isStaking ? <div>STEP 2/2: STAKE</div> : null}
                 {this.state.isStaking ? <div>STAKING...</div> : null}
-            </Button> : null}
+            </div> : null}
             <div className={`button withdraw-button ${this.state.kseedBalance > 0 || this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.stakedAmount ? "" : "disabled"}`} onClick={this.withdrawkSeed}>
                 {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}
                 {this.state.isWithdrawing ? <div>WITHDRAWING...</div> : null}
