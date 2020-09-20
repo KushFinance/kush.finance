@@ -29,7 +29,7 @@ state = {
   };
 
   setInputField() {
-    if (this.state.stakeAmount > 0) {
+    if (this.state.stakeAmount >= 0) {
       return this.state.stakeAmount;
     } else {
       return null

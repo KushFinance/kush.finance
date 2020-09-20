@@ -375,7 +375,7 @@ button.as-link {
 
 .button {
   padding: 10px;
-  margin: 0 auto;
+  margin-bottom: 1rem;
   background-color: #367c2f;
   color: #282c34;
   font-size: 16px;
@@ -387,7 +387,6 @@ button.as-link {
 
 .inliner {
   width: 100%;
-  margin: 1rem 0;
   display: inline-block;
 }
 
