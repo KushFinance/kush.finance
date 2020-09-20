@@ -223,11 +223,11 @@ state = {
             
             <Alert
       message="Instructions"
-      description="1. Go to Uniswap kKush/ETH https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481  pair. 2.Add Liquidity. 3. Come back to kush.finance 4. Farm $kushOG"
+      description="1. Go to Uniswap kKush/ETH   pair. 2.Add Liquidity. 3. Come back to kush.finance 4. Farm $kushOG"
       type="info"
       showIcon
     />
-    <Button danger>Join kKUSH/ETH Uniswap Pool</Button>
+    <Button size="large "href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481" danger>Join kKUSH/ETH Uniswap Pool</Button>
     </div>
             
             <div className="amount-staked-box">
