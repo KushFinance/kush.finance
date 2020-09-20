@@ -219,7 +219,7 @@ state = {
                 <p>kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH. </p>
             </div> */}
               <Divider>How to farm $kushOG?</Divider>
-            <div>
+            
             <Alert
       message="Instructions"
       description="1. Go to Uniswap kKush/ETH https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481  pair. 2.Add Liquidity. 3. Come back to kush.finance 4. Farm $kushOG"
@@ -282,8 +282,8 @@ state = {
                 {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}
                 {this.state.isWithdrawing ? <div>WITHDRAWING...</div> : null}
             </div> : null}
-       
-      
+        </div>
+      </div>
     );
   }
 }
