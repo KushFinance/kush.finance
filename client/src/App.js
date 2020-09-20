@@ -272,7 +272,11 @@ class App extends Component {
             <a target="_blank" rel="noopener noreferrer" href={"https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513"}>
             <div className="social-icon uni"></div>
             </a>
-
+            </a>
+            <a target="_blank" rel="noopener noreferrer" href={"https://www.unicrypt.network/uniswap-browser/pair/0xDCfF4c70131B476595B449C7dB17cd92663aa513"}>
+            <div className="social-icon unicrypt"></div>
+            </a>
+            
         </div>
         {/* <div className="gift-icon"></div>
         <div className="gift-box">

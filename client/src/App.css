@@ -266,6 +266,13 @@ Body {
   background-size: contain;
   background-repeat: no-repeat;
 }
+.unicrypt {
+  background-image: url("./assets/unycrypt.svg");
+  background-position: left;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 
 .App-header {
   background-color: #282c34;
