@@ -249,6 +249,15 @@ class App extends Component {
           <h3>GOVERN</h3>
           </div>
         </div>
+
+        <div className="Options-box">
+        <Card
+    hoverable
+    style={{ width: 240 }}
+    cover={<img alt="Trade or Add Liqudity on $kSEED" extra={<a href="https://uniswap.info/token/0x3f09400313e83d53366147e3ea0e4e2279d80850">More</a>} src="https://www.pngfind.com/pngs/m/67-672523_milwaukie-cannabis-seeds-3-seed-cannabis-seeds-png.png" />}
+  >
+    <Meta  extra={<a href="https://uniswap.info/token/0x3f09400313e83d53366147e3ea0e4e2279d80850">More</a>} title="Trade or Add Liqudity on $kSEED" />
+  </Card> </div>
         {this.state.isViewingStaking ? <Staking toggle={this.toggleStakingView} /> : null}
         {this.state.isViewingPump ? <Pump toggle={this.togglePumpView} /> : null}
         {this.state.isViewingMine ? <Mine toggle={this.toggleMineView} /> : null}
@@ -276,13 +285,7 @@ class App extends Component {
             <a target="_blank" rel="noopener noreferrer" href={"https://www.unicrypt.network/uniswap-browser/pair/0xDCfF4c70131B476595B449C7dB17cd92663aa513"}>
             <div className="social-icon unicrypt"></div>
             </a>
-            <div><Card
-    hoverable
-    style={{ width: 240 }}
-    cover={<img alt="Trade or Add Liqudity on $kSEED" extra={<a href="https://uniswap.info/token/0x3f09400313e83d53366147e3ea0e4e2279d80850">More</a>} src="https://www.pngfind.com/pngs/m/67-672523_milwaukie-cannabis-seeds-3-seed-cannabis-seeds-png.png" />}
-  >
-    <Meta  extra={<a href="https://uniswap.info/token/0x3f09400313e83d53366147e3ea0e4e2279d80850">More</a>} title="Trade or Add Liqudity on $kSEED" />
-  </Card></div>
+            
         </div>
         {/* <div className="gift-icon"></div>
         <div className="gift-box">
