@@ -269,6 +269,9 @@ class App extends Component {
             <a target="_blank" rel="noopener noreferrer" href={"https://T.me/kushfinance"}>
               <div className="social-icon tele"></div>
             </a>
+            <a target="_blank" rel="noopener noreferrer" href={"https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513"}>
+            <div className="social-icon uni"></div>
+            </a>
 
         </div>
         {/* <div className="gift-icon"></div>
