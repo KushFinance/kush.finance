@@ -209,7 +209,7 @@ state = {
           </span>
           <h1>Stake kSEED to mine kKUSH</h1>
           <h1></h1>
-          <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" />
+          <div> <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" showIcon/></div>
           <div className="amount-staked-box">
             <div className="inline-block amount-staked-image">
               <img className="balance-logo-image" alt="nyan logo" src={nyanLogo}/>

@@ -243,7 +243,7 @@ class App extends Component {
           <h3>SEEDING</h3>
           </div>
           <div className="Option mine" onClick={this.toggleMineView}>
-          <h3>RESEARCH</h3>
+          <h3>FARMING</h3>
           </div>
           <div className="Option pumped" onClick={this.togglePumpView}>
           <h3>GOVERN</h3>

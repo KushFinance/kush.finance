@@ -6,7 +6,7 @@ import {getWeb3Var} from "./shared";
 import ethLogo from './assets/eth.png';
 import kKUSHicon from './assets/kKUSH.png';
 import kOGLogo from './assets/kOGlogo.png';
-import { Input, Tooltip } from 'antd';
+import { Input, Tooltip, Alert } from 'antd';
 export default class Pump extends Component {
 state = {
     loaded: false,
@@ -205,7 +205,7 @@ state = {
           <span className="close" onClick={this.handleClick}>
             &times;
           </span>
-          <h1>Create a kushOG hybird</h1>
+          <h1>Farm the kushOG hybird</h1>
             <h3>Create the bridge to the Polkadot network!</h3>
 
             <div>
@@ -254,7 +254,10 @@ state = {
             <Input onChange={this.updateStakingInput.bind(this)} value={this.setInputField()}  />
 
             </div>
+             <div>
+             <Alert message="Make sure to always claim mining rewards before staking more!" type="warning" showIcon/>
 
+             </div>
             {!this.state.miningStarted ? <div className="button stake-button">
                 {!this.state.isStaking ? <div>MINING HAS NOT STARTED</div> : null}
             </div> : null}

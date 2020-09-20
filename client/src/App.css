@@ -21,6 +21,7 @@ Body {
   width: 200px;
   text-align: left;
   font-size: 30px;
+  background-image:url("./assets/kSeedLogo.png");
 }
 
 .top-box-desc {
