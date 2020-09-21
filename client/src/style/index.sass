@@ -2,22 +2,37 @@
 
 @import 'u-variables'
 @import 'u-reset'
+@import 'u-antd'
 
-@import './components/c-header'
+@import './components/c-menu'
 @import './components/c-kushShowcase'
 @import './components/c-footer'
 @import './components/c-balance'
+@import './components/c-subpage'
+@import './components/c-governPage'
+@import './components/c-seedingPage'
 
     
 body
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
-    background: rgb(56,212,34)
+    background: #030a02
     background: linear-gradient(0deg, rgba(56,212,34,1) 0%, rgba(154,255,195,1) 40%, rgba(196,203,234,1) 50%, rgba(207,180,255,1) 60%, rgba(254,156,243,1) 100%)
 
 code
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",monospace
     
+a.button
+    color: #444
+    font-size: 14px
+    cursor: pointer
+    background-color: rgba(255, 253, 248, 0.75)
+    border-radius: 4px
+    padding: 2px 6px
+    font-weight: 500
+    margin: 6px 0
+    &.disabled
+        background-color: #fe9cf3
 
 .full-w
     width: 100%
@@ -28,25 +43,43 @@ code
         flex-direction: column
     &.spaced
         justify-content: space-between
+    &.justify-rigth
+        justify-content: flex-end
+    &.align-center
+        align-items: center
 
 .content
+    height: 100%
+    display: flex
+    width: 70%
+    flex-direction: column
+    background: linear-gradient(90deg, rgba(51,51,51,0.7539390756302521) 0%, rgba(29,29,29,0.7539390756302521) 100%)
+    padding: 20px
+    overflow: auto
+    color: #eee
+
+.sidebar
+    height: 100%
     display: flex
     flex-direction: column
     justify-content: space-between
-    width: 40vw
-    padding-left: 20px
-    background: linear-gradient(90deg, rgba(51,51,51,0.7539390756302521) 0%, rgba(29,29,29,0.7539390756302521) 100%)
+    width: 30%
+    padding: 10px 10px
+
 
 .App 
+    margin: 5vh auto
     display: flex
     flex-direction: row
+    justify-content: center
+    align-items: center
+    max-width: 1200px
+    height: 90vh
+    background: linear-gradient(90deg, rgba(51,51,51,0.7539390756302521) 0%, rgba(29,29,29,0.7539390756302521) 100%)
 
 
 .App-logo 
     height: 40vmin
-
-
-
 
 
 .reward-logo-image
@@ -63,9 +96,6 @@ code
 
 .stats-op:not(:last-child)
     margin-bottom: 1px
-
-.button.stake-button.disabled, .button.withdraw-button.disabled 
-    background-color: #f2f2f2
 
 
 .vote-nyan
@@ -156,73 +186,18 @@ code
     font-size: 26px
     padding-left: 10px
     border-bottom: 3px black solid
-    margin-bottom: 15px
+    margin-bottom: 1rem 0
 
 
 .input-amount
-    width: 98%
-    height: 7vh
+    width: 100%
+    height: 4rem
     outline: none
     font-size: 1em
     border: 1px solid #bcbcbc
     border-radius: 5px
     padding-left: 10px
-    margin-bottom: 15px
-
-
-.max-container
-    text-align: right
-    padding-right: 1vh
-    padding-top: 2vh
-    padding-bottom: 1vh
-
-
-button.as-link
-    color: #47d347
-    background: none
-    border: none
-    font-size: 14px
-    cursor: pointer
-    text-decoration: underline
-
-
-
-.amount-staked-box
-    background-color: #f2f2f2
-    width: 97%
-    padding: 10px
-    display: flex
-
-
-.amount-staked-image
-    margin-right: 15px
-
-
-.button
-    padding: 10px
-    margin: 0 auto
-    background-color: #367c2f
-    color: #282c34
-    font-size: 16px
-    font-weight: bold
-    text-align: center
-    border-radius: 6px
-    cursor: pointer
-
-
-.inliner
-    width: 100%
-    margin: 1rem 0
-    display: inline-block
-
-
-.withdraw-button
-
-
-
-.launch-date
-    width: 400px
-    cursor: default
+    margin-bottom: 1rem 0
 
 
 .inline-block

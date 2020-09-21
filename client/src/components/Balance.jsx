@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Statistic } from 'antd';
 import kushLogo from '../assets/logo.png';
 
@@ -158,18 +158,6 @@ class Balance extends Component {
         }
       };
     render(){
-
-        function getRoundedkSeedBalance(){
-            return this.toFixed(this.kseedBalance, 6);
-        }
-        function getRoundedTotalkSeedStaked(){
-            let _kseedStaked = this.totalkSeedStaked;
-            if (!isNaN(_kseedStaked)) {
-                return parseFloat(_kseedStaked).toFixed(2);
-            }
-            return _kseedStaked;
-        }
-
         return(
             <div className="balance">
               <div className="top-box balance-box">
