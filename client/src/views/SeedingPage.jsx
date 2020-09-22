@@ -292,7 +292,7 @@ export default class SeedingPage extends Component {
         
         
         <input
-          className=""
+          className="input"
           disabled
           value={this.state.kkushRewards}
           placeholder={this.state.kkushRewards}
