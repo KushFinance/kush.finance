@@ -1,4 +1,6 @@
 # kush.finance
+
+<a href="https://kush.finance"><img src="https://pbs.twimg.com/profile_images/1307795929085349890/SIwMAo38_400x400.jpg" title="Kush Finance" alt="Kush Finance"></a>
 <!-- [![KushFinance](https://pbs.twimg.com/profile_images/1307795929085349890/SIwMAo38_400x400.jpg)](https://kush.finance) -->
 KUSH.FINANCE is a Defi governance token represented by kSEED (kush.SEED) that turns individual traders into a collective whale. 
 kSEED holders can stake their kushSEED's and receive a secondary token known as kKUSH(kush.KUSH).
