@@ -55,7 +55,6 @@ import "./style/index.sass";
 
 //   // Delete connector
 // });
-
 class App extends Component {
   render() {
     return (
