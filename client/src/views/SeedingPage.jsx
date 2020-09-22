@@ -288,8 +288,11 @@ export default class SeedingPage extends Component {
           <button onClick={this.getkKushRewards}> UPDATE </button>
         </div>
         <p> INFO: KUSH rewards grow per block and are updated on each transaction(send) to functions with the "updateStakingRewards" modifier. </p>
+        
+        
+        
         <input
-          className="input"
+          className=""
           disabled
           value={this.state.kkushRewards}
           placeholder={this.state.kkushRewards}
