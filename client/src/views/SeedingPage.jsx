@@ -234,7 +234,7 @@ export default class SeedingPage extends Component {
         <Divider />
         <div className="amount-staked-box">
           <img alt="nyan logo" src={nyanLogoIMG} />
-          <div class="block">
+          <div className="block">
             <div className="desc">Amount staked</div>
             <div className="val nyan-balance">{this.state.stakedAmount}</div>
           </div>

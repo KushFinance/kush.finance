@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../assets/logo.png'
+import Footer from './Footer';
 
 class KushShowcase extends Component {
     render(){
@@ -31,7 +32,7 @@ class KushShowcase extends Component {
                         <span><a href="https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513" target="_blank" rel="noopener noreferrer">k.SEED-ETH Uniswap</a></span>
                     </li>
                 </ul>
-
+                <Footer />
             </div>
         );
     }

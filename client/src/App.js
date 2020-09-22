@@ -8,6 +8,7 @@ import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
 
 import Menu from "./components/Menu";
+import Drawer from "./components/Drawer";
 import Footer from "./components/Footer";
 import KushShowcase from "./components/KushShowcase";
 import Balance from "./components/Balance";
@@ -60,6 +61,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <Drawer/>
           <div className="sidebar">
             <Menu />
             <Balance />

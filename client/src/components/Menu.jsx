@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import SeedingIMG from '../assets/Seeding.png'
 import GovernIMG from '../assets/Vote.png'
 import FarmingIMG from '../assets/pKushExtract.png'
-import KushIMG from '../assets/logo_alt.png'
+import KushIMG from '../assets/faviconKush.svg'
 
 const Address = (props) => {
     return (
@@ -21,37 +21,38 @@ const Address = (props) => {
 
 function Menu(props) {
     const [page,setPage] = useState(window.location.pathname)
+    const onChangePage = props.onChangePage ? props.onChangePage : ()=>{};
     useEffect(()=>{
-
+        onChangePage()
     },[page])
     return(
         <div className="menu">
-                <ul className="menu--navbar">
-                    { page !== "/" && <li>
-                        <Address href="/" handleChangePage={()=>{setPage("/")}}>
-                            <img src={KushIMG} alt="Kush Finance"></img>
-                            Kush Finance
-                        </Address>
-                    </li> }
-                    { page !== "/seeding" && <li>
-                        <Address href="seeding" handleChangePage={()=>{setPage("/seeding")}}>
-                            <img src={SeedingIMG} alt="Seeding"></img>
-                            Seeding
-                        </Address>
-                    </li> }
-                    { page !== "/farming" && <li>
-                        <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
-                            <img src={FarmingIMG} alt="farming"></img>
-                            Farming
-                        </Address>
-                    </li> }
-                    { page!== "/govern" && <li>
-                        <Address href="govern" handleChangePage={()=>{setPage("/govern")}}>
-                            <img src={GovernIMG} alt="Govern"></img>
-                            Govern
-                        </Address>
-                    </li> }
-                </ul>
+            <ul className="menu--navbar">
+                { page !== "/" && <li>
+                    <Address href="/" handleChangePage={()=>{setPage("/")}}>
+                        <img src={KushIMG} alt="Kush Finance"></img>
+                        Kush Finance
+                    </Address>
+                </li> }
+                { page !== "/seeding" && <li>
+                    <Address href="seeding" handleChangePage={()=>{setPage("/seeding")}}>
+                        <img src={SeedingIMG} alt="Seeding"></img>
+                        Seeding
+                    </Address>
+                </li> }
+                { page !== "/farming" && <li>
+                    <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
+                        <img src={FarmingIMG} alt="farming"></img>
+                        Farming
+                    </Address>
+                </li> }
+                { page!== "/govern" && <li>
+                    <Address href="govern" handleChangePage={()=>{setPage("/govern")}}>
+                        <img src={GovernIMG} alt="Govern"></img>
+                        Govern
+                    </Address>
+                </li> }
+            </ul>
         </div>
     );
 }
