@@ -1,18 +1,21 @@
 import React, { Component } from "react";
+import { BrowserRouter,  Route } from "react-router-dom";
+import { AnimatedSwitch } from 'react-router-transition';
+import Transition from './utils/switchTransitionConfig';
+
+import GovernPage from "./views/GovernPage";
+import FarmingPage from "./views/FarmingPage";
+import SeedingPage from "./views/SeedingPage";
+
+import Menu from "./components/Menu";
+import Footer from "./components/Footer";
+import KushShowcase from "./components/KushShowcase";
+import Balance from "./components/Balance";
 import "./style/index.sass";
-
-import kSeedToken from "./contracts/kSeedToken.json";
-import KushToken from "./contracts/kKushToken.json";
-import getWeb3 from "./getWeb3";
-import { setWeb3 } from "./shared";
-
-import Homepage from "./views/Homepage";
-
-import Web3 from "web3";
 
 //import WalletConnect from "@walletconnect/client";
 //import QRCodeModal from "@walletconnect/qrcode-modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+// import WalletConnectProvider from "@walletconnect/web3-provider";
 
 // // Create a connector
 // const connector = new WalletConnect({
@@ -54,163 +57,39 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 // });
 
 class App extends Component {
-  state = {
-    isViewingStaking: false,
-    isViewingPump: false,
-    kseedBalance: 0,
-    totalkSeedSupply: 0,
-    totalkSeedStaked: 0,
-    totalKushSupply: 0,
-    isViewingGifts: false,
-    isViewingMine: false,
-  };
-
-  mediaQuery = {
-    desktop: 1200,
-    tablet: 768,
-    phone: 576,
-  };
-
-  toFixed(num, fixed) {
-    var re = new RegExp("^-?\\d+(?:.\\d{0," + (fixed || -1) + "})?");
-    return num.toString().match(re)[0];
-  }
-
-  getRoundedkSeedBalance() {
-    return this.toFixed(this.state.kseedBalance, 6);
-  }
-
-  getRoundedTotalkSeedStaked() {
-    let _kseedStaked = this.state.totalkSeedStaked;
-    if (!isNaN(_kseedStaked)) {
-      return parseFloat(_kseedStaked).toFixed(2);
-    }
-
-    return _kseedStaked;
-  }
-
-  getkSeedBalance = async () => {
-    let _kseedBalance = await this.kseedInstance.methods
-      .balanceOf(this.accounts[0])
-      .call();
-    this.setState({
-      kseedBalance: this.web3.utils.fromWei(_kseedBalance),
-    });
-  };
-
-  getkSeedSupply = async () => {
-    let _kseedSupply = await this.kseedInstance.methods.totalSupply().call();
-    this.setState({
-      totalkSeedSupply: this.web3.utils.fromWei(_kseedSupply),
-    });
-  };
-
-  totalkSeedStaked = async () => {
-    let _totalkSeedStaked = await this.kushInstance.methods
-      .totalStakedSupply()
-      .call();
-
-    this.setState({
-      totalkSeedStaked: this.web3.utils.fromWei(_totalkSeedStaked),
-    });
-  };
-
-  getKushSupply = async () => {
-    let _kushSupply = await this.kushInstance.methods.totalSupply().call();
-
-    this.setState({
-      totalKushSupply: this.web3.utils.fromWei(_kushSupply),
-    });
-  };
-
-  setkSeedAddress = async () => {
-    await this.kushInstance.methods
-      .setkSeedAddress(this.kseedInstance._address)
-      .send({
-        from: this.accounts[0],
-        gas: 1000000,
-      });
-  };
-
-  toggleStakingView = () => {
-    this.setState({
-      isViewingStaking: !this.state.isViewingStaking,
-    });
-  };
-
-  togglePumpView = () => {
-    this.setState({
-      isViewingPump: !this.state.isViewingPump,
-    });
-  };
-
-  toggleMineView = () => {
-    this.setState({
-      isViewingMine: !this.state.isViewingMine,
-    });
-  };
-
-  _getWeb3 = () => {
-    return this.web3;
-  };
-
-  componentDidMount = async () => {
-    document.title = "Kush.Finance";
-
-    try {
-      // // Get network provider and web3 instance.
-      if (!window.ethereum) {
-        //  Create WalletConnect Provider
-        const provider = new WalletConnectProvider({
-          infuraId: "ba0fa4b3210c4528bf4aaefc58eb1251", // Required
-        });
-
-        //  Enable session (triggers QR Code modal)
-        await provider.enable();
-
-        //  Create Web3
-        this.web3 = new Web3(provider);
-      } else {
-        this.web3 = await getWeb3();
-      }
-
-      // Use web3 to get the user's accounts.
-      this.accounts = await this.web3.eth.getAccounts();
-
-      // Get the contract instance.
-      this.networkId = await this.web3.eth.net.getId();
-
-      this.kseedInstance = new this.web3.eth.Contract(
-        kSeedToken.abi,
-        process.env.REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS
-      );
-
-      this.kushInstance = new this.web3.eth.Contract(
-        KushToken.abi,
-        process.env.REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS
-      );
-
-      setWeb3(this.web3);
-
-      this.getkSeedSupply();
-      this.getKushSupply();
-      this.totalkSeedStaked();
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ loaded: true }, this.getkSeedBalance);
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
-      );
-      console.error(error);
-    }
-  };
-
   render() {
     return (
-      <Homepage />
+      <BrowserRouter>
+        <div className="App">
+          <div className="sidebar">
+            <Menu />
+            <Balance />
+            <Footer />
+          </div>
+          <div className="content">
+              <AnimatedSwitch
+                atEnter={Transition.bounceTransition.atEnter}
+                atActive={Transition.bounceTransition.atActive}
+                mapStyles={Transition.mapStyles}
+                className="route-wrapper"
+              >
+                
+                <Route exact path="/">
+                  <KushShowcase />
+                </Route>
+                <Route path="/seeding">
+                  <SeedingPage />
+                </Route>
+                <Route path="/farming">
+                  <FarmingPage />
+                </Route>
+                <Route path="/govern">
+                  <GovernPage />
+                </Route>
+              </AnimatedSwitch>
+          </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
