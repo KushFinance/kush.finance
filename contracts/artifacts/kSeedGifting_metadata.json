@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.6.11+commit.5ef660b1"
+		"version": "0.6.12+commit.27d51765"
 	},
 	"language": "Solidity",
 	"output": {
@@ -56,7 +56,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol": {
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/math/SafeMath.sol": {
 			"keccak256": "0x9a9cf02622cd7a64261b10534fc3260449da25c98c9e96d1b4ae8110a20e5806",
 			"license": "MIT",
 			"urls": [
@@ -64,7 +64,7 @@
 				"dweb:/ipfs/QmSkJtcfWo7c42KnL5hho6GFxK6HRNV91XABx1P7xDtfLV"
 			]
 		},
-		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol": {
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0x5c26b39d26f7ed489e555d955dcd3e01872972e71fdd1528e93ec164e4f23385",
 			"license": "MIT",
 			"urls": [
@@ -72,7 +72,7 @@
 				"dweb:/ipfs/QmfAZFDuG62vxmAN9DnXApv7e7PMzPqi4RkqqZHLMSQiY5"
 			]
 		},
-		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/SafeERC20.sol": {
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/SafeERC20.sol": {
 			"keccak256": "0xf3b30f8a49631420635a8c35daacfcaa338012755f18a76fdd118730256f9a27",
 			"license": "MIT",
 			"urls": [
@@ -80,7 +80,7 @@
 				"dweb:/ipfs/Qmcw1cQnq9eWDnrCBwU3TNyqLfTMUFg5YKpYUkELoMPuUE"
 			]
 		},
-		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/utils/Address.sol": {
 			"keccak256": "0x1845481964ebacf35afe1a006fa574793b52e698eba0a8db6e3d30202bc45429",
 			"license": "MIT",
 			"urls": [
@@ -89,10 +89,10 @@
 			]
 		},
 		"localhost/contracts/SeedGifting.sol": {
-			"keccak256": "0xa52e55111f854e4712c0224d7c7a1719616f32fb1655746b184a813faef7cfa3",
+			"keccak256": "0xed8889101e002b12975d06be55a4646f527468ea3ffcdfd54fbf2c473cefe540",
 			"urls": [
-				"bzz-raw://467bad8849aa4951f366ca632a84762a2dfa452cb5ad43d5ae6ade4b4bfe9b74",
-				"dweb:/ipfs/Qme34B9iPJdmXiSuTytjHHsvkyhzL4Nv3fTDSo5e8NeA4g"
+				"bzz-raw://7578306165a4e78c73c64a450ebad43a8c43bbad729f8bca3bfa718a414407e3",
+				"dweb:/ipfs/QmaZVfmCL54SZ2c1WvVb7LxsTSFfpRzuKuNFKFJuSGsNve"
 			]
 		}
 	},
