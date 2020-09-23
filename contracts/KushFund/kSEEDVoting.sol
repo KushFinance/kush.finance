@@ -1,4 +1,6 @@
-pragma solidity ^0.6.6;
+// contracts/KushFund/kSeedVoting.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.7.0;
 pragma experimental ABIEncoderV2;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/SafeERC20.sol";

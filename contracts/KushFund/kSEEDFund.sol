@@ -1,10 +1,12 @@
-pragma solidity ^0.6.6;
+// contracts/KushFund/kSeedFund.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.7.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/SafeERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/math/SafeMath.sol";
 
-contract NyanFund {
+contract kSeedFund {
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
     
