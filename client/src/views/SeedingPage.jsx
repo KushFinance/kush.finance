@@ -4,7 +4,7 @@ import kKushToken from "../contracts/kKushToken.json";
 import { getWeb3Var } from "../shared";
 import nyanLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider } from "antd";
-import Balance from "./components/Balance";
+import Balance from "../components/Balance";
 export default class SeedingPage extends Component {
   state = {
     loaded: false,

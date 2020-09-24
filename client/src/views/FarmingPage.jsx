@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import kushOG from "../contracts/kushOGToken.json";
 import kushOGUni from "../contracts/kushOGtokenUni.json";
 import { getWeb3Var } from "../shared";
-import Balance from "./components/Balance";
+import Balance from "../components/Balance";
 import ethLogo from "../assets/eth.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
