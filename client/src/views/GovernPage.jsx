@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Divider } from "antd";
-import Balance from "./components/Balance";
 export default class Pump extends Component {
   render() {
     return (
