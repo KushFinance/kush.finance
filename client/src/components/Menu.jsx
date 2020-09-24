@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import SeedingIMG from '../assets/farmkKUSH.png'
 import GovernIMG from '../assets/Vote.png'
-import FarmingIMG from '../assets/kushOGfarming.png'
+import FarmingIMG from '../assets/kushOGfarm.png'
 import KushIMG from '../assets/kSeedLogo.png'
 
 const Address = (props) => {
