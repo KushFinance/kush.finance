@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import kushOG from "../contracts/kushOGToken.json";
 import kushOGUni from "../contracts/kushOGtokenUni.json";
 import { getWeb3Var } from "../shared";
-import Balance from "../components/Balance";
 import ethLogo from "../assets/eth.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
 import { Input, Alert, Divider } from "antd";
-import getWeb3 from "../getWeb3";
-import { setWeb3 } from "../shared";
-import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 export default class FarmingPage extends Component {
   state = {
     loaded: false,
