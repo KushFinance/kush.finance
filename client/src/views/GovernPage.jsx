@@ -8,7 +8,8 @@ export default class Pump extends Component {
         <h2>Welcome to the steering wheel of a multi-million dollar machine</h2>
         <Divider />
         <p>In this system, kSEED holders will be able to freely govern the protocol as they wish. </p>
-        <p>The voting and function calls operate on a bidding system, in which the bid with the most votes at the end of a round will be executed.</p>
+        <p>The voting and function calls operate on a bidding system.</p>
+        <p>In which the bid with the most votes at the end of a round will be executed.</p>
         <p>A bid can be a call to a contract, or a combination of calls to one or multiple contracts, all within the same transaction.</p>
         <h2>What are Bids?</h2>
         <Divider />
@@ -23,7 +24,7 @@ export default class Pump extends Component {
         <Divider />
         <h2>How does voting occur?</h2>
         <p>Voting for bids occurs within periods known as voting rounds. Before each round begins, kSEED holders can construct a bid and propose it in order to have it ready for voting.</p>
-
+        <p></p>
         <button className="disabled launch-date">Voting starts late October</button>
         <Divider />
 

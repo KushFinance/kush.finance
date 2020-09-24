@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import SeedingIMG from '../assets/Seeding.png'
+import SeedingIMG from '../assets/farmkKUSH.png'
 import GovernIMG from '../assets/Vote.png'
-import FarmingIMG from '../assets/pKushExtract.png'
-import KushIMG from '../assets/faviconKush.svg'
+import FarmingIMG from '../assets/kushOGfarming.png'
+import KushIMG from '../assets/kSeedLogo.png'
 
 const Address = (props) => {
     return (
@@ -37,13 +37,13 @@ function Menu(props) {
                 { page !== "/seeding" && <li>
                     <Address href="seeding" handleChangePage={()=>{setPage("/seeding")}}>
                         <img src={SeedingIMG} alt="Farm kKUSH"></img>
-                        Farm kKUSH
+                        Farm kushKUSH
                     </Address>
                 </li> }
                 { page !== "/farming" && <li>
                     <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
                         <img src={FarmingIMG} alt="farming"></img>
-                        Farm kOG[kushOG]
+                        Farm kushOG
                     </Address>
                 </li> }
                 { page!== "/govern" && <li>
