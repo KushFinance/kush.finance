@@ -30,20 +30,20 @@ function Menu(props) {
             <ul className="menu--navbar">
                 { page !== "/" && <li>
                     <Address href="/" handleChangePage={()=>{setPage("/")}}>
-                        <img src={KushIMG} alt="Kush Finance"></img>
-                        Kush Finance
+                        <img src={KushIMG} alt="Home"></img>
+                        Home
                     </Address>
                 </li> }
                 { page !== "/seeding" && <li>
                     <Address href="seeding" handleChangePage={()=>{setPage("/seeding")}}>
-                        <img src={SeedingIMG} alt="Seeding"></img>
-                        Seeding
+                        <img src={SeedingIMG} alt="Farm kKUSH"></img>
+                        Farm kKUSH
                     </Address>
                 </li> }
                 { page !== "/farming" && <li>
                     <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
                         <img src={FarmingIMG} alt="farming"></img>
-                        Farming
+                        Farm kOG[kushOG]
                     </Address>
                 </li> }
                 { page!== "/govern" && <li>
