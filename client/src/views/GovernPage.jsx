@@ -38,6 +38,11 @@ export default class Pump extends Component {
         <p>The goal of the Kush protocol is continuously burn kKUSH used as a fee for voting.</p>
         <p></p>
         <p>Half of this kKUSH will also be swapped for kOG in order to provide rewards for individuals that provide liquidity to kSeed.</p>
+        <p></p>
+        <Divider orientation="left">How do distributions work?</Divider>
+        <p></p>
+        <p>Voters decide when and what to distrubute, with certain limitations. </p>
+        <p>Distributions can be called once every 2 days maximum. </p>
         <button className="disabled launch-date">Voting starts late October</button>
         <Divider />
 
