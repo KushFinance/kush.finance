@@ -43,6 +43,26 @@ export default class Pump extends Component {
         <p></p>
         <p>Voters decide when and what to distrubute, with certain limitations. </p>
         <p>Distributions can be called once every 2 days maximum. </p>
+        <p>The distribution can be for any token held by the funding address. </p>
+        <p>kKUSH and kOG distributions are limited to 10% of their available amount in any one transaction. </p>
+        <p> Distributions of other assets can use all of the available asset.</p>
+        <p></p>
+        <p>In order to claim their proportion of the distributed asset.</p>
+        <p>Claimers must stake their kSEED or kKUSH Liquidity tokens. </p>
+        <p>The tokens will only be released when the distribution period has ended.</p>
+        <p>This is to prevent users from unfairly claiming twice.</p>
+        <p></p>
+        <Divider orientation="left">Is the voting contract fool-proof?</Divider>
+        <p>No contract is fool-proof. </p>
+        <p>The Kush.Finance voting contracts, however are built with modularity in mind. </p>
+        <p>Each contract can be upgraded, replaced and reconnected. </p>
+        <p>Voters will only have to vote for a bid that reconnects the contract to the rest of the ecosystem. </p>
+        <p>Built this way, Kush.Finance can continuously be updated</p>
+        <p>By it's community without the need for a central developer.</p>
+        <p>The voters can also vote for a transfer that pays an external auditor</p>
+        <p>To look over any code in the ecosystem.</p>
+        <p></p> 
+        <p></p>
         <button className="disabled launch-date">Voting starts late October</button>
         <Divider />
 
