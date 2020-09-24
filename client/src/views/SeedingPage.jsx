@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import kSeedToken from "../contracts/kSeedToken.json";
 import kKushToken from "../contracts/kKushToken.json";
 import { getWeb3Var } from "../shared";
-import nyanLogoIMG from "../assets/logo.png";
+import kseedLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider } from "antd";
 import Balance from "../components/Balance";
 export default class SeedingPage extends Component {
@@ -233,14 +233,14 @@ export default class SeedingPage extends Component {
         />
         <Divider />
         <div className="amount-staked-box">
-          <img alt="nyan logo" src={nyanLogoIMG} />
+          <img alt="kSeed" src={kseedLogoIMG} />
           <div className="block">
             <div className="desc">Amount staked</div>
-            <div className="val nyan-balance">{this.state.stakedAmount}</div>
+            <div className="val kseed-balance">{this.state.stakedAmount}</div>
           </div>
           <div class="block">
             <div className="desc">Your kSEED balance</div>
-            <div className="val nyan-balance">{this.state.kseedBalance}</div>
+            <div className="val kseed-balance">{this.state.kseedBalance}</div>
           </div>
         </div>
         <div className="seeding-input">
