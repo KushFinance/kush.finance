@@ -311,8 +311,7 @@ export default class FarmingPage extends Component {
               this.state.stakeAmount > 0 && this.state.stakeAmount <= this.state.kushOGRewards ?
               "enabled" : "enabled"
             }`}
-            onClick={this.withdrawkKushUni}
-          >
+            onClick={this.withdrawkKushUni}>
             {!this.state.isWithdrawing ? <div> WITHDRAW </div> : null}
             {this.state.isWithdrawing ? <div> WITHDRAWING...</div> : null}
           </div>
