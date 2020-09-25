@@ -8,7 +8,7 @@ class KushShowcase extends Component {
             <div className="kushShowcase">
                 <img src={Logo} alt="KUSH.FINANCE LOGO"/>
                 <h1>Kush.Finance</h1>
-                <iframe src="https://vittominacori.github.io/watch-token/detail.html?address=0x3f09400313e83d53366147e3ea0e4e2279d80850&network=mainnet&logo=https://alpha.kush.finance/static/media/logo.7d625c91.png&embedded=1" style="border:none; overflow:hidden; width: 520px; max-width: 100%; height: 240px" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                
                 <ul className="addresses">
                     <li>
                         <a href="https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
