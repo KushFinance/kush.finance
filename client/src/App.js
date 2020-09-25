@@ -6,12 +6,14 @@ import Transition from './utils/switchTransitionConfig';
 import GovernPage from "./views/GovernPage";
 import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
+import WalletPage from "./views/WalletPage";
+import SettingsPage from "./views/SettingsPage";
 
 import Menu from "./components/Menu";
 import Drawer from "./components/Drawer";
 import Footer from "./components/Footer";
 import KushShowcase from "./components/KushShowcase";
-import Balance from "./components/Balance";
+import FloatWallet from "./components/FloatWallet";
 import "./style/index.sass";
 
 //import WalletConnect from "@walletconnect/client";
@@ -58,13 +60,19 @@ import "./style/index.sass";
 // });
 class App extends Component {
   render() {
+    if(!localStorage.getItem("kseedBalance")){
+      localStorage.setItem("kseedBalance","true");
+      localStorage.setItem("kseedSupply","true");
+      localStorage.setItem("kseedTotal","true");
+      localStorage.setItem("kkushSupply","true");
+    }
     return (
       <BrowserRouter>
         <div className="App">
           <Drawer/>
           <div className="sidebar">
             <Menu />
-            <Balance />
+            <FloatWallet />
             <Footer />
           </div>
           <div className="content">
@@ -81,11 +89,17 @@ class App extends Component {
                 <Route path="/seeding">
                   <SeedingPage />
                 </Route>
+                <Route path="/wallet">
+                  <WalletPage />
+                </Route>
                 <Route path="/farming">
                   <FarmingPage />
                 </Route>
                 <Route path="/govern">
                   <GovernPage />
+                </Route>
+                <Route path="/settings">
+                  <SettingsPage />
                 </Route>
               </AnimatedSwitch>
           </div>
