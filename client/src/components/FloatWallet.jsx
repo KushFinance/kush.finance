@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Statistic } from "antd";
-import kushLogo from "../assets/logo.png";
+import { Statistic, Collapse } from "antd";
 
 import kSeedToken from "../contracts/kSeedToken.json";
 import KushToken from "../contracts/kKushToken.json";
@@ -9,20 +8,22 @@ import { setWeb3 } from "../shared";
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-class Balance extends Component {
+
+const { Panel } = Collapse;
+
+class FloatWallet extends Component {
   state = {
     kseedBalance: 0,
     totalkSeedSupply: 0,
     totalkSeedStaked: 0,
     totalKushSupply: 0,
     isViewingGifts: false,
+    showkseedBalance: localStorage.getItem("kseedBalance") === "true" ? true : false,
+    showkseedSupply: localStorage.getItem("kseedSupply") === "true" ? true : false,
+    showkseedTotal: localStorage.getItem("kseedTotal") === "true" ? true : false,
+    showkkushSupply: localStorage.getItem("kkushSupply") === "true" ? true : false,
   };
 
-  mediaQuery = {
-    desktop: 1200,
-    tablet: 768,
-    phone: 576,
-  };
 
   toFixed(num, fixed) {
     var re = new RegExp("^-?\\d+(?:.\\d{0," + (fixed || -1) + "})?");
@@ -85,24 +86,6 @@ class Balance extends Component {
       });
   };
 
-  toggleStakingView = () => {
-    this.setState({
-      isViewingStaking: !this.state.isViewingStaking,
-    });
-  };
-
-  togglePumpView = () => {
-    this.setState({
-      isViewingPump: !this.state.isViewingPump,
-    });
-  };
-
-  toggleMineView = () => {
-    this.setState({
-      isViewingMine: !this.state.isViewingMine,
-    });
-  };
-
   _getWeb3 = () => {
     return this.web3;
   };
@@ -160,29 +143,24 @@ class Balance extends Component {
       console.error(error);
     }
   };
-  
   render() {
     return (
-      <div className="balance">
-        <div className="top-box balance-box">
-          <img className="balance-logo-image" alt="balance logo" src={kushLogo}/>
-          <Statistic title="Your k.SEED Balance" value={this.getRoundedkSeedBalance()} precision={2} />
-          <div className="top-box-val nyan-balance"></div>
-        </div>
-        <div className="top-box stats-box">
-          <div className="stats-op">
-            <Statistic title="Total k.SEED Supply" value={this.state.totalkSeedSupply} precision={2} />
+      <>
+        {(this.state.showkseedBalance||this.state.showkseedSupply||this.state.showkseedTotal||this.state.showkkushSupply) &&
+          <div className="float-wallet">
+            <Collapse defaultActiveKey={1} ghost>
+              <Panel header="Wallet" key="1">
+                { this.state.showkseedBalance && <Statistic title="Your k.SEED Balance" value={this.getRoundedkSeedBalance()} precision={2} />}
+                <div className="nyan-balance"></div>
+                { this.state.showkseedSupply && <Statistic title="Total k.SEED Supply" value={this.state.totalkSeedSupply} precision={2} />}
+                { this.state.showkseedTotal && <Statistic title="Total k.SEED Seeded" value={this.getRoundedTotalkSeedStaked()} precision={2}/>}
+                { this.state.showkkushSupply && <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>}
+              </Panel>
+            </Collapse>
           </div>
-          <div className="stats-op">
-            <Statistic title="Total k.SEED Seeded" value={this.getRoundedTotalkSeedStaked()} precision={2}/>
-          </div>
-          <div className="stats-op">
-            <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>
-          </div>
-        </div>
-      </div>
-    );
+        }
+      </>
+    )
   }
 }
-
-export default Balance;
+export default FloatWallet;

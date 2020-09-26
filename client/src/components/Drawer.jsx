@@ -1,8 +1,6 @@
 import React, {useState} from "react"
 import {Drawer} from "antd"
-import { createFromIconfontCN } from '@ant-design/icons'
 import Menu from "./Menu"
-const SpiryIcon = createFromIconfontCN({ scriptUrl: '//at.alicdn.com/t/font_1952854_9hxo6ls2cw.js'})
 
 
 function MobileDrawer(props){
@@ -16,7 +14,7 @@ function MobileDrawer(props){
     return (
         <>
             <Drawer 
-                title="Menu"
+                title="Kush.Finance"
                 placement="left"
                 onClose={handleClose}
                 visible={visible}
@@ -25,7 +23,7 @@ function MobileDrawer(props){
                 <Menu onChangePage={handleClose}/>
             </Drawer>
             { !visible && 
-                <button className="button-drawer" onClick={()=>{handleOpen()}}> <SpiryIcon type='iconmenu'/> </button>
+                <button className="button-drawer" onClick={()=>{handleOpen()}}> </button>
             }
         </>
         
