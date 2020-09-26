@@ -5,6 +5,7 @@ import kKUSHicon from "../assets/kKUSH.png";
 import { getWeb3Var } from "../shared";
 import kseedLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider,PageHeader } from "antd";
+
 export default class SeedingPage extends Component {
   state = {
     loaded: false,
