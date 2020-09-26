@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Divider, Tabs } from "antd";
 const { TabPane } = Tabs;
-import { getWeb3Var } from "../shared";
 export default class Pump extends Component {
   render() {
     return (
