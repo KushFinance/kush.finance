@@ -25,15 +25,18 @@
 
 .ant-tabs
     color: #eee
+    .ant-tabs-tab.ant-tabs-tab-disabled
+        color: rgba(39,205,53,1)
+
     .ant-tabs-tab
         &:hover 
-            color: #fe9cf3
+            color: rgba(39,205,53,1)
         &-active .ant-tabs-tab-btn
             color: #7bfc5b
         .ant-tabs-tab-btn:active
             color: #fe9cf3
-            .ant-tabs-tab.ant-tabs-tab-disabled
-            color: #98C58C
+        .ant-tabs-tab-btn:inactive
+            color: #98c58c
     .ant-tabs-ink-bar
         background: #fe9cf3
 

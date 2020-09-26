@@ -228,8 +228,11 @@ export default class SeedingPage extends Component {
          <PageHeader
             className="site-page-header"
             onBack={() => window.history.back()}
-            title="Seeding kSEED"
-            subTitle="Stake kSEED to mine kKUSH"/>
+            title="Seeding kSEED for kKUSH"
+            subTitle=""
+            avatar={{ src: kseedLogoIMG }}
+            />
+            
         <Alert
           message="Make sure to always claim mining rewards before staking more!"
           type="warning"
@@ -288,7 +291,11 @@ export default class SeedingPage extends Component {
         </div>
         <Divider />
         <div className="flex spaced full-w align-center">
-          <h1>GET kKUSH</h1>
+        <PageHeader
+    className="site-page-header"
+    title="Get kKUSH"
+    avatar={{ src: kKUSHicon }}
+  />
           <button onClick={this.getkKushRewards}> UPDATE </button>
         </div>
         <p> INFO: KUSH rewards grow per block and are updated on each transaction(send) to functions with the "updateStakingRewards" modifier. </p>
