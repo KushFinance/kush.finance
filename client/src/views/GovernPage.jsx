@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Divider, Tabs } from "antd";
 const { TabPane } = Tabs;
+import { getWeb3Var } from "../shared";
 export default class Pump extends Component {
   render() {
     return (
@@ -72,13 +73,13 @@ export default class Pump extends Component {
       </div>
       </TabPane>
       <TabPane tab="Bid" disabled key="2">
-        Tab 2
+       
       </TabPane>
       <TabPane tab="Vote" disabled key="3">
-        Tab 3
+       
       </TabPane>
       <TabPane tab="Claim" disabled key="4">
-        Tab 3
+       
       </TabPane>
     </Tabs>
       
