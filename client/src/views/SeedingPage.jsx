@@ -4,7 +4,7 @@ import kKushToken from "../contracts/kKushToken.json";
 import kKUSHicon from "../assets/kKUSH.png";
 import { getWeb3Var } from "../shared";
 import kseedLogoIMG from "../assets/logo.png";
-import { Input, Alert, Divider } from "antd";
+import { Input, Alert, Divider,PageHeader } from "antd";
 export default class SeedingPage extends Component {
   state = {
     loaded: false,
@@ -225,7 +225,11 @@ export default class SeedingPage extends Component {
   render() {
     return (
       <div class="subpage seeding">
-        <h1>Stake  <img className="balance-logo-image" src={kseedLogoIMG} alt="kSEED"/> kSEED to mine  <img className="balance-logo-image" src={kKUSHicon} alt="kSEED"/> kKUSH</h1>
+         <PageHeader
+            className="site-page-header"
+            onBack={() => window.history.back()}
+            title="Seeding kSEED"
+            subTitle="Stake kSEED to mine kKUSH"/>
         <Alert
           message="Make sure to always claim mining rewards before staking more!"
           type="warning"
