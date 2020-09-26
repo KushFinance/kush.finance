@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Tabs, TabPane } from "antd";
+import { Divider, Tabs } from "antd";
+const { TabPane } = Tabs;
 export default class Pump extends Component {
   render() {
     return (
