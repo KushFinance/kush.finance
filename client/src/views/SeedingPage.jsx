@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import kSeedToken from "../contracts/kSeedToken.json";
 import kKushToken from "../contracts/kKushToken.json";
+import kKUSHicon from "../assets/kKUSH.png";
 import { getWeb3Var } from "../shared";
 import kseedLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider } from "antd";
@@ -224,7 +225,7 @@ export default class SeedingPage extends Component {
   render() {
     return (
       <div class="subpage seeding">
-        <h1>Stake $kSEED to mine $kKUSH</h1>
+        <h1>Stake <img alt="kSeed" src={kseedLogoIMG} /> kSEED to mine <img alt="kSeed" src={kKUSHicon} /> kKUSH</h1>
         <Alert
           message="Make sure to always claim mining rewards before staking more!"
           type="warning"
@@ -283,7 +284,7 @@ export default class SeedingPage extends Component {
         </div>
         <Divider />
         <div className="flex spaced full-w align-center">
-          <h1>GET $kKUSH</h1>
+          <h1>GET kKUSH</h1>
           <button onClick={this.getkKushRewards}> UPDATE </button>
         </div>
         <p> INFO: KUSH rewards grow per block and are updated on each transaction(send) to functions with the "updateStakingRewards" modifier. </p>
