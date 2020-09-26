@@ -225,7 +225,7 @@ export default class SeedingPage extends Component {
   render() {
     return (
       <div class="subpage seeding">
-        <h1>Stake <img alt="kSeed" src={kseedLogoIMG} /> kSEED to mine <img alt="kSeed" src={kKUSHicon} /> kKUSH</h1>
+        <h1>Stake  <img className="balance-logo-image" src={kseedLogoIMG} alt="kSEED"/> kSEED to mine  <img className="balance-logo-image" src={kKUSHicon} alt="kSEED"/> kKUSH</h1>
         <Alert
           message="Make sure to always claim mining rewards before staking more!"
           type="warning"
