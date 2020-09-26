@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Divider } from "antd";
+import { Divider, Tabs } from "antd";
 export default class Pump extends Component {
   render() {
     return (
+      <Tabs defaultActiveKey="1">
+      <TabPane tab="INFO & FAQ" key="1">
       <div className="subpage govern">
         <h1>Governing Page & Fund FAQ</h1>
 
@@ -67,6 +69,18 @@ export default class Pump extends Component {
         
         <button className="disabled launch-date">Voting starts late October</button>
       </div>
+      </TabPane>
+      <TabPane tab="Bid" disabled key="2">
+        Tab 2
+      </TabPane>
+      <TabPane tab="Vote" disabled key="3">
+        Tab 3
+      </TabPane>
+      <TabPane tab="Claim" disabled key="4">
+        Tab 3
+      </TabPane>
+    </Tabs>
+      
     );
   }
 }

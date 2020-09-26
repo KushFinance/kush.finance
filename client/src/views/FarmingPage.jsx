@@ -243,10 +243,11 @@ export default class FarmingPage extends Component {
         />
 
         <div className="amount-staked-box">
-          <div className="block amount-staked-image">
-            <img className="balance-logo-image" src={kKUSHicon} alt="kKUSH icon"/>
+        <img className="balance-logo-image" src={kKUSHicon} alt="kKUSH icon"/>
             /
             <img className="balance-logo-image" src={ethLogo} alt="ETH logo" />
+          <div className="block amount-staked-image">
+
           </div>  
           <div className="block">
             <div className="desc">Amount in Wallet</div>
