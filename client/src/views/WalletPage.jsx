@@ -83,6 +83,36 @@ export default class WalletPage extends Component {
     return this.web3;
   };
 
+  // addToken(token){
+  //   try {
+  //     this.web3.send({
+  //       method: 'wallet_watchAsset',
+  //       params: {
+  //         'type': 'ERC20',
+  //         'options': {
+  //           'address': token.address,
+  //           'symbol': token.symbol.substr(0, 6),
+  //           'decimals': token.decimals,
+  //           'image': token.logo,
+  //         },
+  //       },
+  //       id: Math.round(Math.random() * 100000),
+  //     }, (err, data) => {
+  //       if (!err) {
+  //         if (data.result) {
+  //           console.log('Token added');
+  //         } else {
+  //           console.log(data);
+  //           console.log('Some error');
+  //         }
+  //       } else {
+  //         console.log(err.message);
+  //       }
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
   componentDidMount = async () => {
     document.title = "Kush.Finance";
 
@@ -151,6 +181,30 @@ export default class WalletPage extends Component {
             <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>
           </Card>
         </div>
+        {/* <div className="addToken">
+          <div className="flex align-center">
+            <img src="https://i.imgur.com/lvDv8Dh.png" alt="kKUSH" width="64" height="64"/>
+            <h2>kKUSH (kKUSH) </h2>
+          </div>
+          <h3>0x538B4B507D57bf9eBd8847eC395B7b061c150181</h3>
+          <a>Add to Metamask</a>
+          <a rel="noopener" target="_blank" href="https://etherscan.io/token/0x538B4B507D57bf9eBd8847eC395B7b061c150181">View on Etherscan</a>
+        </div>
+        <div className="addToken">
+          <div className="flex align-center">
+            <img src="https://i.imgur.com/DFldun8.png" alt="kushOG" width="64" height="64"/>
+            <h2>kushOG (kOG) </h2>
+          </div>
+          <h3>0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4</h3>
+          <button onClick={()=>{this.addToken({
+            address: "0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4",
+            symbol: "kOG",
+            decimals: 18,
+            image: "https%3A%2F%2Fi.imgur.com%2FDFldun8.png"
+            })}}>
+          Add to Metamask</button>
+          <a rel="noopener" target="_blank" href="https://etherscan.io/token/0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4"> View on Etherscan</a>
+        </div> */}
       </div>
     );
   }

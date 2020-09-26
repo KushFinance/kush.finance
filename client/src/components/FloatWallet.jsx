@@ -143,21 +143,24 @@ class FloatWallet extends Component {
       console.error(error);
     }
   };
-  
   render() {
     return (
-      <div className="float-wallet">
-          <Collapse defaultActiveKey={1} ghost>
-            <Panel header="Wallet" key="1">
-              { this.state.showkseedBalance && <Statistic title="Your k.SEED Balance" value={this.getRoundedkSeedBalance()} precision={2} />}
-              <div className="nyan-balance"></div>
-              { this.state.showkseedSupply && <Statistic title="Total k.SEED Supply" value={this.state.totalkSeedSupply} precision={2} />}
-              { this.state.showkseedTotal && <Statistic title="Total k.SEED Seeded" value={this.getRoundedTotalkSeedStaked()} precision={2}/>}
-              { this.state.showkkushSupply && <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>}
-            </Panel>
-          </Collapse>
-      </div>
-    );
+      <>
+        {(this.state.showkseedBalance||this.state.showkseedSupply||this.state.showkseedTotal||this.state.showkkushSupply) &&
+          <div className="float-wallet">
+            <Collapse defaultActiveKey={1} ghost>
+              <Panel header="Wallet" key="1">
+                { this.state.showkseedBalance && <Statistic title="Your k.SEED Balance" value={this.getRoundedkSeedBalance()} precision={2} />}
+                <div className="nyan-balance"></div>
+                { this.state.showkseedSupply && <Statistic title="Total k.SEED Supply" value={this.state.totalkSeedSupply} precision={2} />}
+                { this.state.showkseedTotal && <Statistic title="Total k.SEED Seeded" value={this.getRoundedTotalkSeedStaked()} precision={2}/>}
+                { this.state.showkkushSupply && <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>}
+              </Panel>
+            </Collapse>
+          </div>
+        }
+      </>
+    )
   }
 }
 export default FloatWallet;

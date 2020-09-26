@@ -242,11 +242,11 @@ export default class SeedingPage extends Component {
             <div className="val kseed-balance">{this.state.kseedBalance}</div>
           </div>
         </div>
-        <div className="seeding-input">
+        <div className="farm-input">
           <div>
             <Input prefix="kSEED" onChange={this.updateStakingInput.bind(this)} value={this.setInputField()} />
           </div>
-          <div className="seeding-buttons">
+          <div className="farm-buttons">
             <button onClick={this.setMaxkSeedUnstake.bind(this)}> Max amount to unstake </button>
             <button onClick={this.setMaxkSeed.bind(this)}> Max amount to stake </button>
           </div>

@@ -65,10 +65,12 @@ class App extends Component {
       localStorage.setItem("kseedSupply","true");
       localStorage.setItem("kseedTotal","true");
       localStorage.setItem("kkushSupply","true");
+      localStorage.setItem("darkMode","false");
     }
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="bg-lime"></div>
+        <div className={`App ${localStorage.getItem('darkMode') === "true" && 'dark-mode'}`}>
           <Drawer/>
           <div className="sidebar">
             <Menu />
@@ -89,7 +91,7 @@ class App extends Component {
                 <Route path="/seeding">
                   <SeedingPage />
                 </Route>
-                <Route path="/wallet">
+                <Route path="/wallet" >
                   <WalletPage />
                 </Route>
                 <Route path="/farming">
