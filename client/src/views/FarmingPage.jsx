@@ -6,6 +6,7 @@ import ethLogo from "../assets/eth.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
 import { Input, Alert, Divider } from "antd";
+import { useGlobal } from 'reactn';
 export default class FarmingPage extends Component {
   state = {
     loaded: false,

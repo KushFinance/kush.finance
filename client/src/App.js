@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter,  Route } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
 import Transition from './utils/switchTransitionConfig';
-
+import { useGlobal } from 'reactn';
 import GovernPage from "./views/GovernPage";
 import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
