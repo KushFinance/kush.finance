@@ -7,6 +7,7 @@ export default class SettingsPage extends Component {
     kseedSupply: localStorage.getItem("kseedSupply") === "true" ? true : false,
     kseedTotal: localStorage.getItem("kseedTotal") === "true" ? true : false,
     kkushSupply: localStorage.getItem("kkushSupply") === "true" ? true : false,
+    kushOGSupply: localStorage.getItem("kushOGSupply") === "true" ? true : false,
     darkMode: localStorage.getItem("darkMode") === "true" ? true : false,
   }
   changeStorage(item){
@@ -17,6 +18,7 @@ export default class SettingsPage extends Component {
         kseedSupply: localStorage.getItem("kseedSupply") === "true" ? true : false,
         kseedTotal: localStorage.getItem("kseedTotal") === "true" ? true : false,
         kkushSupply: localStorage.getItem("kkushSupply") === "true" ? true : false,
+        kushOGSupply: localStorage.getItem("kushOGSupply") === "true" ? true : false,
         darkMode: localStorage.getItem("darkMode") === "true" ? true : false,
       }) 
   }

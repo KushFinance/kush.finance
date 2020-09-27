@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Statistic, Collapse } from "antd";
-
 import kSeedToken from "../contracts/kSeedToken.json";
 import KushToken from "../contracts/kKushToken.json";
+import KushOGToken from "../contracts/kushOGToken.json";
 import getWeb3 from "../getWeb3";
 import { setWeb3 } from "../shared";
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-
-
 const { Panel } = Collapse;
 
 class FloatWallet extends Component {
@@ -17,11 +15,13 @@ class FloatWallet extends Component {
     totalkSeedSupply: 0,
     totalkSeedStaked: 0,
     totalKushSupply: 0,
+    totalKushOGSupply: 0,
     isViewingGifts: false,
     showkseedBalance: localStorage.getItem("kseedBalance") === "true" ? true : false,
     showkseedSupply: localStorage.getItem("kseedSupply") === "true" ? true : false,
     showkseedTotal: localStorage.getItem("kseedTotal") === "true" ? true : false,
     showkkushSupply: localStorage.getItem("kkushSupply") === "true" ? true : false,
+    totalkushOGSupply: localStorage.getItem("kushOGSupply") === "true" ? true : false,
   };
 
 
@@ -76,6 +76,12 @@ class FloatWallet extends Component {
       totalKushSupply: this.web3.utils.fromWei(_kushSupply),
     });
   };
+    getkushOGSupply = async () => {
+    let _kushogSupply = await this.kushogInstance.methods.totalSupply().call();
+    this.setState({
+      totalKushOGSupply: this.web3.utils.fromWei(_kushogSupply),
+    });
+  };
 
   setkSeedAddress = async () => {
     await this.kushInstance.methods
@@ -125,12 +131,17 @@ class FloatWallet extends Component {
         KushToken.abi,
         process.env.REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS
       );
+      this.kushOGInstance = new this.web3.eth.Contract(
+        KushOGToken.abi,
+        process.env.REACT_APP_KUSHOG_TOKEN_CONTRACT_ADDRESS
+      );
 
       setWeb3(this.web3);
 
       this.getkSeedSupply();
       this.getKushSupply();
       this.totalkSeedStaked();
+      this.getkushOGSupply();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -151,10 +162,11 @@ class FloatWallet extends Component {
             <Collapse defaultActiveKey={1} ghost>
               <Panel header="Wallet" key="1">
                 { this.state.showkseedBalance && <Statistic title="Your k.SEED Balance" value={this.getRoundedkSeedBalance()} precision={2} />}
-                <div className="nyan-balance"></div>
+                <div className="kush-balance"></div>
                 { this.state.showkseedSupply && <Statistic title="Total k.SEED Supply" value={this.state.totalkSeedSupply} precision={2} />}
                 { this.state.showkseedTotal && <Statistic title="Total k.SEED Seeded" value={this.getRoundedTotalkSeedStaked()} precision={2}/>}
                 { this.state.showkkushSupply && <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>}
+                { this.state.showkushOGSupply && <Statistic title="Total k.OG Supply" value={this.state.totalKushSupply} precision={2}/>}
               </Panel>
             </Collapse>
           </div>

@@ -1,10 +1,10 @@
 // contracts/KushFund/kSeedFund.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.0;
+pragma solidity ^0.6.6;
+import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/SafeERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/math/SafeMath.sol";
 
 contract kSeedFund {
     using SafeERC20 for IERC20;
@@ -16,7 +16,6 @@ contract kSeedFund {
         require(msg.sender == connectorAddress);
         _;
     }
-    
     function approveSpend(address _address, uint256 _amount) public _onlyConnector {
         // ERC20(_address).approve(_address, _amount);
         IERC20 ercToken = IERC20(_address);
