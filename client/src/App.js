@@ -8,7 +8,7 @@ import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
 import WalletPage from "./views/WalletPage";
 import SettingsPage from "./views/SettingsPage";
-
+import Web3Connection from "./components/Web3Connection.jsx";
 import Menu from "./components/Menu";
 import Drawer from "./components/Drawer";
 import Footer from "./components/Footer";
@@ -84,7 +84,7 @@ class App extends Component {
                 mapStyles={Transition.mapStyles}
                 className="route-wrapper"
               >
-                
+                 <Web3Connection>
                 <Route exact path="/">
                   <KushShowcase />
                 </Route>
@@ -103,6 +103,7 @@ class App extends Component {
                 <Route path="/settings">
                   <SettingsPage />
                 </Route>
+                </Web3Connection>
               </AnimatedSwitch>
           </div>
         </div>
