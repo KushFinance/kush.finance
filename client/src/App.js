@@ -15,7 +15,7 @@ import Footer from "./components/Footer";
 import KushShowcase from "./components/KushShowcase";
 import FloatWallet from "./components/FloatWallet";
 import "./style/index.sass";
-const [ web3Instance ] = useGlobal('web3Instance');
+
 //import WalletConnect from "@walletconnect/client";
 //import QRCodeModal from "@walletconnect/qrcode-modal";
 // import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -60,7 +60,7 @@ const [ web3Instance ] = useGlobal('web3Instance');
 // });
 class App extends Component {
   
-  render() {document.title = "kush.finance";
+  render() {
     if(!localStorage.getItem("kseedBalance")){
       localStorage.setItem("kseedBalance","true");
       localStorage.setItem("kseedSupply","true");
@@ -114,3 +114,4 @@ class App extends Component {
 }
 
 export default App;
+ const [ web3Instance ] = useGlobal('web3Instance');
