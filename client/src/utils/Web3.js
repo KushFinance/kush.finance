@@ -6,16 +6,16 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import React, { useContext, useState, useEffect} from "react";
-//window.ethereum
+window.ethereum
 
 
 
-  /*
+
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider, // required
       options: {
-        infuraId: "83301e4b4e234662b7769295c0f4a2e1" // required
+        infuraId: "ba0fa4b3210c4528bf4aaefc58eb1251" // required
       }
     }
   };
@@ -41,15 +41,14 @@ import React, { useContext, useState, useEffect} from "react";
 
   const web3 = new Web3(provider);
   
-  /*window.web3Modal = web3Modal;
+  window.web3Modal = web3Modal;
   window.web3Instance = web3;
   window.web3Provider = provider;*/
+  dispatch({ type: 'setWeb3Connected' })
+
+return ('<div/>')
+
   
-  //dispatch({ type: 'setWeb3Connected' })
-
-  //return ('<div/>')
-
-  /*
   if(window.web3Instance) return window.web3Instance;
   
   
@@ -96,7 +95,7 @@ import React, { useContext, useState, useEffect} from "react";
   
   return web3;
   
-  /*
+  
     if (window.ethereum) {
       console.log('window.ethereum')
         const web3 = new Web3(window.ethereum);
@@ -122,7 +121,7 @@ import React, { useContext, useState, useEffect} from "react";
       }
       // Fallback to localhost; use dev console port by default...
       else {
-        /*
+        
         console.log('fallback to localhost')
         const provider = new Web3.providers.HttpProvider(
           "http://127.0.0.1:8545"
@@ -135,25 +134,25 @@ import React, { useContext, useState, useEffect} from "react";
       }
       
  }
- */
+ 
 
  /**
   * Check to see if there's a web3 instance to use
   */
- /*
+ 
  async function checkWeb3IsPresent(){
    let instance = await GetInstance();
    if(!instance) return false;
    return true;
 }
-*/
+
 
  /** Get all accounts */
- /*
+ 
  async function getAccounts(){
     const instance = await GetInstance();
     return instance.eth.getAccounts();
-    //return {};
+    return {};
  }
  
 
@@ -161,11 +160,11 @@ import React, { useContext, useState, useEffect} from "react";
     const instance = await GetInstance();
     return instance.eth.net.getId()
  }
- */
+ 
 
  // Export each function
  export {
-    //checkWeb3IsPresent,
-    //getAccounts,
-    //getNetworkId
+    checkWeb3IsPresent,
+    getAccounts,
+    getNetworkId
  };
