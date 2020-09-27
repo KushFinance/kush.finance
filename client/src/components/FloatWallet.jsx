@@ -3,9 +3,9 @@ import { Statistic, Collapse } from "antd";
 import kSeedToken from "../contracts/kSeedToken.json";
 import KushToken from "../contracts/kKushToken.json";
 import KushOGToken from "../contracts/kushOGToken.json";
-import getWeb3 from "../getWeb3";
+import getWeb3modal from "../getWeb3";
 import { setWeb3 } from "../shared";
-import web3Modal from "web3modal";
+import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 const { Panel } = Collapse;
 
@@ -111,9 +111,9 @@ class FloatWallet extends Component {
         await provider.enable();
 
         //  Create Web3
-        this.web3 = new Web3(provider);
+        this.web3 = new Web3Modal(provider);
       } else {
-        this.web3 = await getWeb3();
+        this.web3 = await getWeb3modal();
       }
 
       // Use web3 to get the user's accounts.
