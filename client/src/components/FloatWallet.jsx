@@ -3,9 +3,9 @@ import { Statistic, Collapse } from "antd";
 import kSeedToken from "../contracts/kSeedToken.json";
 import KushToken from "../contracts/kKushToken.json";
 import KushOGToken from "../contracts/kushOGToken.json";
-import getWeb3modal from "../getWeb3";
+import getWeb3 from "../getWeb3";
 import { setWeb3 } from "../shared";
-import Web3Modal from "web3modal";
+import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 const { Panel } = Collapse;
 
@@ -48,14 +48,14 @@ class FloatWallet extends Component {
       .balanceOf(this.accounts[0])
       .call();
     this.setState({
-      kseedBalance: this.web3modal.utils.fromWei(_kseedBalance),
+      kseedBalance: this.web3.utils.fromWei(_kseedBalance),
     });
   };
 
   getkSeedSupply = async () => {
     let _kseedSupply = await this.kseedInstance.methods.totalSupply().call();
     this.setState({
-      totalkSeedSupply: this.web3modal.utils.fromWei(_kseedSupply),
+      totalkSeedSupply: this.web3.utils.fromWei(_kseedSupply),
     });
   };
 
@@ -65,7 +65,7 @@ class FloatWallet extends Component {
       .call();
 
     this.setState({
-      totalkSeedStaked: this.web3modal.utils.fromWei(_totalkSeedStaked),
+      totalkSeedStaked: this.web3.utils.fromWei(_totalkSeedStaked),
     });
   };
 
@@ -73,13 +73,13 @@ class FloatWallet extends Component {
     let _kushSupply = await this.kushInstance.methods.totalSupply().call();
 
     this.setState({
-      totalKushSupply: this.web3modal.utils.fromWei(_kushSupply),
+      totalKushSupply: this.web3.utils.fromWei(_kushSupply),
     });
   };
     getkushOGSupply = async () => {
     let _kushogSupply = await this.kushogInstance.methods.totalSupply().call();
     this.setState({
-      totalKushOGSupply: this.web3modal.utils.fromWei(_kushogSupply),
+      totalKushOGSupply: this.web3.utils.fromWei(_kushogSupply),
     });
   };
 
@@ -111,9 +111,9 @@ class FloatWallet extends Component {
         await provider.enable();
 
         //  Create Web3
-        this.web3 = new Web3Modal(provider);
+        this.web3 = new Web3(provider);
       } else {
-        this.web3 = await getWeb3modal();
+        this.web3 = await getWeb3();
       }
 
       // Use web3 to get the user's accounts.
