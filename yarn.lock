@@ -1790,6 +1790,13 @@ engine.io-parser@~2.2.0:
     blob "0.0.5"
     has-binary2 "~1.0.2"
 
+erc20-meta-token@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/erc20-meta-token/-/erc20-meta-token-0.3.2.tgz#39411cd251718942dc0b4d57b1bf84e77151d951"
+  integrity sha512-vCCCsqJEaoxVa2P8AGUYDTQkdYYL9tJr1j0uAC0adIJT7C74x53dTfV9PCFDoy+74R95cTOsjnRKV3Vt3XaHTQ==
+  dependencies:
+    multi-token-standard "^0.9.6"
+
 errno@~0.1.1:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
@@ -3480,6 +3487,11 @@ ms@2.1.2, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+
+multi-token-standard@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/multi-token-standard/-/multi-token-standard-0.9.6.tgz#8a6238b567e6ff069f6122ebfbfdcc71e0b641ce"
+  integrity sha512-i00XDym35De70g4gvify5v5J8mqKGFOdmWsCaMGH7UnE5jyPrH3DIjoLTC+6mVFx3N9/Ovm23QdUeKduYwvAkQ==
 
 nan@2.14.0:
   version "2.14.0"

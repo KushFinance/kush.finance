@@ -2,6 +2,7 @@
   "dependencies": {
     "@myetherwallet/mewconnect-web-client": "^2.1.5-beta.1",
     "@walletconnect/web3-provider": "^1.2.2",
+    "erc20-meta-token": "^0.3.2",
     "web3connect": "^1.0.0-beta.33",
     "web3modal": "^1.9.0"
   }
