@@ -1,8 +1,8 @@
 pragma solidity ^0.6.6;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/SafeERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 
 contract kushPUREToken is ERC20{
@@ -105,17 +105,16 @@ contract kushPUREToken is ERC20{
 
     constructor(
         address kkushToken,
-        address _devAddress,
+        address _devAddress
     ) public payable ERC20("kushPURE", "kPURE") {
         
         owner = msg.sender;
-        uint256 supply = 4.2;
+        uint256 supply = 1;
         _mint(msg.sender, supply.mul(10 ** 18));
-        start_block = _start_block;
         devAddress = _devAddress;
         lastBlockSent = block.number;
         isStart = false;
-        kKushToken = IERC20(address(kKushToken));
+        kkushToken = IERC20(address(kkushToken));
     }
     
     function transferOwnership(address newOwner) external _onlyOwner {
@@ -214,7 +213,7 @@ contract kushPUREToken is ERC20{
        stakedBalances[msg.sender].rewards = 0;
        uint256 totalWeight = rateReward.add(rateDevFee).add(rateFund);
        // 20% to Funding event
-       _mint(address(this),fundingPoolReward, reward.div(totalWeight).mul(rateFund));
+       _mint(address(this), reward.div(totalWeight).mul(rateFund));
        // 75% to User
        _mint(msg.sender, reward.div(totalWeight).mul(rateReward));
         // 5% to DevFee

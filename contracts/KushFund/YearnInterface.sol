@@ -1,3 +1,4 @@
+pragma solidity ^0.6.6;
 interface YConverter {
     function convert(address) external returns (uint256);
 }

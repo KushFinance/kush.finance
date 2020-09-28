@@ -1,3 +1,5 @@
+pragma solidity ^0.6.6;
+
 interface ERC20 {
     /**
      * @dev Returns the amount of tokens in existence.

@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { BrowserRouter,  Route } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
 import Transition from './utils/switchTransitionConfig';
-
+import { useGlobal } from 'reactn';
 import GovernPage from "./views/GovernPage";
 import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
 import WalletPage from "./views/WalletPage";
 import SettingsPage from "./views/SettingsPage";
-
+import Web3Connection from "./components/Web3Connection.jsx";
 import Menu from "./components/Menu";
 import Drawer from "./components/Drawer";
 import Footer from "./components/Footer";
@@ -59,6 +59,7 @@ import "./style/index.sass";
 //   // Delete connector
 // });
 class App extends Component {
+  
   render() {
     if(!localStorage.getItem("kseedBalance")){
       localStorage.setItem("kseedBalance","true");
@@ -84,7 +85,7 @@ class App extends Component {
                 mapStyles={Transition.mapStyles}
                 className="route-wrapper"
               >
-                
+                 <Web3Connection>
                 <Route exact path="/">
                   <KushShowcase />
                 </Route>
@@ -103,6 +104,7 @@ class App extends Component {
                 <Route path="/settings">
                   <SettingsPage />
                 </Route>
+                </Web3Connection>
               </AnimatedSwitch>
           </div>
         </div>
@@ -112,3 +114,4 @@ class App extends Component {
 }
 
 export default App;
+ 

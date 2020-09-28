@@ -7,6 +7,7 @@ export default class SettingsPage extends Component {
     kseedSupply: localStorage.getItem("kseedSupply") === "true" ? true : false,
     kseedTotal: localStorage.getItem("kseedTotal") === "true" ? true : false,
     kkushSupply: localStorage.getItem("kkushSupply") === "true" ? true : false,
+    kushOGSupply: localStorage.getItem("kushOGSupply") === "true" ? true : false,
     darkMode: localStorage.getItem("darkMode") === "true" ? true : false,
   }
   changeStorage(item){
@@ -17,6 +18,7 @@ export default class SettingsPage extends Component {
         kseedSupply: localStorage.getItem("kseedSupply") === "true" ? true : false,
         kseedTotal: localStorage.getItem("kseedTotal") === "true" ? true : false,
         kkushSupply: localStorage.getItem("kkushSupply") === "true" ? true : false,
+        kushOGSupply: localStorage.getItem("kushOGSupply") === "true" ? true : false,
         darkMode: localStorage.getItem("darkMode") === "true" ? true : false,
       }) 
   }
@@ -26,6 +28,7 @@ export default class SettingsPage extends Component {
     localStorage.setItem("kseedSupply","true");
     localStorage.setItem("kseedTotal","true");
     localStorage.setItem("kkushSupply","true");
+    localStorage.setItem("kushOGSupply","true");
     localStorage.setItem("darkMode","false");
     window.location.reload()
   }
@@ -52,6 +55,12 @@ export default class SettingsPage extends Component {
           checked={this.state.kseedTotal}
           onChange={()=>{this.changeStorage("kseedTotal")}} />
           <span>Show total k.SEED seeded</span>
+        </div> 
+        <div className="switch-settings">
+          <Switch
+          checked={this.state.kushOGSupply}
+          onChange={()=>{this.changeStorage("kushOGSupply")}} />
+          <span>Show total k.OG Supply</span>
         </div> 
         <div className="switch-settings">
           <Switch

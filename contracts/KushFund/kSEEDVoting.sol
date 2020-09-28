@@ -1,10 +1,10 @@
 // contracts/KushFund/kSeedVoting.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.0;
+pragma solidity ^0.6.6;
 pragma experimental ABIEncoderV2;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/SafeERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./ERC20Interface.sol";
 
 contract kSeedVoting {
@@ -166,7 +166,7 @@ contract kSeedVoting {
     function voteForBid(address _bidAddr, uint256 votes) public {
         kseedIERC20.safeTransferFrom(msg.sender, address(this), votes * costPerVote);
         kkushIERC20.safeTransferFrom(msg.sender, address(this), votes * kkushCost);
-        votedkSeed[msg.sender].kseedLocked = votedkSeed[msg.sender].kseedLocked.add(votes * costPerVote);
+        votedkSeed[msg.sender].kSeedLocked = votedkSeed[msg.sender].kSeedLocked.add(votes * costPerVote);
         votedkSeed[msg.sender].releaseBlock = currentVotingEndBlock;
         currentBids[_bidAddr].votes = currentBids[_bidAddr].votes.add(votes);
         
@@ -176,9 +176,9 @@ contract kSeedVoting {
     
     function withdrawBidkSeed() public {
         require(votedkSeed[msg.sender].releaseBlock > block.number, "kSEED is still locked for vote");
-        uint256 amount = votedkSeed[msg.sender].kseedLocked;
+        uint256 amount = votedkSeed[msg.sender].kSeedLocked;
         kseedIERC20.safeTransfer(msg.sender, amount);
-        votedkSeed[msg.sender].kseedLocked = 0;
+        votedkSeed[msg.sender].kSeedLocked = 0;
         
         //Bid kSEED withdrawal event
     }
