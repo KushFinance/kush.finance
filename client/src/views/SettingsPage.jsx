@@ -28,6 +28,7 @@ export default class SettingsPage extends Component {
     localStorage.setItem("kseedSupply","true");
     localStorage.setItem("kseedTotal","true");
     localStorage.setItem("kkushSupply","true");
+    localStorage.setItem("kushOGSupply","true");
     localStorage.setItem("darkMode","false");
     window.location.reload()
   }
@@ -54,6 +55,12 @@ export default class SettingsPage extends Component {
           checked={this.state.kseedTotal}
           onChange={()=>{this.changeStorage("kseedTotal")}} />
           <span>Show total k.SEED seeded</span>
+        </div> 
+        <div className="switch-settings">
+          <Switch
+          checked={this.state.kushOGSupply}
+          onChange={()=>{this.changeStorage("kushOGSupply")}} />
+          <span>Show total k.OG Supply</span>
         </div> 
         <div className="switch-settings">
           <Switch

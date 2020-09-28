@@ -77,9 +77,9 @@ class FloatWallet extends Component {
     });
   };
     getkushOGSupply = async () => {
-    let _kushogSupply = await this.kushogInstance.methods.totalSupply().call();
+    let _kushOGSupply = await this.kushogInstance.methods.totalSupply().call();
     this.setState({
-      totalKushOGSupply: this.web3.utils.fromWei(_kushogSupply),
+      totalKushOGSupply: this.web3.utils.fromWei(_kushOGSupply),
     });
   };
 
@@ -149,7 +149,7 @@ class FloatWallet extends Component {
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
+        `Web3 Connection Failed. Do you have MetaMask or your Wallet unlocked?`
       );
       console.error(error);
     }
@@ -157,7 +157,7 @@ class FloatWallet extends Component {
   render() {
     return (
       <>
-        {(this.state.showkseedBalance||this.state.showkseedSupply||this.state.showkseedTotal||this.state.showkkushSupply) &&
+        {(this.state.showkseedBalance||this.state.showkseedSupply||this.state.showkseedTotal||this.state.showkkushSupply|this.state.showkushOGSupply) &&
           <div className="float-wallet">
             <Collapse defaultActiveKey={1} ghost>
               <Panel header="Wallet" key="1">
@@ -166,7 +166,7 @@ class FloatWallet extends Component {
                 { this.state.showkseedSupply && <Statistic title="Total k.SEED Supply" value={this.state.totalkSeedSupply} precision={2} />}
                 { this.state.showkseedTotal && <Statistic title="Total k.SEED Seeded" value={this.getRoundedTotalkSeedStaked()} precision={2}/>}
                 { this.state.showkkushSupply && <Statistic title="Total k.KUSH Supply" value={this.state.totalKushSupply} precision={2}/>}
-                { this.state.showkushOGSupply && <Statistic title="Total k.OG Supply" value={this.state.totalKushSupply} precision={2}/>}
+                { this.state.showkushOGSupply && <Statistic title="Total k.OG Supply" value={this.state.totalKushOGSupply} precision={2}/>}
               </Panel>
             </Collapse>
           </div>

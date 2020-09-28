@@ -114,4 +114,4 @@ class App extends Component {
 }
 
 export default App;
- const [ web3Instance ] = useGlobal('web3Instance');
+ 

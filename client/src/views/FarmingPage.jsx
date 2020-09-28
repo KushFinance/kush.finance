@@ -5,10 +5,9 @@ import { getWeb3Var } from "../shared";
 import ethLogo from "../assets/eth.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
-import { Input, Alert, Divider } from "antd";
+import { Input, Alert, Divider, PageHeader, Button } from "antd";
 import { useGlobal } from 'reactn';
 
-const [ web3Instance ] = useGlobal('web3Instance');
 export default class FarmingPage extends Component {
   state = {
     loaded: false,
@@ -220,21 +219,28 @@ export default class FarmingPage extends Component {
   render() {
     return (
       <div class="subpage">
-        <h1>Farm the kushOG hybird</h1>
+        <PageHeader
+            className="site-page-header"
+            onBack={() => window.history.back()}
+            title="Farm kushOG with kKUSH/ETH Liquidity"
+            subTitle=""
+            avatar={{ src: kOGLogo }}
+            />
         <Divider>Create the bridge to the Polkadot network!</Divider>
         
         <p> kushOG is an extension to the KUSH.FINANCE ecosystem that will allow kSEED voters to acquire non ERC20 assets.</p>
         <p> 20% of all minted kushOG will go to a funding contract.</p>
         <p> kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH.</p>
         
-        <Divider>How to farm $kushOG?</Divider>
+        <Divider>How to farm kushOG[$kOG]?</Divider>
    
         <h2>Instructions </h2>
         <p> 1. Go to Uniswap kKush/ETH pair. </p>
         <p> 2. Add Liquidity. </p>
         <p> 3. Come back to kush.finance </p>
         <p> 4. Farm $kushOG </p>
-        <a className="button" href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481" rel="noopener noreferrer" target="_blank" > Join kKUSH/ETH Uniswap Pool </a>
+        <Button href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481" target="_blank" rel="noopener noreferrer" shape="round" type="primary" size="24px">JOIN kKUSH/ETH Uniswap Pool</Button>
+        
         
         <Divider />
         
