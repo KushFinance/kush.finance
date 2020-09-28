@@ -26,3 +26,9 @@ Total/Max Supply: 420,000
 0x3f09400313e83d53366147e3ea0e4e2279d80850
 Uniswap Contract: https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513
 Contract Address:  https://etherscan.io/token/0x3f09400313e83d53366147e3ea0e4e2279d80850
+
+
+
+Ropen: 0x2af3447bc1792920bede9b9d958e5eff9610f04d kSEED
+Ropen: 0x6fb5b7c68c05bd0998dea6da1e6d3e228c624e21 kKUSH
+Ropen: 0x902d840b30ff9fb61213e374c5b3b971f19143e2 kushOG
