@@ -239,7 +239,7 @@ export default class FarmingPage extends Component {
         <p> 2. Add Liquidity. </p>
         <p> 3. Come back to kush.finance </p>
         <p> 4. Farm $kushOG </p>
-        <Button href="https://uniswap.info/pair/0xdd0e143868b34d97355f249a4ddffbee03fd0481" target="_blank" rel="noopener noreferrer" shape="round" type="primary" size="24px">JOIN kKUSH/ETH Uniswap Pool</Button>
+        <Button href="https://uniswap.exchange/add/0x538b4b507d57bf9ebd8847ec395b7b061c150181/ETH" target="_blank" rel="noopener noreferrer" shape="round" type="primary" size="24px">JOIN kKUSH/ETH Uniswap Pool</Button>
         
         
         <Divider />
