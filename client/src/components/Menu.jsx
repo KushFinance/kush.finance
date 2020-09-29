@@ -58,7 +58,7 @@ function Menu(props) {
                 <li className={page === "/kush-art" && 'active'}>
                     <Address href="/kush-art" handleChangePage={()=>{setPage("/kush-art")}}>
                         <img src={KushArtIMG} alt="Kush Art"></img>
-                        Govern
+                        Kush ART
                     </Address>
                 </li>
                 <li className={page === "/wallet" && 'active'}>
