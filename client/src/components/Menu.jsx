@@ -55,8 +55,8 @@ function Menu(props) {
                         Govern
                     </Address>
                 </li>
-                <li className={page === "/kushart" && 'active'}>
-                    <Address href="/kushart" handleChangePage={()=>{setPage("/kushart")}}>
+                <li className={page === "/kush-art" && 'active'}>
+                    <Address href="/kush-art" handleChangePage={()=>{setPage("/kush-art")}}>
                         <img src={KushArtIMG} alt="Kush Art"></img>
                         KushART
                     </Address>
