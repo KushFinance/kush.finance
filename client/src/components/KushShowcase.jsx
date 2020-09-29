@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Logo from '../assets/logo.png'
 import Footer from './Footer';
-import { Button, Card, Typography, Space  } from "antd";
+import {Image, Button, Card, Typography, Space  } from "antd";
 const { Paragraph } = Typography;
 class KushShowcase extends Component {
     render(){
