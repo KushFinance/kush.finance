@@ -67,7 +67,8 @@ const Web3Wrapper = (props) => {
       
     return (
       <div>
-        {web3Instance ? <Redirect to="/app"/> : null }
+
+        {web3Instance ? <Redirect to="/"/> : null }
         {props.children}
       </div>
     )

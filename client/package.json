@@ -10,6 +10,7 @@
     "@walletconnect/qrcode-modal": "^1.2.2",
     "@walletconnect/web3-provider": "^1.2.2",
     "antd": "^4.6.4",
+    "axios": "^0.20.0",
     "dot-env": "0.0.1",
     "erc20-meta-token": "^0.3.2",
     "node-sass": "^4.14.1",
