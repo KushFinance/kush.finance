@@ -7,8 +7,8 @@ class KushShowcase extends Component {
     render(){
         return(
             <div className="kushShowcase">
-                <img src={Logo} alt="KUSH.FINANCE LOGO"/>
-                <Image width={200} src="{Logo}"/>
+                
+                <Image width={450} src="{Logo}"/>
                 <h1>kush.finance</h1>
                  <Card style={{ width: 600 }}>
                  <Space>
