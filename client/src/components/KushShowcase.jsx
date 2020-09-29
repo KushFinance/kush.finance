@@ -22,7 +22,7 @@ class KushShowcase extends Component {
           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
           title={<a href="https://ant.design">{item.title}</a>}
           description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-        />
+        /></List.Item>
                     <ul className="addresses">
                      <li>
                         <a href="https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
