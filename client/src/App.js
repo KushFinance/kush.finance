@@ -8,6 +8,7 @@ import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
 import WalletPage from "./views/WalletPage";
 import SettingsPage from "./views/SettingsPage";
+import KushARTPage from "./views/KushARTPage";
 import Web3Connection from "./components/Web3Connection.jsx";
 import Menu from "./components/Menu";
 import Drawer from "./components/Drawer";
@@ -16,48 +17,7 @@ import KushShowcase from "./components/KushShowcase";
 import FloatWallet from "./components/FloatWallet";
 import "./style/index.sass";
 
-//import WalletConnect from "@walletconnect/client";
-//import QRCodeModal from "@walletconnect/qrcode-modal";
-// import WalletConnectProvider from "@walletconnect/web3-provider";
 
-// // Create a connector
-// const connector = new WalletConnect({
-//   bridge: "https://bridge.walletconnect.org", // Required
-//   qrcodeModal: QRCodeModal,
-// });
-
-// // Check if connection is already established
-// if (!connector.connected) {
-//   // create new session
-//   connector.createSession();
-// }
-
-// // Subscribe to connection events
-// connector.on("connect", (error, payload) => {
-//   if (error) {
-//     throw error;
-//   }
-
-//   // Get provided accounts and chainId
-//   const { accounts, chainId } = payload.params[0];
-// });
-
-// connector.on("session_update", (error, payload) => {
-//   if (error) {
-//     throw error;
-//   }
-
-//   // Get updated accounts and chainId
-//   const { accounts, chainId } = payload.params[0];
-// });
-
-// connector.on("disconnect", (error, payload) => {
-//   if (error) {
-//     throw error;
-//   }
-
-//   // Delete connector
-// });
 class App extends Component {
   
   render() {
@@ -66,6 +26,7 @@ class App extends Component {
       localStorage.setItem("kseedSupply","true");
       localStorage.setItem("kseedTotal","true");
       localStorage.setItem("kkushSupply","true");
+      localStorage.setItem("kushOGSupply","true");
       localStorage.setItem("darkMode","false");
     }
     return (
@@ -97,6 +58,9 @@ class App extends Component {
                 </Route>
                 <Route path="/farming">
                   <FarmingPage />
+                </Route>
+                <Route path="/kush-art">
+                  <KushARTPage />
                 </Route>
                 <Route path="/govern">
                   <GovernPage />
