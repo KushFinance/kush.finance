@@ -8,7 +8,7 @@ class KushShowcase extends Component {
         return(
             <div className="kushShowcase">
                 
-                <Image width={450} src={Logo}/>
+                <Image preview={false} width={250} src={Logo}/>
                 <h1>kush.finance</h1>
                  <Card style={{ width: 600 }}>
                  <Space>
