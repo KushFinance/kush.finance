@@ -4,6 +4,7 @@ import SeedingIMG from '../assets/farmkKUSH.png'
 import GovernIMG from '../assets/Vote.png'
 import FarmingIMG from '../assets/kushOGfarm.png'
 import KushIMG from '../assets/kSeedLogo.png'
+import KushArtIMG from '../assets/Deal.png'
 import WalletIMG from '../assets/walletIcon.png'
 import SettingsIMG from '../assets/settingsIcon.png'
 
@@ -52,6 +53,12 @@ function Menu(props) {
                     <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
                         <img src={GovernIMG} alt="Govern"></img>
                         Govern
+                    </Address>
+                </li>
+                <li className={page === "/kush-art" && 'active'}>
+                    <Address href="/kush-art" handleChangePage={()=>{setPage("/kush-art")}}>
+                        <img src={KushArtIMG} alt="Kush Art"></img>
+                        Kush ART
                     </Address>
                 </li>
                 <li className={page === "/wallet" && 'active'}>
