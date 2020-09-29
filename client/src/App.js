@@ -8,6 +8,7 @@ import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
 import WalletPage from "./views/WalletPage";
 import SettingsPage from "./views/SettingsPage";
+import KushARTPage from "./views/KushARTPage";
 import Web3Connection from "./components/Web3Connection.jsx";
 import Menu from "./components/Menu";
 import Drawer from "./components/Drawer";
@@ -97,6 +98,9 @@ class App extends Component {
                 </Route>
                 <Route path="/farming">
                   <FarmingPage />
+                </Route>
+                <Route path="/kushart">
+                  <KushARTPage />
                 </Route>
                 <Route path="/govern">
                   <GovernPage />
