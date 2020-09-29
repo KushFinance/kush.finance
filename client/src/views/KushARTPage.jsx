@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
-export default class KushART extends Component {
+export default class Pump extends Component {
   render() {
     return (
       <Tabs defaultActiveKey="1">
