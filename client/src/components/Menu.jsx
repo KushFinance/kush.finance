@@ -4,7 +4,7 @@ import SeedingIMG from '../assets/farmkKUSH.png'
 import GovernIMG from '../assets/Vote.png'
 import FarmingIMG from '../assets/kushOGfarm.png'
 import KushIMG from '../assets/kSeedLogo.png'
-import KushIMG from '../assets/Deal.png'
+import KushArtIMG from '../assets/Deal.png'
 import WalletIMG from '../assets/walletIcon.png'
 import SettingsIMG from '../assets/settingsIcon.png'
 
