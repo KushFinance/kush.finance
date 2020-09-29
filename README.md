@@ -30,5 +30,11 @@ Contract Address:  https://etherscan.io/token/0x3f09400313e83d53366147e3ea0e4e22
 
 
 Ropen: 0x2af3447bc1792920bede9b9d958e5eff9610f04d kSEED
-Ropen: 0x6fb5b7c68c05bd0998dea6da1e6d3e228c624e21 kKUSH
+Ropen: 0x6fb5b7c68c05bd0998dea6da1e6d3e228c624e21 kKUSH 
 Ropen: 0x902d840b30ff9fb61213e374c5b3b971f19143e2 kushOG
+Ropen: 0xc04ab8b1fd89cef5520f87522359ca8c36469329 VoteContract
+Ropen: 0x040918408c9b1748E1bA4326a024A86306EdCFB8 FundContract
+
+
+kKUSH/ETH https://ropsten.etherscan.io/address/0x099aa7cac3c06e7cf0b5c9d67b37acb2f0f90fb2
+kushOG/ETH https://ropsten.etherscan.io/address/0x5a1895ca9ef226b6ade04564ef77b2e7296cfc9f
