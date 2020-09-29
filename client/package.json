@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.0.0-0",
     "@myetherwallet/mewconnect-web-client": "^2.1.5-beta.1",
     "@truffle/hdwallet-provider": "^1.0.43",
     "@walletconnect/client": "^1.2.2",
