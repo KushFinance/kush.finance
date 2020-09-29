@@ -14,8 +14,8 @@ class KushShowcase extends Component {
                 <Image preview={false} width={250} src={Logo}/>
                 <h1>kush.finance</h1>
                 
-                 <Card style={{ width: 600}}>
-                 <Space size={100} align="baseline">
+                 <Card style={{ width: 500}}>
+                 <Space size={65} align="baseline">
                 
                  <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer"  type="primary" size="middle">BUY kSEED</Button>
                   <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x538b4b507d57bf9ebd8847ec395b7b061c150181" target="_blank" rel="noopener noreferrer" type="primary" size="middle">BUY kKUSH</Button>
