@@ -10,11 +10,12 @@ class KushShowcase extends Component {
                 
                 <Image preview={false} width={250} src={Logo}/>
                 <h1>kush.finance</h1>
-                 <Card style={{ width: 600 }}>
+                 <Card style={{ width: 550 }}>
                  <Space>
                  <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer"  type="primary" size="middle">BUY kSEED</Button>
                  <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x538b4b507d57bf9ebd8847ec395b7b061c150181" target="_blank" rel="noopener noreferrer" type="primary" size="middle">BUY kKUSH</Button>
-                 <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer" type="primary" size="middle">BUY kOG</Button></Space>
+                 <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer" type="primary" size="middle">BUY kOG</Button>
+                 </Space>
                     <ul className="addresses">
                      <li>
                         <a href="https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">

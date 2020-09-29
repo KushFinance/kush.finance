@@ -14,7 +14,7 @@
     "dot-env": "0.0.1",
     "erc20-meta-token": "^0.3.2",
     "node-sass": "^4.14.1",
-    "react": "16.11.0",
+    "react": "16.13.1",
     "react-dom": "16.11.0",
     "react-router-dom": "^5.2.0",
     "react-router-transition": "^2.0.0",
