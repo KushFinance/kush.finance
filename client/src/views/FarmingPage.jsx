@@ -5,7 +5,7 @@ import { getWeb3Var } from "../shared";
 import ethLogo from "../assets/eth.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
-import { Input, Alert, Divider, PageHeader, Button } from "antd";
+import { Popover,Input, Alert, Divider, PageHeader, Button } from "antd";
 import { useGlobal } from 'reactn';
 
 export default class FarmingPage extends Component {
@@ -226,14 +226,14 @@ export default class FarmingPage extends Component {
             subTitle=""
             avatar={{ src: kOGLogo }}
             />
-        <Divider>Create the bridge to the Polkadot network!</Divider>
+        <Divider>Create the bridge to the Polkadot network and NFT Markets!</Divider>
         
         <p> kushOG is an extension to the KUSH.FINANCE ecosystem that will allow kSEED voters to acquire non ERC20 assets.</p>
+        <p> kushOG will also be used for KushART in the way that you can generate limited edition NFTs burning a certain amount</p>
         <p> 20% of all minted kushOG will go to a funding contract.</p>
         <p> kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH.</p>
         
         <Divider>How to farm kushOG[$kOG]?</Divider>
-   
         <h2>Instructions </h2>
         <p> 1. Go to Uniswap kKush/ETH pair. </p>
         <p> 2. Add Liquidity. </p>
@@ -243,7 +243,6 @@ export default class FarmingPage extends Component {
         
         
         <Divider />
-        
         <Alert
           className="margin"
           message="Make sure to always claim mining rewards before staking more!"
@@ -254,19 +253,18 @@ export default class FarmingPage extends Component {
         <div className="amount-staked-box">
         <img className="balance-logo-image" src={kKUSHicon} alt="kKUSH icon"/>
             /
-            <img className="balance-logo-image" src={ethLogo} alt="ETH logo" />
-          <div className="block amount-staked-image">
-
-          </div>  
+        <img className="balance-logo-image" src={ethLogo} alt="ETH logo" />
+        <div className="block amount-staked-image">
+        </div>  
           <div className="block">
             <div className="desc">Amount in Wallet</div>
-            <div className="val nyan-balance">
+            <div className="val kush-balance">
               {this.state.kushOGUniAmount}
             </div>
           </div>
           <div className="block">
             <div className="desc">Amount farming</div>
-            <div className="val nyan-balance">
+            <div className="val kush-balance">
               {this.state.stakedAmount}
             </div>
           </div>
@@ -284,7 +282,7 @@ export default class FarmingPage extends Component {
           </div>
         </div>
         
-        <Input onChange={this.updateStakingInput.bind(this)} value={this.setInputField()} style={{marginTop: '12px'}}/>
+        <Input onChange={this.updateStakingInput.bind(this)} value={this.setInputField()} style={{background:'green',marginTop: '12px'}}/>
 
         {!this.state.miningStarted ? (
           <div className="process-button">
