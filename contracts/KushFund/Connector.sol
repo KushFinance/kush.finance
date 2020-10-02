@@ -51,7 +51,7 @@ contract Connector {
             interfaceWETH(functionCode,functionName,_addresses,integers,strings,bytesArr);
         }
         if (keccak256(bytes(functionCode)) == keccak256(bytes("yearn"))) {
-            interfaceUniV2(functionCode,functionName,_addresses,integers,strings,bytesArr);
+            interfaceYearn(functionCode,functionName,_addresses,integers,strings,bytesArr);
         }
     }
     
