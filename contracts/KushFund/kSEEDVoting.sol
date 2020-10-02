@@ -1,5 +1,37 @@
 // contracts/KushFund/kSeedVoting.sol
 // SPDX-License-Identifier: MIT
+// KUSH.FINANCE VOTING CONTRACT by KushMaster420
+// tHANKS TO THE COMMUNITY & THE TEAM BEHIND IT 
+//                              .
+//                       .:.
+//                       :|:
+//                      .:|:.
+//                      ::|::
+//       :.             ::|::             .:
+//       :|:.          .::|::.          .:|:
+//       ::|:.         :::|:::         .:|:;
+//       `::|:.        :::|:::        .:|::'
+//        ::|::.       :::|:::       .::|:;
+//        `::|::.      :::|:::      .::|::'
+//         :::|::.     :::|:::     .::|::;
+//         `:::|::.    :::|:::    .::|::;'
+//`::.      `:::|::.   :::|:::   .::|::;'      .:;'
+// `:::..     ¹::|::.  :::|:::  .::|::¹    ..::;'
+//   `:::::.    ':|::. :::|::: .::|:'   ,::::;'
+//     `:::::.    ':|:::::|:::::|:'   :::::;'
+//       `:::::.:::::|::::|::::|::::.,:::;'
+//          ':::::::::|:::|:::|:::::::;:'
+//             ':::::::|::|::|:::::::''
+//                  `::::::::::;'
+//                 .:;'' ::: ``::.
+//                      :':':
+//                        ;
+//
+//                   KUSH.FINANCE 
+//  
+// 
+// Supported by smokers world wide.
+// 
 pragma solidity ^0.6.6;
 pragma experimental ABIEncoderV2;
 
@@ -151,70 +183,132 @@ contract kSeedVoting {
     currentVotingStartBlock = block.number;
     currentVotingEndBlock = _initialEndBlock;        
     kseedAddress = _kseed;
+    kseedIERC20 = IERC20(kseedAddress);     
+    kkushAddress = _kkush;      
+    kkushIERC20 = IERC20(kkushAddress);     
+    kushOGAddress = _kOG;      
+    kushOGIERC20 = IERC20(kushOGAddress);      
+    isVotingPeriod = true;       
+    isDistributing = false;     
+    canDistribute = true;     
+    isRewardingkKush = true;
+    burnPoolLimit = 500000000000000000000;} 
     
     
     
-    
-    
-    
+    function setOwner(address _owner) public _onlyOwner _updatePeriods {
+        owner = _owner;
     }
+        
     
-    function setConnector(address _connector) public _onlyConnector {
+    function setConnector(address _connector) public _onlyConnector _updatePeriods {
         connectorAddress = _connector;
-        
+        emit NewConnector(_connector);
         //Voting connector change event
     }
+
+     function setFundAddress(address _fund) public _onlyConnector _updatePeriods {
+        fundAddress = _fund;
+        emit NewFundingAddress(fundAddress);
+        
+        
+    }
     
-    function setIsRewardingkKush(bool _isRewarding) public _onlyConnector {
+    function setIsRewardingkKush(bool _isRewarding) public _onlyConnector _updatePeriods{
         isRewardingkKush = _isRewarding;
-        
+         emit isRewardingkKush(isRewardingkKush);
         //Voting connector change event
     }
     
-    function setVotingPeriodBlockLength(uint256 _blocks) public _onlyConnector {
+    function setVotingPeriodBlockLength(uint256 _blocks) public _onlyConnector _updatePeriods {
         votingPeriodBlockLength = _blocks;
-        
-        //Voting period change event
-    } 
+         emit NewVotingPeriodLength(votingPeriodBlockLength, block.number);
+    }
+    function setSafetyWithdrawal(bool _safetyBool) public _onlyConnector _updatePeriods{
+        safetyWithdrawal = _safetyBool;
+        emit SafetyWithdrawalToggled(safetyWithdrawal);   
+    }
+
+    function setRewardsContract(address _addr) public _onlyConnector _updatePeriods {      
+         kseedLPFarm = _addr;      
+         emit NewLPFarmAddress(kseedLPFarm);   
+    }
     
-    function setkSeedAddress(address _addr) public _onlyConnector {
+    function setkSeedAddress(address _addr) public _onlyConnector _updatePeriods {
         kseedAddress = _addr;
         kseedIERC20 = IERC20(kseedAddress);
-        
+        emit NewNyanAddress(kseedAddress);
         //kSeed address change event
     }
-    
-    function setkKushAddress(address _addr) public _onlyConnector {
+      
+    function setkKushAddress(address _addr) public _onlyConnector _updatePeriods{
         kkushAddress = _addr;
         kkushIERC20 = IERC20(kkushAddress);
-        
+        emit  NewkKushAddress(kkushAddress);
         //kKUSH address change event
     }
     
-    function setkushOGAddress(address _addr) public _onlyConnector {
+    function setkushOGAddress(address _addr) public _onlyConnector _updatePeriods{
         kushOGAddress = _addr;
         kushOGIERC20 = IERC20(kushOGAddress);
-        
+        emit  NewkushOGAddress(kushOGAddress);
         //kushOG address change event
     }
-    
-    function proposeBid(string memory _functionCode, string memory _functionName, address[] memory _addresses, uint256[] memory _integers, string[] memory _strings, bytes32[] memory _bytesArr) public {
-        require(isVotingPeriod, "Voting period has not started.");
-        require(currentVotingEndBlock >= block.number, "Voting period has ended.");
-        currentBids[msg.sender].bidder = msg.sender;
-        currentBids[msg.sender].functionCode = _functionCode;
-        currentBids[msg.sender].functionName = _functionName;
-        currentBids[msg.sender].addresses = _addresses;
-        currentBids[msg.sender].integers = _integers;
-        currentBids[msg.sender].strings = _strings;
-        currentBids[msg.sender].bytesArr = _bytesArr;
-        
-        //Bid proposal event
-    }
-    
-    function addChainBid(string memory id, string memory _functionCode, string memory _functionName, address[] memory _addresses, uint256[] memory _integers, string[] memory _strings, bytes32[] memory _bytesArr) public {
-        
-    }
+     function setkSeedFarmAddress(address _addr) public _onlyConnector _updatePeriods {
+        kseedLPFarm = _addr;
+        emit NewLPFarmAddress(kseedLPFarm);  
+        }
+    function proposeBid(
+    string memory bidId, 
+    string memory _functionCode, 
+    string memory _functionName,
+    address[] memory _addresses,     
+    uint256[] memory _integers,        
+    string[] memory _strings,      
+    bytes[] memory _bytesArr)
+    public  _updatePeriods { 
+    // require(isVotingPeriod, \\"Voting period has not started.\\");        
+     // require(currentVotingEndBlock >= block.number, \\"Voting period has ended.\\");
+    //check bidId
+    currentBids[msg.sender].bidId = bidId;           
+    currentBids[msg.sender].bidder = msg.sender;        
+    currentBids[msg.sender].functionCode = _functionCode;          
+    currentBids[msg.sender].functionName = _functionName;        
+    currentBids[msg.sender].addresses = _addresses;           
+    currentBids[msg.sender].integers = _integers;        
+    currentBids[msg.sender].strings = _strings;         
+    currentBids[msg.sender].bytesArr = _bytesArr;               
+    if (currentBids[msg.sender].votingRound < currentVotingRound) {
+        delete currentBids[msg.sender].chain;}
+    currentBids[msg.sender].votingRound = currentVotingRound;
+    currentBids[msg.sender].votes = 0;
+     bool alreadyExists = false;          
+     for (uint256 i = 0; i < proposals.length; i++)
+     {if (proposals[i] == msg.sender) {alreadyExists = true;}}
+     if (!alreadyExists) {proposals.push(msg.sender);}
+     emit NewBidProposal(msg.sender, bidId, _functionName);}
+     
+     function addChainBid(string memory id, string memory bidId, string memory _functionCode, string memory _functionName, address[] memory _addresses, uint256[] memory _integers, string[] memory _strings, bytes[] memory _bytesArr) 
+           public _updatePeriods {
+                //create id internally in the future
+                string memory userBid = currentBids[msg.sender].bidId;    
+               require(keccak256(bytes(userBid)) == keccak256(bytes(bidId)), \\"This is not your bid\\");    
+             //verify this
+                if (keccak256(bytes(bidChains[id].id)) == keccak256(bytes(id))) {require(keccak256(bytes(currentBids[msg.sender].bidId)) == keccak256(bytes(bidChains[id].bidId)));} 
+                else 
+                {require(keccak256(bytes(bidChains[id].id)) != keccak256(bytes(id)), \\"This Id already exists\\");}
+                 bidChains[id].id = id;
+                 bidChains[id].bidId = bidId;
+                         bidChains[id].functionCode = _functionCode;        
+                           bidChains[id].functionName = _functionName;
+                                     bidChains[id].addresses = _addresses;
+                                               bidChains[id].integers = _integers;       
+                                                bidChains[id].strings = _strings;         
+                                                bidChains[id].bytesArr = _bytesArr;             
+                 bool bidExists = false;          
+                 for (uint256 i = 0; i < currentBids[msg.sender].chain.length; i++) { if (keccak256(bytes(currentBids[msg.sender].chain[i])) == keccak256(bytes(id)))
+                  {bidExists = true;}
+
     
     function voteForBid(address _bidAddr, uint256 votes) public {
         kseedIERC20.safeTransferFrom(msg.sender, address(this), votes * costPerVote);
