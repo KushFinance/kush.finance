@@ -29,7 +29,7 @@ class Footer extends Component {
                         </a> 
                     </li>
                     <li style={{backgroundColor: "#2ba8db"}}>
-                        <a target="_blank" rel="noopener noreferrer" href="https://T.me/kushfinance">
+                        <a target="_blank" rel="noopener noreferrer" href="https://T.me/kush_finance">
                             <div className="social-icon">
                                 <img src={telegramIMG} alt="telegram"/>
                             </div>
