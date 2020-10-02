@@ -11,7 +11,7 @@ contract WidgetInterface {
 pragma solidity ^0.6.6;
 pragma experimental ABIEncoderV2;
 
-import "./ERC20Interface.sol";
+import "./KushFundInterface.sol";
 import "./UniswapV2Interface.sol";
 import "./WETHInterface.sol";
 import "./YearnInterface.sol";
