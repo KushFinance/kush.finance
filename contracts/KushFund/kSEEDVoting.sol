@@ -134,16 +134,29 @@ contract kSeedVoting {
     event NewBidChain(address indexed proposer, string functionName, string bidId, string chainId);
     event NewBidVote(address indexed voter, uint256 votes);
     event VotedkSeedWithdrawn(address indexed voter, uint256 kseed);
-
-
+    event BidExecution(address indexed voter, string bidId);
+    event FundsDistribution(address indexed distributedToken, uint256 amount);
+    event ClaimDistribution(address indexed claimer, uint256 amountClaimed, uint256 kseedStaked, uint256 kkushLPStaked);
+    event WithdrawDistributionkSeed(address indexed claimer, uint256 amount);
+    event WithdrawDistributionkKush(address indexed claimer, uint256 amount);
+    event kKushBurn(uint256 kKushBurned);
 
     }
     
     
-    constructor() public {
-        owner = address(this);
-        currentVotingStartBlock = block.number;
-        currentVotingEndBlock = block.number + votingPeriodBlockLength;
+    constructor(address _uniswapRouter, address _kseed, address _kkush, address _kOG, uint256 _initialEndBlock) public 
+    { owner = msg.sender;     
+    uniswapRouterAddress = _uniswapRouter;      
+    uniswapRouter = IUniswapV2Router02(_uniswapRouter);
+    currentVotingStartBlock = block.number;
+    currentVotingEndBlock = _initialEndBlock;        
+    kseedAddress = _kseed;
+    
+    
+    
+    
+    
+    
     }
     
     function setConnector(address _connector) public _onlyConnector {
