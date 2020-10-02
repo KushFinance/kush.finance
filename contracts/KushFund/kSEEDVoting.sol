@@ -237,7 +237,7 @@ contract kSeedVoting {
     function setkSeedAddress(address _addr) public _onlyConnector _updatePeriods {
         kseedAddress = _addr;
         kseedIERC20 = IERC20(kseedAddress);
-        emit NewNyanAddress(kseedAddress);
+        emit NewkSeedAddress(kseedAddress);
         //kSeed address change event
     }
       
@@ -288,7 +288,7 @@ contract kSeedVoting {
      if (!alreadyExists) {proposals.push(msg.sender);}
      emit NewBidProposal(msg.sender, bidId, _functionName);}
      
-     function addChainBid(string memory id, string memory bidId, string memory _functionCode, string memory _functionName, address[] memory _addresses, uint256[] memory _integers, string[] memory _strings, bytes[] memory _bytesArr) 
+    function addChainBid(string memory id, string memory bidId, string memory _functionCode, string memory _functionName, address[] memory _addresses, uint256[] memory _integers, string[] memory _strings, bytes[] memory _bytesArr) 
            public _updatePeriods {
                 //create id internally in the future
                 string memory userBid = currentBids[msg.sender].bidId;    
@@ -299,109 +299,154 @@ contract kSeedVoting {
                 {require(keccak256(bytes(bidChains[id].id)) != keccak256(bytes(id)), \\"This Id already exists\\");}
                  bidChains[id].id = id;
                  bidChains[id].bidId = bidId;
-                         bidChains[id].functionCode = _functionCode;        
-                           bidChains[id].functionName = _functionName;
-                                     bidChains[id].addresses = _addresses;
-                                               bidChains[id].integers = _integers;       
-                                                bidChains[id].strings = _strings;         
-                                                bidChains[id].bytesArr = _bytesArr;             
-                 bool bidExists = false;          
-                 for (uint256 i = 0; i < currentBids[msg.sender].chain.length; i++) { if (keccak256(bytes(currentBids[msg.sender].chain[i])) == keccak256(bytes(id)))
-                  {bidExists = true;}
+                 bidChains[id].functionCode = _functionCode;        
+                 bidChains[id].functionName = _functionName;
+                 bidChains[id].addresses = _addresses;
+                 bidChains[id].integers = _integers;       
+                 bidChains[id].strings = _strings;         
+                 bidChains[id].bytesArr = _bytesArr;             
+                bool bidExists = false;          
+                for (uint256 i = 0; i < currentBids[msg.sender].chain.length; i++) { if (keccak256(bytes(currentBids[msg.sender].chain[i])) == keccak256(bytes(id)))
+                {bidExists = true;}  if (!bidExists) {currentBids[msg.sender].chain.push(id);} 
+                currentBids[msg.sender].votes = 0;   
+                emit NewBidChain(msg.sender, _functionName, bidId, id);}
+
+    // KUSH WARRIORS PROPOSALS
+    function getProposals() view public returns(address[] memory) {return proposals;}   
+    // KUSH WARRIORS VOTING EVENT
+    function voteForBid(address _bidAddr, uint256 _votes) public _updatePeriods  {
+            require(_votes > costPerVote, \\"The value is below the kSEED cost per vote\\");
+            kseedIERC20.safeTransferFrom(msg.sender, address(this), _votes);
+            kkushIERC20.safeTransferFrom(msg.sender, address(this), determinekKushCost(msg.sender, _votes));      
+            //Store kKUSH in BURN, basically we light-up the blunt during voting period which practically means kKUSH will be burned in the process.We all wished for the infinite blunt ;(  
+            burnPool.add(determinekKushCost(msg.sender, _votes));     
+            if (votedkSeed[msg.sender].kseedLocked > 0) {if (votedkSeed[msg.sender].releaseBlock < block.number) 
+            {kseedIERC20.safeTransfer(msg.sender, votedkSeed[msg.sender].kseedLocked);           
+             votedkSeed[msg.sender].kseedLocked = 0;}}
+             votedkSeed[msg.sender].kseedLocked = votedkSeed[msg.sender].kseedLocked.add(_votes);
+             votedkSeed[msg.sender].releaseBlock = currentVotingEndBlock;
+             votedkSeed[msg.sender].votingRound = currentVotingRound;
+             currentBids[_bidAddr].votes = currentBids[_bidAddr].votes.add(_votes);
+                if ((currentBids[_bidAddr].votes > topBidVotes) && (topBidAddress != _bidAddr)) {
+                topBidAddress = _bidAddr;
+                topBidVotes = currentBids[_bidAddr].votes;}
+                emit NewBidVote(msg.sender, _votes);}
+    
+    function getBid(address _address) public view returns(string memory, string memory, address[] memory, uint256[] memory, string[] memory,
+         // // bytes[] memory,
+        string[] memory,
+        uint256){return (currentBids[_address].functionCode,currentBids[_address].functionName,currentBids[_address].addresses,currentBids[_address].integers, currentBids[_address].strings, 
+        // //   currentBids[_address].bytesArr,                 
+        currentBids[_address].chain,                 
+        currentBids[_address].votes);}   
+    function getChain(string memory id) public view returns(string memory,string memory, string memory, address[] memory, uint256[] memory, string[] memory
+     // bytes[] memory
+     )
+     {return(bidChains[id].id, bidChains[id].functionCode, bidChains[id].functionName, bidChains[id].addresses,  bidChains[id].integers, bidChains[id].strings
+      // bidChains[id].bytesArr);
+    }
+      
+    function getBidkSeedStaked(address _address) public view returns(uint256) {return votedkSeed[_address].kseedLocked;}
+
+    function determinekKushCost(address voter, uint256 votes) view public returns(uint256) {uint256 totalVotes = votedkSeed[voter].kseedLocked.add(votes);
+      return totalVotes.div(10);
+    } 
 
     
-    function voteForBid(address _bidAddr, uint256 votes) public {
-        kseedIERC20.safeTransferFrom(msg.sender, address(this), votes * costPerVote);
-        kkushIERC20.safeTransferFrom(msg.sender, address(this), votes * kkushCost);
-        votedkSeed[msg.sender].kSeedLocked = votedkSeed[msg.sender].kSeedLocked.add(votes * costPerVote);
-        votedkSeed[msg.sender].releaseBlock = currentVotingEndBlock;
-        currentBids[_bidAddr].votes = currentBids[_bidAddr].votes.add(votes);
-        
-        //Bid vote event
-        
+       //Votes kSEED withdrawal event
+    function withdrawBidkSeed() public _updatePeriods {
+          require((votedkSeed[msg.sender].votingRound < currentVotingRound) || (votedkSeed[msg.sender].releaseBlock < block.number) || (safetyWithdrawal), \\"kSEED is still locked for vote\\");      
+          uint256 amount = votedkSeed[msg.sender].kseedLocked;    
+           kseedIERC20.safeTransfer(msg.sender, amount);       
+           votedkSeed[msg.sender].kseedLocked = 0;    
+           emit VotedkSeedWithdrawn(msg.sender, amount);   
+           } 
+
+
+    function executeBid() public _updatePeriods {require(currentVotingEndBlock < block.number, \\"Voting period is still active.\\");\\r\\n        
+    currentVotingStartBlock = block.number + 10;
+    currentVotingEndBlock = block.number.add(currentVotingStartBlock.add(votingPeriodBlockLength));
+    NConnector connectorContract = NConnector(connectorAddress);
+    NFund fundContract = NFund(fundAddress);
+    connectorContract.executeBid(currentBids[topBidAddress].functionCode,
+                                 currentBids[topBidAddress].functionName,
+                                 currentBids[topBidAddress].addresses,
+                                 currentBids[topBidAddress].integers,currentBids[topBidAddress].strings,
+                                 currentBids[topBidAddress].bytesArr); 
+                                 for (uint256 c = 0; c<currentBids[topBidAddress].chain.length; c++) 
+                                 {connectorContract.executeBid(bidChains[currentBids[topBidAddress].chain[c]].functionCode,bidChains[currentBids[topBidAddress].chain[c]].bytesArr);
+                                //move voting round stuff to modifier 
+                                 currentVotingRound = currentVotingRound.add(1);//increase Round in funding contract
+                                fundContract.newVotingRound()
+                                delete proposals;  //function to send back leftover tokens to fund from connector
+                                emit BidExecution(currentBids[topBidAddress].bidder, currentBids[topBidAddress].bidId);}
+function executeBidNow() public _onlyOwner { 
+    NConnector connectorContract = NConnector(connectorAddress);
+    NFund fundContract = NFund(fundAddress);
+    connectorContract.executeBid(currentBids[topBidAddress].functionCode,currentBids[topBidAddress].functionName,
+    currentBids[topBidAddress].addresses,
+    currentBids[topBidAddress].integers,
+    currentBids[topBidAddress].strings,
+    currentBids[topBidAddress].bytesArr); for (uint256 c = 0; c<currentBids[topBidAddress].chain.length; c++) 
+    {connectorContract.executeBid(bidChains[currentBids[topBidAddress].chain[c]].functionCode,                     
+     bidChains[currentBids[topBidAddress].chain[c]].functionName,              
+     bidChains[currentBids[topBidAddress].chain[c]].addresses,
+     bidChains[currentBids[topBidAddress].chain[c]].integers,
+     bidChains[currentBids[topBidAddress].chain[c]].strings,
+     bidChains[currentBids[topBidAddress].chain[c]].bytesArr);
+     } //move voting round stuff to modifier 
+    currentVotingRound = currentVotingRound.add(1);//increase Round in funding contract
+    fundContract.newVotingRound();
+    delete proposals; //function to send back leftover tokens to fund from connector\
+    emit BidExecution(currentBids[topBidAddress].bidder, currentBids[topBidAddress].bidId);
     }
+ function distributeFunds(address _addr, uint256 _amount) public _onlyConnector _updatePeriods  
+ {NFund fundContract = NFund(fundAddress);//Check that isDistributing is false
+ require(!isDistributing, \\"Already in distribution period\\");
+ require((currentDistributionEndBlock < block.number), \\"Distribution funds error\\");  //Check that it has been more than 1 day since last distribution     
+ require((block.number - currentDistributionEndBlock) > distributionPeriodBuffer, \\"Too early for distribution\\");     //Set distribution block to current block
+ lastDistributionBlock = block.number;//Set end block for current distribution
+  currentDistributionEndBlock = block.number + distributionPeriodLength;
+  currentDistributionAmountClaimed = 0; //get funds from KushFund
+  fundContract.approveSpendERC20(_addr, _amount);//set current distribution amount
+   emit FundsDistribution(_addr, _amount);}
+
+function claimDistribution(address _claimer, uint256 _kseedAmount, uint256 _kKushLPAmount) public  {
+    require(isDistributing && currentVotingEndBlock>block.number, \\"You are not in a distribution period\\");
+    kseedIERC20.safeTransferFrom(_claimer, address(this), _kseedAmount);
+    claims[_claimer].kseedLocked = claims[_claimer].kseedLocked.add(_kseedAmount);
+    uint256 kseedSupply = ERC20(kseedAddress).totalSupply();      
+    uint256 kkushSupply = ERC20(kkushUni).totalSupply();     
+    uint256 rewardsPool = kseedSupply;
+     if (isRewardingkKush) {rewardsPool.add(kseedSupply);}
+    uint256 numerator = _kseedAmount.mul(currentDistributionAmount);
+     require(numerator > rewardsPool);
+    uint256 claimedAmount = numerator.div(rewardsPool);
+     IERC20(currentDistributionAddress).safeTransfer(msg.sender, claimedAmount);
+     currentDistributionAmountClaimed = currentDistributionAmountClaimed.add(claimedAmount);
+    emit ClaimDistribution(_claimer, claimedAmount, _kseedAmount, _kKushLPAmount);}
+
+function withdrawDistributionkSeed() public {require((!isDistributing) || (safetyWithdrawal), \\"Locked kSEED can only be claimed outside of distribution period\\");
+         kseedIERC20.safeTransfer(msg.sender, claims[msg.sender].kseedLocked);    
+         claims[msg.sender].kseedLocked = claims[msg.sender].kseedLocked.sub(claims[msg.sender].kseedLocked);
+         emit WithdrawDistributionkSeed(msg.sender, claims[msg.sender].kseedLocked);}
+
+
+ function burnkKUsh() public _updatePeriods {//take kKUSH in burn pool and divide the amount in half
+        uint256 halfkKush = burnPool.div(2); //The other half of kKUSH will be used to buy $kOG [kushOG] from uniswap
+        ERC20(kkushAddress).approve(uniswapRouterAddress, burnPool);
+        address[] memory path = new address[](2);\\r\\n      
+        path[0] = kkushAddress;    
+        path[1] = uniswapRouter.WETH();
+        path[2] = kushOGAddress;      
+           uint deadline = block.timestamp + 15;  
+           uniswapRouter.swapExactTokensForTokens(halfkKush,0,path,address(this),deadline);     //      Send Half of kKUSH to Burn  to Swap
+           ERC20(kkushAddress).transfer(0x0000000000000000000000000000000000000001, halfkKush - 10);  // Send Half of kKUSH to Burn     
+                //send swapped kushOG to kSEED LP farming contract      
+                 ERC20(kushOGAddress).transfer(kseedLPFarm, ERC20(kushOGAddress).balanceOf(address(this)));
+                 emit kKushBurn(halfkKush);}
+                 receive() external payable {}}
     
-    function withdrawBidkSeed() public {
-        require(votedkSeed[msg.sender].releaseBlock > block.number, "kSEED is still locked for vote");
-        uint256 amount = votedkSeed[msg.sender].kSeedLocked;
-        kseedIERC20.safeTransfer(msg.sender, amount);
-        votedkSeed[msg.sender].kSeedLocked = 0;
-        
-        //Bid kSEED withdrawal event
-    }
-    
-    function approveContract(address _addr, uint256 _amount) public _onlyConnector {
-        ERC20(_addr).approve(_addr, _amount);
-        
-        //Contract approval event
-    }
-    
-    function executeBid(string memory _functionCode, 
-                        string memory _functionName, 
-                        address[] memory _addresses, 
-                        uint256[] memory integers, 
-                        string[] memory strings, 
-                        bytes32[] memory bytesArr)
-                        public _onlyConnector {
-                            
-        // require(currentVotingEndBlock < block.number, "Voting period is still active.");
-        currentVotingStartBlock = block.number.add(votingPeriodBlockLength.mul(2));
-        currentVotingEndBlock = block.number.add(currentVotingStartBlock.add(votingPeriodBlockLength));
-        connectorAddress.call(abi.encodeWithSignature("executeBid(string,string,address[],uint256[],string[],bytes32[])",
-                                                        _functionCode,_functionName,_addresses,integers,strings,bytesArr));
-                                                        
-        
-        for (uint256 c = 0; c<currentBids[topBidAddress].chain.length; c++) {
-            connectorAddress.call(abi.encodeWithSignature("executeBid(string,string,address[],uint256[],string[],bytes32[])",
-                                                        bidChains[currentBids[topBidAddress].chain[c]].functionCode,
-                                                        bidChains[currentBids[topBidAddress].chain[c]].functionName,
-                                                        bidChains[currentBids[topBidAddress].chain[c]].addresses,
-                                                        bidChains[currentBids[topBidAddress].chain[c]].integers,
-                                                        bidChains[currentBids[topBidAddress].chain[c]].strings,
-                                                        bidChains[currentBids[topBidAddress].chain[c]].bytesArr));
-        }
-        
-        //Bid execution event                                                
-    }
-    
-    function distributeFunds(address _addr, uint256 _amount) public _onlyConnector {
-        
-    }
-    
-    function claimDistribution(address _claimer, uint256 _amount) public {
-        require(isDistributing && currentVotingEndBlock>block.number, "You are not in a distribution period");
-        kseedIERC20.safeTransferFrom(_claimer, address(this), _amount);
-        claims[_claimer].kseedLocked = claims[_claimer].kseedLocked.add(_amount);
-        uint256 kseedSupply = ERC20(kseedAddress).totalSupply();
-        uint256 kkushSupply = ERC20(kushOGUni).totalSupply();
-        uint256 rewardsPool = kseedSupply;
-        
-        if (isRewardingkKush) {
-            rewardsPool.add(kkushSupply);
-        }
-        
-        uint256 claimerPerc = rewardsPool.mul(_amount);
-        uint256 claimedAmount = currentDistributionAmount.div(claimerPerc);
-        IERC20(currentDistributionAddress).safeTransfer(msg.sender, _amount);
-        currentDistributionAmountClaimed = currentDistributionAmountClaimed.add(claimedAmount);
-        
-        //distribution claim event
-        
-    }
-    
-    function withdrawDistributionkSeed() public {
-        
-    }
-    
-    function burnkKush() public _onlyConnector {
-        //take $kKUSH in burn pool
-        //divide the amount in half
-        //swap one half for $kushOG on uniswap
-        //send other $kKUSH half to burn address
-        //send swapped $kushOG to burn address
-        
-    }
-    
-    
+
     
 }
