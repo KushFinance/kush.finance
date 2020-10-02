@@ -17,7 +17,7 @@ contract kSeedVoting {
     uint256 public currentVotingEndBlock;
     bool public isVotingPeriod;
     
-    uint256 public votingPeriodBlockLength = 270;
+    uint256 public votingPeriodBlockLength = 3250;
     uint256 public costPerVote = 1000000000000000000;
     uint256 public kkushCost = 100000000000000000;
     
@@ -52,22 +52,27 @@ contract kSeedVoting {
     struct votingHold {
         uint256 kSeedLocked;
         uint256 releaseBlock;
+        uint256 votingRound;
     }
     
     mapping(address => votingHold) private votedkSeed;
     
-    
+    bool public isRewardingkKush = true;
+
+
     uint256 public lastDistributionBlock;
     uint256 public currentDistributionEndBlock;
-    bool public isDistributing;
-    bool public canDistribute;
-    bool public isRewardingkKush = true;
-    
-    
+    uint256 public distributionPeriodBuffer = 13000;
+    uint256 public distributionPeriodLength = 6500; //measured in blocks
     address public currentDistributionAddress;
     uint256 public currentDistributionAmount;
     uint256 public currentDistributionAmountClaimed;
-    
+    bool public isDistributing;
+    bool public canDistribute;
+    bool public isRewardingkKush;
+
+
+
     struct distributionClaimed {
         uint256 kseedLocked;
         
@@ -86,8 +91,15 @@ contract kSeedVoting {
     IERC20 private kushOGIERC20;
     
     address public uniswapAddress;
-    
+    address public uniswapRouterAddress;
     address public connectorAddress;
+    IUniswapV2Router02 public uniswapRouter;
+    address public kseedLPFarm;
+    address public connectorAddress;
+    address public fundAddress;
+    uint256 public burnPool;
+    uint256 public burnPoolLimit;
+    bool public safetyWithdrawal;
     
     modifier _onlyOwner() {
         require(msg.sender == owner);
@@ -95,8 +107,36 @@ contract kSeedVoting {
     }
     
     modifier _onlyConnector() {
-        require(msg.sender == connectorAddress);
+        require((msg.sender == connectorAddress) || (msg.sender == owner));
         _;
+    }
+    modifier _onlyFund() {
+        require((msg.sender == fundAddress) || (msg.sender == owner));
+        _;
+    }
+    modifier _updatePeriods() {
+        if (block.number >= currentVotingStartBlock && block.number <= currentVotingEndBlock) 
+        {isVotingPeriod = true; } else {isVotingPeriod = false; delete proposals;}
+         if (block.number > lastDistributionBlock && block.number > currentDistributionEndBlock)
+         {isDistributing = false;}
+         if (burnPool > burnPoolLimit) 
+         {burnkKush();}_;
+    event NewConnector(address indexed connector);
+    event isRewardingkKush(bool isRewarding);
+    event NewVotingPeriodLength(uint256 length, uint256 currentBlock);
+    event NewFundingAddress(address indexed fundAddress);
+    event NewkSeedAddress(address indexed kseedAddress);
+    event NewkKushAddress(address indexed kkushAddress);
+    event NewkushOGAddress(address indexed kOGAddress);
+    event NewLPFarmAddress(address indexed kseedLPAddress);
+    event SafetyWithdrawalToggled(bool safetyBool);
+    event NewBidProposal(address indexed proposer, string bidId, string functionName);
+    event NewBidChain(address indexed proposer, string functionName, string bidId, string chainId);
+    event NewBidVote(address indexed voter, uint256 votes);
+    event VotedkSeedWithdrawn(address indexed voter, uint256 kseed);
+
+
+
     }
     
     
