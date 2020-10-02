@@ -1,0 +1,5 @@
+{
+    "solidity-va.tools.surya.input.contracts": "workspace",
+    "solidity-va.whatsNew.disabled": true,
+    "solidity.linter": "solium"
+}
