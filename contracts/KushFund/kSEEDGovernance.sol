@@ -42,7 +42,7 @@ import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 
-contract KushGovernance {
+contract kSEEDGovernance {
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
     address public kseedAddress;  IERC20 private kseedIERC20;
