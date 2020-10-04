@@ -207,8 +207,7 @@ contract kSeedVoting {
 
     
     
-    constructor(address _uniswapRouter, address _kseed, address _kkush, address _kOG, uint256 _initialEndBlock) public 
-    {
+    constructor(address _uniswapRouter, address _kseed, address _kkush, address _kOG, uint256 _initialEndBlock) public {
     owner = msg.sender;     
     uniswapRouterAddress = _uniswapRouter;      
     uniswapRouter = IUniswapV2Router02(_uniswapRouter);
@@ -226,7 +225,6 @@ contract kSeedVoting {
     isRewardingkKush = true;
     burnPoolLimit = 500000000000000000000;
     }
-    
     
     function setOwner(address _owner) public _onlyOwner _updatePeriods {
         owner = _owner;
@@ -246,6 +244,7 @@ contract kSeedVoting {
         
     }
     
+
     function setIsRewardingkKush(bool _isRewarding) public _onlyConnector _updatePeriods{
         isRewardingkKush = _isRewarding;
          emit isRewardingkKush(isRewardingkKush);
@@ -291,16 +290,11 @@ contract kSeedVoting {
         emit NewLPFarmAddress(kseedLPFarm);  
     }
     
-    function proposeBid(
-         string memory bidId, 
-         string memory _functionCode, 
-         string memory _functionName,
-         address[] memory _addresses,     
-         uint256[] memory _integers,        
-         string[] memory _strings,      
-         bytes[] memory _bytesArr)
-    public  _updatePeriods { 
-        
+     function getProposals((address _address, address[] memory) public view returns){
+        return Proposals;
+    }   
+
+    function proposeBid(string memory bidId, string memory _functionCode, string memory _functionName,address[] memory _addresses, uint256[] memory _integers,string[] memory _strings,bytes[] memory _bytesArr) public  _updatePeriods { 
     currentBids[msg.sender].bidId = bidId;           
     currentBids[msg.sender].bidder = msg.sender;        
     currentBids[msg.sender].functionCode = _functionCode;          
@@ -310,12 +304,12 @@ contract kSeedVoting {
     currentBids[msg.sender].strings = _strings;         
     currentBids[msg.sender].bytesArr = _bytesArr;               
     if (currentBids[msg.sender].votingRound < currentVotingRound) {
-    delete currentBids[msg.sender].chain;}
+    delete currentBids[msg.sender].chain;
+    }
     currentBids[msg.sender].votingRound = currentVotingRound;
     currentBids[msg.sender].votes = 0;
      bool alreadyExists = false;          
-     for (uint256 i = 0; i < proposals.length; i++)
-     {
+     for (uint256 i = 0; i < proposals.length; i++){
          if (proposals[i] == msg.sender) 
          {
          alreadyExists = true;
@@ -360,13 +354,8 @@ contract kSeedVoting {
          emit NewBidChain(msg.sender, _functionName, bidId, id);               
     }
 
-    function getProposals(address _address) view public returns (address[] memory) 
-    {
-        return proposals;
-    }
     
-    function voteForBid(address _bidAddr, uint256 _votes) public _updatePeriods  
-    {
+    function voteForBid(address _bidAddr, uint256 _votes) public  _updatePeriods{
         require(_votes > costPerVote, \\"The value is below the kSEED cost per vote\\");
         kseedIERC20.safeTransferFrom(msg.sender, address(this), _votes);
         kkushIERC20.safeTransferFrom(msg.sender, address(this), determinekKushCost(msg.sender, _votes));      
@@ -387,7 +376,7 @@ contract kSeedVoting {
         topBidVotes = currentBids[_bidAddr].votes;
         }
         emit NewBidVote(msg.sender, _votes);
-        }
+        }}
     
     function getBid(address _address) public view returns(string memory, string memory, address[] memory, uint256[] memory, string[] memory,
          // // bytes[] memory,
@@ -449,7 +438,8 @@ contract kSeedVoting {
                                  }}
     
     
-    function executeBidNow() public _onlyOwner{ 
+    function executeBidNow() public _onlyOwner
+    { 
     NConnector connectorContract = NConnector(connectorAddress);
     NFund fundContract = NFund(fundAddress);
     connectorContract.executeBid(currentBids[topBidAddress].functionCode,currentBids[topBidAddress].functionName,
