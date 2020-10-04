@@ -1,24 +1,20 @@
 {
 	"compiler": {
-		"version": "0.6.12+commit.27d51765"
+		"version": "0.6.6+commit.6c089d02"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"kind": "dev",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		},
 		"userdoc": {
-			"kind": "user",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/contracts/kseedall.sol": "Context"
+			"localhost/contracts/kushOG.sol": "Context"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -32,12 +28,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/contracts/kseedall.sol": {
-			"keccak256": "0xef185ced004ac521a86ebab395715f0a556418ef7284414f74e55994c9de8e8a",
-			"license": "UNLICENSED",
+		"localhost/contracts/kushOG.sol": {
+			"keccak256": "0x50a0b1379ecd4e4275382aaf660325a12bbf5afc3e5ebbae1b0f637d3a588f8b",
 			"urls": [
-				"bzz-raw://3e2fd7addedf1016f667c38b59c2d06ac3494a09b6ca1ec23bd3c260ecfed265",
-				"dweb:/ipfs/QmYwL4iP6aMbpY1dQfwsGFU261F1nce8bni6vVQK91pERp"
+				"bzz-raw://7bfb1ed0e89588cea7eb1d72a1c4e499ae054f57a355790a8c6bef0c8c0a72ed",
+				"dweb:/ipfs/QmNspXTS8KuWESaVKAwKbejswEuZZqiXdEFMkJbbVGRv9e"
 			]
 		}
 	},

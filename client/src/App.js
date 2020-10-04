@@ -17,7 +17,6 @@ import KushShowcase from "./components/KushShowcase";
 import FloatWallet from "./components/FloatWallet";
 import "./style/index.sass";
 
-
 class App extends Component {
   
   render() {
@@ -30,6 +29,7 @@ class App extends Component {
       localStorage.setItem("darkMode","false");
     }
     return (
+      
       <BrowserRouter>
         <div className="bg-lime"></div>
         <div className={`App ${localStorage.getItem('darkMode') === "true" && 'dark-mode'}`}>
