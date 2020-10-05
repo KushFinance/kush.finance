@@ -12,7 +12,9 @@ export default class Pump extends Component {
   state = {
     loaded: false,
     allowance: 0,
-    getProposal: true,
+    getProposal: false,
+    isApproving: false,
+    isApproved: false,
   };
 
   handleClick = () => {
@@ -40,6 +42,25 @@ export default class Pump extends Component {
     });
   };
 
+  approvekSEEDGovernance = async () => {
+    if (this.state.isApproving) {
+      return;
+    }
+    this.setState({ isApproving: true });
+
+    let approveGovernance = await this.kseedgovernanceInstance.methods
+      .approve(
+        this.kseedgovernanceInstance._address,
+      )
+      .send({
+        from: this.accounts[0],
+      });
+
+    if (approveGovernance["status"]) {
+      this.setState({ isApproving: false, isApproved: true });
+    }
+  };
+
 
   componentDidMount = async () => {
     try {
@@ -60,7 +81,7 @@ export default class Pump extends Component {
 
       this.getAllowance();
       this.getProposal();
-
+      this.approveGovernance();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -150,11 +171,11 @@ export default class Pump extends Component {
        
       </TabPane>
       <TabPane tab="Vote"  key="3">
-      <div className="block">
-
-      {this.state.getProposal}
+     
+      <button onClick={this.approveGovernance}> APPROVE GOVERNANCE </button>
       
-      </div>
+
+      {this.getProposal}
       </TabPane>
       <TabPane tab="Claim" disabled key="4">
        
