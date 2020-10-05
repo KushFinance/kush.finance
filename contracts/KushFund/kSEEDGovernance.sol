@@ -138,7 +138,7 @@ contract kSEEDGovernance {
                                             }
                                             
     function voteForProposal(uint256 _amount, uint256 _optionIndex, address _proposalAddr) public {
-        require(block.number < eachProposal[_proposalAddr].endBlock, "Voting is already over!");    
+        require(block.number < eachProposal[_proposalAddr].endBlock, "Voting is already over! You smoked all the Kush!");    
         kseedIERC20.safeTransferFrom(msg.sender, address(this), _amount);
         kseedVotes[msg.sender].votes = kseedVotes[msg.sender].votes.add(_amount);
          kseedVotes[msg.sender].proposalAddr = _proposalAddr;
@@ -154,7 +154,7 @@ contract kSEEDGovernance {
         emit votedForProposal(msg.sender, eachProposal[_proposalAddr].proposalQuestion, kseedVotes[msg.sender].option);}
         function withdrawkSeed() public {
             
-            require(block.number > eachProposal[proposals[0]].endBlock, "Voting has not ended yet!");    
+            require(block.number > eachProposal[proposals[0]].endBlock, "Voting has not ended yet, Lil Smoker!");    
             address propAddr = kseedVotes[msg.sender].proposalAddr;
             string memory propQuestion = kseedVotes[msg.sender].proposalQuestion;    
             string memory currentQuestion = eachProposal[propAddr].proposalQuestion;

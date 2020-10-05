@@ -1,7 +1,83 @@
+import kSEEDGovernance from "../contracts/kSEEDGovernance.json";
+import { getWeb3Var } from "../shared";
 import React, { Component } from "react";
 import { Divider, Tabs } from "antd";
 const { TabPane } = Tabs;
+
+
+
+
 export default class Pump extends Component {
+
+  state = {
+    loaded: false,
+    allowance: 0,
+    getProposal: false,
+  };
+
+  handleClick = () => {
+    this.props.toggle();
+  };
+
+  /** getters */
+  getAllowance = async () => {
+    let _kseedAllowance = await this.kseedInstance.methods
+      .allowance(this.accounts[0], this.kkushInstance._address)
+      .call();
+    if (_kseedAllowance > 0) {
+      this.setState({
+        isApproved: true,
+        allowance: this.web3.utils.fromWei(_kseedAllowance.toString()),
+      });
+    }
+  };
+
+  getProposal = async () => {
+    let _getProposal = await this.kseedgovernanceInstance.methods
+      .balanceOf(this.accounts[0])
+      .call();
+    this.setState({
+      getProposal: this.web3.utils.fromWei(_getProposal),
+    });
+  };
+
+
+  componentDidMount = async () => {
+    try {
+      this.web3 = getWeb3Var();
+
+      // Get network provider and web3 instance.
+
+      // Use web3 to get the user's accounts.
+      this.accounts = await this.web3.eth.getAccounts();
+
+      // Get the contract instance.
+      this.networkId = await this.web3.eth.net.getId();
+
+      this.kseedgovernanceInstance = new this.web3.eth.Contract(
+        kSEEDGovernance.abi,
+        process.env.REACT_APP_KSEEDGOV_TOKEN_CONTRACT_ADDRESS
+      );
+
+      this.getAllowance();
+      this.getProposal();
+
+
+      // Set web3, accounts, and contract to the state, and then proceed with an
+      // example of interacting with the contract's methods.
+      this.setState({ loaded: true });
+    } catch (error) {
+      // Catch any errors for any of the above operations.
+      alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`
+      );
+      console.error(error);
+    }
+  };
+
+
+
+
   render() {
     return (
       <Tabs defaultActiveKey="1">
@@ -74,8 +150,11 @@ export default class Pump extends Component {
       <TabPane tab="Bid" disabled key="2">
        
       </TabPane>
-      <TabPane tab="Vote" disabled key="3">
-       
+      <TabPane tab="Vote"  key="3">
+      <div className="block">
+      {this.state.getProposal}
+      
+      </div>
       </TabPane>
       <TabPane tab="Claim" disabled key="4">
        
