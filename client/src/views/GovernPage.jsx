@@ -13,6 +13,7 @@ export default class Pump extends Component {
     loaded: false,
     allowance: 0,
     getProposal: false,
+    proposals: false,
     isApproving: false,
     isApproved: false,
   };
@@ -34,6 +35,13 @@ export default class Pump extends Component {
     }
   };
 
+  proposals = async () => {
+    let _proposals = await this.kseedgovernanceInstance.methods
+      .call();
+    this.setState({
+      proposals: this.web3.utils.fromWei(_proposals),
+    });
+  };
   getProposal = async () => {
     let _getProposal = await this.kseedgovernanceInstance.methods
       .call();
@@ -82,6 +90,7 @@ export default class Pump extends Component {
       this.getAllowance();
       this.getProposal();
       this.approveGovernance();
+      this.proposals();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -176,6 +185,7 @@ export default class Pump extends Component {
       
 
       {this.getProposal}
+      {this.proposals}
       </TabPane>
       <TabPane tab="Claim" disabled key="4">
        
