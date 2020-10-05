@@ -39,14 +39,14 @@ export default class Pump extends Component {
     let _proposals = await this.kseedgovernanceInstance.methods
       .call();
     this.setState({
-      proposals: this.web3.utils.fromWei(_proposals),
+      proposals: this.web3.utils.fromWei(this.state.proposals),
     });
   };
   getProposal = async () => {
     let _getProposal = await this.kseedgovernanceInstance.methods
       .call();
     this.setState({
-      getProposal: this.web3.utils.fromWei(_getProposal),
+      getProposal: this.web3.utils.fromWei(this.state.getProposal),
     });
   };
 
@@ -97,9 +97,7 @@ export default class Pump extends Component {
       this.setState({ loaded: true });
     } catch (error) {
       // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
-      );
+      
       console.error(error);
     }
   };
@@ -184,8 +182,8 @@ export default class Pump extends Component {
       <button onClick={this.approveGovernance}> APPROVE GOVERNANCE </button>
       
 
-      {this.getProposal}
-      {this.proposals}
+      {this.getProposal.toString()}
+      {this.proposals.toString()}
       </TabPane>
       <TabPane tab="Claim" disabled key="4">
        
