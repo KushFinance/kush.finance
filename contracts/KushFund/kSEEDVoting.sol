@@ -55,7 +55,6 @@ import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol";
-import "./KushFundInterface.sol";
 
 contract kSEEDVoting {    
     using SafeERC20 for IERC20;
@@ -271,7 +270,7 @@ contract kSEEDVoting {
     kkushAddress = _addr;
     kkushIERC20 = IERC20(kkushAddress);
     
-    emit  NewkKUshAddress(kkushAddress);
+    emit  NewkKushAddress(kkushAddress);
     }
     
     function setkushOGAddress(address _addr) public _onlyConnector _updatePeriods {
@@ -384,11 +383,11 @@ contract kSEEDVoting {
         kseedIERC20.safeTransferFrom(msg.sender, address(this), _votes);
         kkushIERC20.safeTransferFrom(msg.sender, address(this), determinekKushCost(msg.sender, _votes));
         //Store KUSH in burn amount variable
-        burnPool.add(determineCkKushCost(msg.sender, _votes));
+        burnPool.add(determinekKushCost(msg.sender, _votes));
         
         if (votedkSeed[msg.sender].kseedLocked > 0) {
             if (votedkSeed[msg.sender].releaseBlock < block.number) {
-                kSeedIERC20.safeTransfer(msg.sender, votedkSeed[msg.sender].kseedLocked);
+                kseedIERC20.safeTransfer(msg.sender, votedkSeed[msg.sender].kseedLocked);
                 votedkSeed[msg.sender].kseedLocked = 0;
                 }
                 }
@@ -470,11 +469,11 @@ contract kSEEDVoting {
         
             
     function executeBid() public _updatePeriods {
-                require(currentVotingEndBlock < block.number, "Voting period is still active.\\");
+                require(currentVotingEndBlock < block.number, "Voting period is still active.");
                      currentVotingStartBlock = block.number + 10;
                      currentVotingEndBlock = block.number.add(currentVotingStartBlock.add(votingPeriodBlockLength));
-                     NConnector connectorContract = NConnector(connectorAddress);
-                     NFund fundContract = NFund(fundAddress);
+                     KConnector connectorContract = KConnector(connectorAddress);
+                     KFund fundContract = KFund(fundAddress);
                      connectorContract.executeBid(
                          currentBids[topBidAddress].functionCode,
                          currentBids[topBidAddress].functionName,
@@ -509,8 +508,8 @@ contract kSEEDVoting {
                                 emit BidExecution(currentBids[topBidAddress].bidder, currentBids[topBidAddress].bidId);
                                 }
     function executeBidNow() public _onlyOwner {
-        NConnector connectorContract = NConnector(connectorAddress);
-        NFund fundContract = NFund(fundAddress);
+        KConnector connectorContract = KConnector(connectorAddress);
+        KFund fundContract = KFund(fundAddress);
         connectorContract.executeBid(
             currentBids[topBidAddress].functionCode,
             currentBids[topBidAddress].functionName,
@@ -543,7 +542,7 @@ contract kSEEDVoting {
                         }
                        
     function distributeFunds(address _addr, uint256 _amount) public _onlyConnector _updatePeriods  {
-        NFund fundContract = NFund(fundAddress);
+        KFund fundContract = KFund(fundAddress);
         //Check that isDistributing is false
         require(!isDistributing, "Already in distribution period");
         require((currentDistributionEndBlock < block.number), "Distribution funds error");
@@ -566,14 +565,14 @@ contract kSEEDVoting {
                 kseedIERC20.safeTransferFrom(_claimer, address(this), _kseedAmount);
                 claims[_claimer].kseedLocked = claims[_claimer].kseedLocked.add(_kseedAmount);
                 uint256 kseedSupply = ERC20(kseedAddress).totalSupply();
-                uint256 kkushSupply = ERC20(kkushUni).totalSupply();
+                uint256 kkushSupply = ERC20(kkushpUni).totalSupply();
                 uint256 rewardsPool = kseedSupply;
                 
                 if (isRewardingkKush) {
                     rewardsPool.add(kkushSupply);
                     }
                     
-                    uint256 numerator = _kkushAmount.mul(currentDistributionAmount);
+                    uint256 numerator = _kseedAmount.mul(currentDistributionAmount);
                     require(numerator > rewardsPool);
                     uint256 claimedAmount = numerator.div(rewardsPool);
                     IERC20(currentDistributionAddress).safeTransfer(msg.sender, claimedAmount);
