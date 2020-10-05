@@ -12,7 +12,7 @@ export default class Pump extends Component {
   state = {
     loaded: false,
     allowance: 0,
-    getProposal: false,
+    getProposal: true,
   };
 
   handleClick = () => {
@@ -21,20 +21,19 @@ export default class Pump extends Component {
 
   /** getters */
   getAllowance = async () => {
-    let _kseedAllowance = await this.kseedInstance.methods
-      .allowance(this.accounts[0], this.kkushInstance._address)
+    let _kseedgovernanceAllowance = await this.kseedgovernanceInstance.methods
+      .allowance(this.accounts[0], this.kseedgovernanceInstance._address)
       .call();
-    if (_kseedAllowance > 0) {
+    if (_kseedgovernanceAllowance > 0) {
       this.setState({
         isApproved: true,
-        allowance: this.web3.utils.fromWei(_kseedAllowance.toString()),
+        allowance: this.web3.utils.fromWei(_kseedgovernanceAllowance.toString()),
       });
     }
   };
 
   getProposal = async () => {
     let _getProposal = await this.kseedgovernanceInstance.methods
-      .balanceOf(this.accounts[0])
       .call();
     this.setState({
       getProposal: this.web3.utils.fromWei(_getProposal),
@@ -152,6 +151,7 @@ export default class Pump extends Component {
       </TabPane>
       <TabPane tab="Vote"  key="3">
       <div className="block">
+
       {this.state.getProposal}
       
       </div>
