@@ -1,4 +1,12 @@
 {
+  "name": "kush.finance",
+  "version": "1.0.0",
+  "description": "Kush.Finance official repository",
+  "main": "README.md",
+  "repository": "https://github.com/KushFinance/kush.finance",
+  "author": "Kush Community",
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "@myetherwallet/mewconnect-web-client": "^2.1.5-beta.1",
     "@uniswap/v2-periphery": "^1.1.0-beta.0",
