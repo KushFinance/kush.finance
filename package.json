@@ -14,5 +14,9 @@
     "erc20-meta-token": "^0.3.2",
     "web3connect": "^1.0.0-beta.33",
     "web3modal": "^1.9.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2",
+    "prettier-plugin-solidity": "^1.0.0-alpha.58"
   }
 }
