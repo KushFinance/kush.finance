@@ -9,66 +9,6 @@ const { TabPane } = Tabs;
 
 export default class Pump extends Component {
 
-  state = {
-    loaded: false,
-    allowance: 0,
-    getProposal: false,
-    proposals: false,
-    isApproving: false,
-    isApproved: false,
-  };
-
-  handleClick = () => {
-    this.props.toggle();
-  };
-
-  /** getters */
-  getAllowance = async () => {
-    let _kseedgovernanceAllowance = await this.kseedgovernanceInstance.methods
-      .allowance(this.accounts[0], this.kseedgovernanceInstance._address)
-      .call();
-    if (_kseedgovernanceAllowance > 0) {
-      this.setState({
-        isApproved: true,
-        allowance: this.web3.utils.fromWei(_kseedgovernanceAllowance.toString()),
-      });
-    }
-  };
-
-  proposals = async () => {
-    let _proposals = await this.kseedgovernanceInstance.methods
-      .call();
-    this.setState({
-      proposals: this.web3.utils.fromWei(this.state.proposals),
-    });
-  };
-  getProposal = async () => {
-    let _getProposal = await this.kseedgovernanceInstance.methods
-      .call();
-    this.setState({
-      getProposal: this.web3.utils.fromWei(this.state.getProposal),
-    });
-  };
-
-  approvekSEEDGovernance = async () => {
-    if (this.state.isApproving) {
-      return;
-    }
-    this.setState({ isApproving: true });
-
-    let approveGovernance = await this.kseedgovernanceInstance.methods
-      .approve(
-        this.kseedgovernanceInstance._address,
-      )
-      .send({
-        from: this.accounts[0],
-      });
-
-    if (approveGovernance["status"]) {
-      this.setState({ isApproving: false, isApproved: true });
-    }
-  };
-
 
   componentDidMount = async () => {
     try {
@@ -89,7 +29,6 @@ export default class Pump extends Component {
 
       this.getAllowance();
       this.getProposal();
-      this.approveGovernance();
       this.proposals();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -174,18 +113,16 @@ export default class Pump extends Component {
         <button className="disabled launch-date">Voting starts late October</button>
       </div>
       </TabPane>
-      <TabPane tab="Bid" disabled key="2">
+      <TabPane tab="Governance Voting"  key="2">
        
       </TabPane>
-      <TabPane tab="Vote"  key="3">
-     
-      <button onClick={this.getAllowance}> APPROVE GOVERNANCE </button>
-      
+      <TabPane tab="Fund Bidding" disabled key="3">
 
-      {this.getProposal}
-      {this.proposals}
       </TabPane>
-      <TabPane tab="Claim" disabled key="4">
+      <TabPane tab="Fund Voting" disabled key="4">
+       
+      </TabPane>
+      <TabPane tab="Claim Fund Rewards" disabled key="4">
        
       </TabPane>
     </Tabs>
