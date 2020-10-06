@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/kseedall.sol": "EnumerableSet"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/kseedall.sol": {
+			"keccak256": "0xef185ced004ac521a86ebab395715f0a556418ef7284414f74e55994c9de8e8a",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://3e2fd7addedf1016f667c38b59c2d06ac3494a09b6ca1ec23bd3c260ecfed265",
+				"dweb:/ipfs/QmYwL4iP6aMbpY1dQfwsGFU261F1nce8bni6vVQK91pERp"
+			]
+		}
+	},
+	"version": 1
+}

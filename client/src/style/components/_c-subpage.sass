@@ -1,0 +1,44 @@
+.subpage
+    display: flex
+    justify-content: left
+    align-items: flex-start
+    flex-direction: column
+    h1, h2
+        color: #eee
+
+    .amount-staked-box
+        display: flex
+        width: 100%
+        background-color: rgba(255, 251, 230, 0.15)
+        padding: 10px
+        img
+            height: 50px
+        .block
+            margin: 0 10px
+        & + .amount-staked-box
+            margin-top: 6px
+    .process-button
+        padding: 4px 6px
+        background-color: #70f95c
+        color: #444
+        margin: 5px auto
+        width: 300px
+        font-size: 16px
+        font-weight: bold
+        text-align: center
+        border-radius: 4px
+        cursor: pointer
+    
+    .farm-input
+        width: 100%
+        display: flex
+        flex-direction: column
+        margin: 10px 0
+        
+        .farm-buttons
+            display: flex
+
+            button + button
+                margin-left: 10px
+
+                

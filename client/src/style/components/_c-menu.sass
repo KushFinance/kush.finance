@@ -1,0 +1,32 @@
+
+.menu
+    display: flex
+    width: 100%
+    align-items: center
+    color: white
+
+    ul
+        list-style-type: none
+        width: 100%
+        li
+            margin-bottom: 10px
+            background-color: rgba(255,253,248, .75)
+            border-radius: 4px
+            padding: 3px 5px
+            transition: all .12s
+            &.active
+                border-right: 18px solid rgba(0,0,0,.8)
+            &:hover
+                box-shadow: 0 0 10px rgba(0,0,0,.3)
+            a
+                color: #444
+                font-size: 18px
+                font-weight: bold
+                display: flex
+                align-items: center
+                flex-direction: row
+                width: 100%
+                img
+                    width: 60px
+                    height: 60px
+                    margin-right: 10px

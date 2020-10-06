@@ -1,0 +1,133 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "fromToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "destToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "parts",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "flags",
+						"type": "uint256"
+					}
+				],
+				"name": "getExpectedReturn",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "returnAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "distribution",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "fromToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "destToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minReturn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "distribution",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "flags",
+						"type": "uint256"
+					}
+				],
+				"name": "swap",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "returnAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/YearnInterface.sol": "YOneSplitAudit"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/YearnInterface.sol": {
+			"keccak256": "0xe2270667f6c1fc0780a750f8511d2beab26d2f5391e11e626d6505bb23fd6eea",
+			"urls": [
+				"bzz-raw://e99fac34294af4ba67957fdde449fb937f34514cc3058282b64164cc97d1bda9",
+				"dweb:/ipfs/QmaQS29T85i3NZvxv8boSzBuEZHg4AHsmfE7CZNkaMX9yB"
+			]
+		}
+	},
+	"version": 1
+}

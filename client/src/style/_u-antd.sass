@@ -1,0 +1,59 @@
+.ant-divider
+    color: #eee
+    margin: 20px 0
+    border: 1px solid rgba(236, 236, 236, 0.3)
+    &.ant-divider-with-text
+        border: none
+        color: #eee
+        &::after, &::before
+            border-top: 1px solid rgba(236, 236, 236, 0.3)
+    .ant-divider-inner-text
+        padding: 0 10px
+
+.ant-alert
+    color: #111
+    background-color: rgba(255,251,230,.15)
+
+    &.margin
+        margin: 6px 0
+    &-warning
+        .ant-alert-message, .ant-alert-description
+            color: #ffe58f
+    &-info
+        .ant-alert-message, .ant-alert-description
+            color: #91d5ff
+
+.ant-tabs
+    color: #eee
+    .ant-tabs-tab.ant-tabs-tab-disabled
+        color: rgba(39,205,53,1)
+
+    .ant-tabs-tab
+        &:hover 
+            color: rgba(39,205,53,1)
+        &-active .ant-tabs-tab-btn
+            color: #7bfc5b
+        .ant-tabs-tab-btn:active
+            color: #fe9cf3
+        .ant-tabs-tab-btn:inactive
+            color: #98c58c
+    .ant-tabs-ink-bar
+        background: #fe9cf3
+
+.ant-collapse-header
+    color: rgba(200,200,200,.8) !important
+
+.ant-statistic
+    margin-bottom: 16px
+    .ant-statistic-title
+        color: #eee
+    .ant-statistic-content
+        color: #fff
+    &:last-child
+        margin-bottom: 0
+    
+.ant-card
+    background-color: rgba(20,20,20,.3)
+    .ant-card-head
+        color: white
+        border-bottom: 2px solid #444

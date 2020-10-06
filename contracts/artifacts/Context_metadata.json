@@ -1,0 +1,40 @@
+{
+	"compiler": {
+		"version": "0.6.6+commit.6c089d02"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/kushOG.sol": "Context"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/kushOG.sol": {
+			"keccak256": "0x50a0b1379ecd4e4275382aaf660325a12bbf5afc3e5ebbae1b0f637d3a588f8b",
+			"urls": [
+				"bzz-raw://7bfb1ed0e89588cea7eb1d72a1c4e499ae054f57a355790a8c6bef0c8c0a72ed",
+				"dweb:/ipfs/QmNspXTS8KuWESaVKAwKbejswEuZZqiXdEFMkJbbVGRv9e"
+			]
+		}
+	},
+	"version": 1
+}
