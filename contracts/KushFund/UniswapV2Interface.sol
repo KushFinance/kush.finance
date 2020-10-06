@@ -1,93 +1,189 @@
 pragma solidity ^0.6.6;
+
 interface IUniswapV2Callee {
-    function uniswapV2Call(address sender, uint amount0, uint amount1, bytes calldata data) external;
+  function uniswapV2Call(
+    address sender,
+    uint256 amount0,
+    uint256 amount1,
+    bytes calldata data
+  ) external;
 }
 
 interface IUniswapV2ERC20 {
-    event Approval(address indexed owner, address indexed spender, uint value);
-    event Transfer(address indexed from, address indexed to, uint value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
+  event Transfer(address indexed from, address indexed to, uint256 value);
 
-    function name() external pure returns (string memory);
-    function symbol() external pure returns (string memory);
-    function decimals() external pure returns (uint8);
-    function totalSupply() external view returns (uint);
-    function balanceOf(address owner) external view returns (uint);
-    function allowance(address owner, address spender) external view returns (uint);
+  function name() external pure returns (string memory);
 
-    function approve(address spender, uint value) external returns (bool);
-    function transfer(address to, uint value) external returns (bool);
-    function transferFrom(address from, address to, uint value) external returns (bool);
+  function symbol() external pure returns (string memory);
 
-    function DOMAIN_SEPARATOR() external view returns (bytes32);
-    function PERMIT_TYPEHASH() external pure returns (bytes32);
-    function nonces(address owner) external view returns (uint);
+  function decimals() external pure returns (uint8);
 
-    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external;
+  function totalSupply() external view returns (uint256);
+
+  function balanceOf(address owner) external view returns (uint256);
+
+  function allowance(address owner, address spender)
+    external
+    view
+    returns (uint256);
+
+  function approve(address spender, uint256 value) external returns (bool);
+
+  function transfer(address to, uint256 value) external returns (bool);
+
+  function transferFrom(
+    address from,
+    address to,
+    uint256 value
+  ) external returns (bool);
+
+  function DOMAIN_SEPARATOR() external view returns (bytes32);
+
+  function PERMIT_TYPEHASH() external pure returns (bytes32);
+
+  function nonces(address owner) external view returns (uint256);
+
+  function permit(
+    address owner,
+    address spender,
+    uint256 value,
+    uint256 deadline,
+    uint8 v,
+    bytes32 r,
+    bytes32 s
+  ) external;
 }
 
 interface IUniswapV2Factory {
-    event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+  event PairCreated(
+    address indexed token0,
+    address indexed token1,
+    address pair,
+    uint256
+  );
 
-    function feeTo() external view returns (address);
-    function feeToSetter() external view returns (address);
+  function feeTo() external view returns (address);
 
-    function getPair(address tokenA, address tokenB) external view returns (address pair);
-    function allPairs(uint) external view returns (address pair);
-    function allPairsLength() external view returns (uint);
+  function feeToSetter() external view returns (address);
 
-    function createPair(address tokenA, address tokenB) external returns (address pair);
+  function getPair(address tokenA, address tokenB)
+    external
+    view
+    returns (address pair);
 
-    function setFeeTo(address) external;
-    function setFeeToSetter(address) external;
+  function allPairs(uint256) external view returns (address pair);
+
+  function allPairsLength() external view returns (uint256);
+
+  function createPair(address tokenA, address tokenB)
+    external
+    returns (address pair);
+
+  function setFeeTo(address) external;
+
+  function setFeeToSetter(address) external;
 }
 
 interface IUniswapV2Pair {
-    event Approval(address indexed owner, address indexed spender, uint value);
-    event Transfer(address indexed from, address indexed to, uint value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
+  event Transfer(address indexed from, address indexed to, uint256 value);
 
-    function name() external pure returns (string memory);
-    function symbol() external pure returns (string memory);
-    function decimals() external pure returns (uint8);
-    function totalSupply() external view returns (uint);
-    function balanceOf(address owner) external view returns (uint);
-    function allowance(address owner, address spender) external view returns (uint);
+  function name() external pure returns (string memory);
 
-    function approve(address spender, uint value) external returns (bool);
-    function transfer(address to, uint value) external returns (bool);
-    function transferFrom(address from, address to, uint value) external returns (bool);
+  function symbol() external pure returns (string memory);
 
-    function DOMAIN_SEPARATOR() external view returns (bytes32);
-    function PERMIT_TYPEHASH() external pure returns (bytes32);
-    function nonces(address owner) external view returns (uint);
+  function decimals() external pure returns (uint8);
 
-    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external;
+  function totalSupply() external view returns (uint256);
 
-    event Mint(address indexed sender, uint amount0, uint amount1);
-    event Burn(address indexed sender, uint amount0, uint amount1, address indexed to);
-    event Swap(
-        address indexed sender,
-        uint amount0In,
-        uint amount1In,
-        uint amount0Out,
-        uint amount1Out,
-        address indexed to
+  function balanceOf(address owner) external view returns (uint256);
+
+  function allowance(address owner, address spender)
+    external
+    view
+    returns (uint256);
+
+  function approve(address spender, uint256 value) external returns (bool);
+
+  function transfer(address to, uint256 value) external returns (bool);
+
+  function transferFrom(
+    address from,
+    address to,
+    uint256 value
+  ) external returns (bool);
+
+  function DOMAIN_SEPARATOR() external view returns (bytes32);
+
+  function PERMIT_TYPEHASH() external pure returns (bytes32);
+
+  function nonces(address owner) external view returns (uint256);
+
+  function permit(
+    address owner,
+    address spender,
+    uint256 value,
+    uint256 deadline,
+    uint8 v,
+    bytes32 r,
+    bytes32 s
+  ) external;
+
+  event Mint(address indexed sender, uint256 amount0, uint256 amount1);
+  event Burn(
+    address indexed sender,
+    uint256 amount0,
+    uint256 amount1,
+    address indexed to
+  );
+  event Swap(
+    address indexed sender,
+    uint256 amount0In,
+    uint256 amount1In,
+    uint256 amount0Out,
+    uint256 amount1Out,
+    address indexed to
+  );
+  event Sync(uint112 reserve0, uint112 reserve1);
+
+  function MINIMUM_LIQUIDITY() external pure returns (uint256);
+
+  function factory() external view returns (address);
+
+  function token0() external view returns (address);
+
+  function token1() external view returns (address);
+
+  function getReserves()
+    external
+    view
+    returns (
+      uint112 reserve0,
+      uint112 reserve1,
+      uint32 blockTimestampLast
     );
-    event Sync(uint112 reserve0, uint112 reserve1);
 
-    function MINIMUM_LIQUIDITY() external pure returns (uint);
-    function factory() external view returns (address);
-    function token0() external view returns (address);
-    function token1() external view returns (address);
-    function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);
-    function price0CumulativeLast() external view returns (uint);
-    function price1CumulativeLast() external view returns (uint);
-    function kLast() external view returns (uint);
+  function price0CumulativeLast() external view returns (uint256);
 
-    function mint(address to) external returns (uint liquidity);
-    function burn(address to) external returns (uint amount0, uint amount1);
-    function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;
-    function skim(address to) external;
-    function sync() external;
+  function price1CumulativeLast() external view returns (uint256);
 
-    function initialize(address, address) external;
+  function kLast() external view returns (uint256);
+
+  function mint(address to) external returns (uint256 liquidity);
+
+  function burn(address to) external returns (uint256 amount0, uint256 amount1);
+
+  function swap(
+    uint256 amount0Out,
+    uint256 amount1Out,
+    address to,
+    bytes calldata data
+  ) external;
+
+  function skim(address to) external;
+
+  function sync() external;
+
+  function initialize(address, address) external;
 }
