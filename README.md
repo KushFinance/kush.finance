@@ -3,8 +3,10 @@
 
 
 
-<a href="https://kush.finance"><img src="https://pbs.twimg.com/profile_images/1307795929085349890/SIwMAo38_400x400.jpg" title="Kush Finance" alt="Kush Finance"></a>
-<!-- [![KushFinance](https://pbs.twimg.com/profile_images/1307795929085349890/SIwMAo38_400x400.jpg)](https://kush.finance) -->
+<p align="center"><a href="https://kush.finance"><img src="https://pbs.twimg.com/profile_banners/1302614813605072897/1601775721/1500x500" title="Kush Finance" alt="Kush Finance"></a>
+<!-- [![KushFinance](https://pbs.twimg.com/profile_banners/1302614813605072897/1601775721/1500x500)](https://kush.finance) --></p>
+
+
 ## KUSH.FINANCE :herb: is a
 
 
