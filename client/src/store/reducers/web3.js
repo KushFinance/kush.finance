@@ -51,5 +51,14 @@ const kushOGInstance = (state = {}, action) => {
   }
 };
 
-export default { kseedInstance, kseedGovInstance, kushInstance, kushOGInstance };
+const web3Instance = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_WEB3_INSTANCE':
+      return action.web3;
+    default:
+      return web3;
+  }
+}
+
+export default { kseedInstance, kseedGovInstance, kushInstance, kushOGInstance, web3Instance };
 
