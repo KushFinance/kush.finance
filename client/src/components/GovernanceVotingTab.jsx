@@ -12,7 +12,7 @@ export default function GovernanceVotingTab() {
   const [kSeedGovMethods, setkSeedGovMethods] = useState({});
   const [kSeedMethods, setkSeedMethods] = useState({});
   const [currentProposal, setCurrentProposal] = useState({});
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(0.000000000000000001);
   const [accounts, setAccounts] = useState([]);
   const [contractAddress, setContractAddress] = useState();
   const [voting, setVoting] = useState(false);
@@ -54,11 +54,10 @@ export default function GovernanceVotingTab() {
 
   const checkAllowance = async (amount) => {
     const allowance = await kSeedMethods.allowance(accounts[0], contractAddress).call();
-    return (BigInt(allowance) / 10000000000000000000n) > amount;
+    return allowance > amount;
   }
 
   const grantAllowance = async (amount) => {
-    amount = BigInt(amount * 10 ** 18);
     const kseedApproval = await kSeedMethods.approve(contractAddress, amount).send({
       from: accounts[0]
     });
@@ -69,11 +68,11 @@ export default function GovernanceVotingTab() {
     setVoting(true);
 
     try {
-      const isAllowed = await checkAllowance(amount);
+      const isAllowed = await checkAllowance(BigInt(amount * 10 ** 18));
 
       if (!isAllowed) {
         try {
-          await grantAllowance(amount);
+          await grantAllowance(BigInt(amount * 10 ** 18));
         } catch (error) {
           console.error(error);
           return;
@@ -81,12 +80,12 @@ export default function GovernanceVotingTab() {
       }
 
       await kSeedGovMethods.voteForProposal(
-        amount,
+        amount * 10 ** 18,
         currentProposal.optionIndex,
         currentProposal['1']
       ).send({
         from: accounts[0],
-        amount
+        amount: amount * 10 ** 18
       }, (error, txh) => {
         if (error) {
           console.log('error');
@@ -127,7 +126,7 @@ export default function GovernanceVotingTab() {
           loading: voting
         }}
       >
-        <InputNumber onChange={handleAmountChange} style={{ width: '100%' }} placeholder="$kSeed amount to vote" min={1} />
+        <InputNumber onChange={handleAmountChange} style={{ width: '100%' }} placeholder="$kSeed amount to vote" min={0.000000000000000001} defaultValue={0.000000000000000001} />
       </Modal>
       {proposals.map((proposal, proposalIndex) => (
         <div key={proposalIndex}>
