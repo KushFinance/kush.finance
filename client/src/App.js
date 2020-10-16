@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import KushShowcase from "./components/KushShowcase";
 import FloatWallet from "./components/FloatWallet";
 import "./style/index.sass";
+import withWeb3 from "./utils/withWeb3";
 
 class App extends Component {
   
@@ -29,7 +30,7 @@ class App extends Component {
       localStorage.setItem("darkMode","false");
     }
     return (
-      
+
       <BrowserRouter>
         <div className="bg-lime"></div>
         <div className={`App ${localStorage.getItem('darkMode') === "true" && 'dark-mode'}`}>
@@ -42,6 +43,7 @@ class App extends Component {
           <div className="content">
               <AnimatedSwitch
                 atEnter={Transition.bounceTransition.atEnter}
+                atLeave={Transition.bounceTransition.atLeave}
                 atActive={Transition.bounceTransition.atActive}
                 mapStyles={Transition.mapStyles}
                 className="route-wrapper"
@@ -77,5 +79,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withWeb3(App);
  

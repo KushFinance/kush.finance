@@ -1,55 +1,15 @@
-import kSEEDGovernance from "../contracts/kSEEDGovernance.json";
-import { getWeb3Var } from "../shared";
-import React, { Component } from "react";
+import React from "react";
 import { Divider, Tabs } from "antd";
+import GovernanceVotingTab from "../components/GovernanceVotingTab";
 const { TabPane } = Tabs;
 
+export default function Pump() {
 
-
-
-export default class Pump extends Component {
-
-
-  componentDidMount = async () => {
-    try {
-      this.web3 = getWeb3Var();
-
-      // Get network provider and web3 instance.
-
-      // Use web3 to get the user's accounts.
-      this.accounts = await this.web3.eth.getAccounts();
-
-      // Get the contract instance.
-      this.networkId = await this.web3.eth.net.getId();
-
-      this.kseedgovernanceInstance = new this.web3.eth.Contract(
-        kSEEDGovernance.abi,
-        process.env.REACT_APP_KSEEDGOV_TOKEN_CONTRACT_ADDRESS
-      );
-
-      this.getAllowance();
-      this.getProposal();
-      this.proposals();
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ loaded: true });
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      
-      console.error(error);
-    }
-  };
-
-
-
-
-  render() {
-    return (
-      <Tabs defaultActiveKey="1">
+  return (
+    <Tabs defaultActiveKey="1">
       <TabPane tab="INFO & FAQ" key="1">
       <div className="subpage govern">
-        <h1>Governing Page & Fund FAQ</h1>
+        <h1>Governing Page {"&"} Fund FAQ</h1>
 
         <Divider orientation="left">Welcome to the steering wheel of a multi-million dollar machine</Divider>
         <p>In this system, kSEED holders will be able to freely govern the protocol as they wish. </p>
@@ -114,7 +74,7 @@ export default class Pump extends Component {
       </div>
       </TabPane>
       <TabPane tab="Governance Voting"  key="2">
-       
+       <GovernanceVotingTab/>
       </TabPane>
       <TabPane tab="Fund Bidding" disabled key="3">
 
@@ -122,11 +82,9 @@ export default class Pump extends Component {
       <TabPane tab="Fund Voting" disabled key="4">
        
       </TabPane>
-      <TabPane tab="Claim Fund Rewards" disabled key="4">
+      <TabPane tab="Claim Fund Rewards" disabled key="5">
        
       </TabPane>
     </Tabs>
-      
-    );
-  }
+  );
 }

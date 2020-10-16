@@ -31,43 +31,43 @@ function Menu(props) {
     return(
         <div className="menu">
             <ul className="menu--navbar">
-                <li className={page === "/" && 'active'}>
+                <li className={page === "/"  ? 'active' : ''}>
                     <Address href="/" handleChangePage={()=>{setPage("/")}}>
                         <img src={KushIMG} alt="Home"></img>
                         Home
                     </Address>
                 </li>
-                <li className={page === "/seeding" && 'active'}>
+                <li className={page === "/seeding"  ? 'active' : ''}>
                     <Address href="/seeding" handleChangePage={()=>{setPage("/seeding")}}>
                         <img src={SeedingIMG} alt="Farm kKUSH"></img>
                         Farm kushKUSH
                     </Address>
                 </li>
-                <li className={page === "/farming" && 'active'}>
+                <li className={page === "/farming"  ? 'active' : ''}>
                     <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
                         <img src={FarmingIMG} alt="farming"></img>
                         Farm kushOG
                     </Address>
                 </li>
-                <li className={page === "/govern" && 'active'}>
+                <li className={page === "/govern"  ? 'active' : ''}>
                     <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
                         <img src={GovernIMG} alt="Govern"></img>
                         Govern
                     </Address>
                 </li>
-                <li className={page === "/kush-art" && 'active'}>
+                <li className={page === "/kush-art"  ? 'active' : ''}>
                     <Address href="/kush-art" handleChangePage={()=>{setPage("/kush-art")}}>
                         <img src={KushArtIMG} alt="Kush Art"></img>
                         KushART
                     </Address>
                 </li>
-                <li className={page === "/wallet" && 'active'}>
+                <li className={page === "/wallet"  ? 'active' : ''}>
                     <Address href="/wallet" handleChangePage={()=>{setPage("/wallet")}}>
                         <img src={WalletIMG} alt="Wallet"></img>
                         Wallet
                     </Address>
                 </li>
-                <li className={`hideOnMobile ${page === "/settings" && 'active'}`}>
+                <li className={`hideOnMobile ${page === "/settings"  ? 'active' : ''}`}>
                     <Address href="/settings" handleChangePage={()=>{setPage("/settings")}}>
                         <img src={SettingsIMG} alt="Settings"></img>
                         Settings
