@@ -142,7 +142,7 @@ export default function GovernanceVotingTab() {
           loading: voting
         }}
       >
-        <InputNumber onChange={handleAmountChange} style={{ width: '100%' }} placeholder="$kSeed amount to vote" min={0.000000000000000001} defaultValue={1} />
+        <InputNumber onChange={handleAmountChange} style={{ width: '100%' }} placeholder="kSEED amount to vote" min={1} defaultValue={1} />
       </Modal>
       
       <Alert
@@ -174,7 +174,7 @@ export default function GovernanceVotingTab() {
               description={
                 <Row>
                   <Col md={16} sm={24}>
-                    {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes ($kSeed)`}
+                    {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes (kSEED)`}
                   </Col>
                   <Col md={8} sm={24}>
                     <Button
