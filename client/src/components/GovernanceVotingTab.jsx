@@ -12,10 +12,12 @@ export default function GovernanceVotingTab() {
   const [kSeedGovMethods, setkSeedGovMethods] = useState({});
   const [kSeedMethods, setkSeedMethods] = useState({});
   const [currentProposal, setCurrentProposal] = useState({});
+  const [currentBlock, setCurrentBlock] = useState(0);
   const [amount, setAmount] = useState(1);
   const [accounts, setAccounts] = useState([]);
   const [contractAddress, setContractAddress] = useState();
   const [voting, setVoting] = useState(false);
+  const [withdrawing, setWithdrawing] = useState(false);
 
   const kseedGovInstance = useSelector(state => state.kseedGovInstance);
   const kseedInstance = useSelector(state => state.kseedInstance);
@@ -25,11 +27,10 @@ export default function GovernanceVotingTab() {
     const results = [];
     const addresses = await methods.getProposals().call();
     const currBlock = await methods.getBlockNumber().call();
+    setCurrentBlock(currBlock);
     for (const address of addresses) {
       const proposal = await methods.getProposal(address).call();
-      if (proposal['5'] > currBlock) {
-        results.push(proposal);
-      }
+      results.push(proposal);
     }
     setProposals(results);
   }
@@ -108,6 +109,21 @@ export default function GovernanceVotingTab() {
     setAmount(v);
   };
 
+  const handleWithdrawal = async () => {
+    setWithdrawing(true);
+    try {
+      await kSeedGovMethods.withdrawkSeed();
+    } catch (error) {
+      alert('Could not withdraw your kSeed, please check transaction');
+      console.error(error);
+    } finally {
+      setWithdrawing(false);
+    }
+  };
+
+  const openProposals = proposals.filter(x => x['5'] > currentBlock);
+  const closedProposals = proposals.filter(x => x['5'] < currentBlock);
+
   return (
     <>
       <Modal
@@ -128,9 +144,25 @@ export default function GovernanceVotingTab() {
       >
         <InputNumber onChange={handleAmountChange} style={{ width: '100%' }} placeholder="kSEED amount to vote" min={1} defaultValue={1} />
       </Modal>
-      {proposals.map((proposal, proposalIndex) => (
+      
+      <Alert
+        type="info"
+        message={`Current ETH block: #${currentBlock}`}
+        style={{ marginBottom: '10px' }}
+      />
+
+      {!openProposals.length && (
+        <Alert
+          type="success"
+          message="Have you voted for a past proposal? You can withdraw your kSeed."
+          description={<Button type="primary" loading={withdrawing} onClick={handleWithdrawal}>Withdraw</Button>}
+          style={{ marginBottom: '10px' }}
+        />
+      )}
+
+      {openProposals.map((proposal, proposalIndex) => (
         <div key={proposalIndex}>
-          <Title level={2}>Proposal #{proposalIndex+1}: {proposal['0']}</Title>
+          <Title level={2}>{proposal['0']}</Title>
           <Text>Voting ends on block #{proposal['5']}</Text>
           <Divider orientation='left'>Options</Divider>
           {proposal['2'].map((option, index) => (
@@ -155,6 +187,36 @@ export default function GovernanceVotingTab() {
                     >
                       Vote
                     </Button>
+                  </Col>
+                </Row>
+              }
+            />
+          ))}
+        </div>
+      ))}
+
+      {closedProposals.length > 0 && (
+        <Divider>
+          <Title level={2}>History</Title>
+        </Divider>
+      )}
+
+      {closedProposals.map((proposal, proposalIndex) => (
+        <div key={proposalIndex}>
+          <Title level={2}>{proposal['0']}</Title>
+          <p>{proposal['1']}</p>
+          <Text>Voting ended on block #{proposal['5']}</Text>
+          <Divider orientation='left'>Options</Divider>
+          {proposal['2'].map((option, index) => (
+            <Alert
+              key={proposalIndex + '-' + index}
+              style={{ marginBottom: '10px' }}
+              type="warning"
+              message={option}
+              description={
+                <Row>
+                  <Col md={16} sm={24}>
+                    {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes ($kSeed)`}
                   </Col>
                 </Row>
               }
