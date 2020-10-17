@@ -1,6 +1,6 @@
 /* global BigInt */
 
-import { Alert, Button, Col, Divider, InputNumber, Modal, Row, Typography } from 'antd';
+import { Alert, Button, Col, Divider, InputNumber, Modal, Row, Tag, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -30,6 +30,10 @@ export default function GovernanceVotingTab() {
     setCurrentBlock(currBlock);
     for (const address of addresses) {
       const proposal = await methods.getProposal(address).call();
+      const topOptionValue = proposal['4'].reduce(function(a, b) {
+        return Math.max(a, b);
+      });
+      proposal.topOption = proposal['4'].findIndex(x => Number(x) === topOptionValue);
       results.push(proposal);
     }
     setProposals(results);
@@ -112,12 +116,16 @@ export default function GovernanceVotingTab() {
   const handleWithdrawal = async () => {
     setWithdrawing(true);
     try {
-      await kSeedGovMethods.withdrawkSeed();
+      await kSeedGovMethods.withdrawkSeed().send({
+        from: accounts[0]
+      });
+      window.location.reload();
     } catch (error) {
       alert('Could not withdraw your kSeed, please check transaction');
       console.error(error);
     } finally {
       setWithdrawing(false);
+      loadData();
     }
   };
 
@@ -154,7 +162,7 @@ export default function GovernanceVotingTab() {
       {!openProposals.length && (
         <Alert
           type="success"
-          message="Have you voted for a past proposal? You can withdraw your kSeed."
+          message="Have you voted for a past proposal? You can withdraw your kSEED."
           description={<Button type="primary" loading={withdrawing} onClick={handleWithdrawal}>Withdraw</Button>}
           style={{ marginBottom: '10px' }}
         />
@@ -204,24 +212,34 @@ export default function GovernanceVotingTab() {
       {closedProposals.map((proposal, proposalIndex) => (
         <div key={proposalIndex}>
           <Title level={2}>{proposal['0']}</Title>
-          <p>{proposal['1']}</p>
           <Text>Voting ended on block #{proposal['5']}</Text>
           <Divider orientation='left'>Options</Divider>
-          {proposal['2'].map((option, index) => (
-            <Alert
-              key={proposalIndex + '-' + index}
-              style={{ marginBottom: '10px' }}
-              type="warning"
-              message={option}
-              description={
-                <Row>
-                  <Col md={16} sm={24}>
-                    {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes ($kSeed)`}
-                  </Col>
-                </Row>
-              }
-            />
-          ))}
+          {proposal['2'].map((option, index) => {
+            const style = { marginBottom: '10px' };
+            if (proposal.topOption === index) {
+              style.color = '#7bfc5b';
+            }
+            return (
+              <Alert
+                key={proposalIndex + '-' + index}
+                style={style}
+                type={proposal.topOption === index ? "success" : "warning"}
+                message={<>
+                  {option}
+                  {proposal.topOption === index && (
+                    <Tag style={{ marginLeft: '10px' }} color="green">Winner</Tag>
+                  )}
+                </>}
+                description={
+                  <Row>
+                    <Col md={16} sm={24}>
+                      {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes ($kSeed)`}
+                    </Col>
+                  </Row>
+                }
+              />
+            );
+          })}
         </div>
       ))}
     </>
