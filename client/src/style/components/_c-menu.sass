@@ -9,8 +9,8 @@
     width: 100%
     .menu--link
         border-radius: 10px
-        background-color: rgba(255,255,255,.15)
-        height: 320px
+        background-color: rgba(255,255,255,.2)
+        height: 300px
         display: flex
         position: relative
         flex-direction: column
@@ -26,6 +26,8 @@
             flex-direction: column
             align-items: center
             justify-content: center
+            width: 100%
+            height: 100%
         &.blocked
             &::before
                 content: ''
@@ -42,7 +44,8 @@
                 position: absolute
                 left: 50%
                 transform: translateX(-50%)
-                bottom: 5px
+                bottom: 6px
                 font-size: 24px
                 color: black
                 font-weight: 600
+                font-size: 1.2rem

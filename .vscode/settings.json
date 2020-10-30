@@ -1,5 +1,17 @@
 {
     "solidity-va.tools.surya.input.contracts": "workspace",
     "solidity-va.whatsNew.disabled": true,
-    "solidity.linter": "solium"
+    "solidity.linter": "solium",
+    "cSpell.words": [
+        "balance",
+        "getk",
+        "getk seed balance",
+        "kseed",
+        "seed",
+        "set",
+        "set kseed balance",
+        "staked",
+        "totalk",
+        "totalk seed staked"
+    ]
 }

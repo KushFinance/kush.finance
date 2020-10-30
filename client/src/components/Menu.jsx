@@ -16,7 +16,6 @@ const Address = (props) => {
                 to={props.href}
                 target={props.external ? '_blank' : ''}
                 >
-
                 {props.children} 
             </Link>
         </div>

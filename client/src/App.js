@@ -14,8 +14,6 @@ import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Wallet from "./components/Wallet";
 import Footer from "./components/Footer";
-import Drawer from "./components/Drawer";
-import KushShowcase from "./components/KushShowcase";
 import "./style/index.sass";
 import withWeb3 from "./utils/withWeb3";
 
@@ -27,17 +25,10 @@ class App extends Component {
       localStorage.setItem("kseedTotal", "true");
       localStorage.setItem("kkushSupply", "true");
       localStorage.setItem("kushOGSupply", "true");
-      localStorage.setItem("darkMode", "false");
     }
     return (
       <BrowserRouter>
-        <div className="bg-lime"></div>
-        <div
-          className={`App ${
-            localStorage.getItem("darkMode") === "true" && "dark-mode"
-          }`}
-        >
-          {/* <Drawer/> */}
+        <div className='App'>
           <Header />
           <div className="content">
             <div className="pages">

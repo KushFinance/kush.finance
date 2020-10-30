@@ -1,32 +1,24 @@
 #root
+    width: 100%
     display: flex
-    height: 100vh
     justify-content: center
-    align-items: center
-    background: linear-gradient(90deg, rgba(29,29,29,0.75) 0%, rgba(11,11,11,0.75) 100%)
+    align-items: flex-start
+    min-height: 100vh
+    background: linear-gradient(180deg, rgba(4, 20, 0, 0.85) 0%, rgba(6, 31, 0, 0.748) 100%), url('../assets/weedBackground.png')
 
 .App 
     display: flex
     flex-direction: column
     justify-content: center
-    width: 1362px
+    max-width: 1362px
     
 .pages
-    width: 1040px
-    height: 680px
+    width: 850px
     display: flex
     flex-direction: column
-    overflow: auto
     color: #eee
     border-radius: 10px
 
 .content
     display: flex
-
-.sidebar
-    height: 100%
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    width: 25%
-    padding: 10px 10px
+    position: relative

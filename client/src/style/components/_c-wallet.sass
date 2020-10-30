@@ -3,8 +3,28 @@
     border-radius: 10px
     background-color: rgba(255,255,255,.15)
     width: 280px
-    height: 660px
+    height: fit-content
     text-align: center
-    padding-top: 20px
+    padding: 20px 
     .wallet--content
         width: 100%
+        text-align: left
+        .coinTitle
+            display: flex
+            width: 100%
+            justify-content: space-between
+            align-items: center
+            margin-top: 10px
+            a
+                position: relative
+                display: flex
+                align-items: center
+                justify-content: center
+                color: black
+                background-color: #05FF00
+                height: 26px
+                width: 26px
+                border-radius: 16px
+                z-index: 1
+            h2 + span
+                margin-left: 10px
