@@ -30,6 +30,10 @@ function Menu(props) {
     },[page])
     return(
         <div className="menu">
+            <Address href="/kseed" handleChangePage={()=>{setPage("/kseed")}}>
+                <img src={KushIMG} alt="kSEED"></img>
+                kSEED
+            </Address>
             <Address href="/seeding" handleChangePage={()=>{setPage("/seeding")}}>
                 <img src={SeedingIMG} alt="Farm kKUSH"></img>
                 Farm kushKUSH
@@ -38,17 +42,13 @@ function Menu(props) {
                 <img src={FarmingIMG} alt="farming"></img>
                 Farm kushOG
             </Address>
-            <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
-                <img src={GovernIMG} alt="Govern"></img>
-                Govern
-            </Address>
             <div className="menu--link blocked">
                 <img src={KushArtIMG} alt="Kush Art"></img>
                 KushART
             </div>
-            <Address href="/settings" handleChangePage={()=>{setPage("/settings")}}>
-                <img src={SettingsIMG} alt="Settings"></img>
-                Settings
+            <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
+                <img src={GovernIMG} alt="Govern"></img>
+                Govern
             </Address>
             <div className="menu--link blocked">
                 <img src={KushIMG} alt="kushRPG"></img>

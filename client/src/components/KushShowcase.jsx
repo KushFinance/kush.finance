@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../assets/logo.png'
-import Footer from './Footer';
-import { Row, Col, Divider, List, Avatar, Image, Button, Card, Typography, Space  } from "antd";
+import { PageHeader, Col, Divider, List, Avatar, Image, Button, Card, Typography, Space  } from "antd";
 import kseedLogoIMG from "../assets/logo.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png"
@@ -9,7 +8,12 @@ const { Paragraph } = Typography;
 class KushShowcase extends Component {
     render(){
         return(
-            <div className="kushShowcase">
+            <div className="subpage kushShowcase">
+              <PageHeader
+                className="site-page-header"
+                onBack={() => window.history.back()}
+                title="Kush Seed Showcase"
+            />
                 
                 <Image preview={false} width={250} src={Logo}/>
                 <h1>kush.finance</h1>
@@ -50,7 +54,6 @@ class KushShowcase extends Component {
          
   </Card> */}
                 
-                <Footer />
             </div>
         );
     }
