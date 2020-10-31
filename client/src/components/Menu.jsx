@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import Link from './Link';
 import SeedingIMG from '../assets/farmkKUSH.png'
 import GovernIMG from '../assets/Vote.png'
 import FarmingIMG from '../assets/kushOGfarm.png'
