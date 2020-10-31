@@ -220,12 +220,12 @@ export default class FarmingPage extends Component {
     return (
       <div class="subpage">
         <PageHeader
-            className="site-page-header"
-            onBack={() => window.history.back()}
-            title="Farm kushOG with kKUSH/ETH Liquidity"
-            subTitle=""
-            avatar={{ src: kOGLogo }}
-            />
+          className="site-page-header"
+          onBack={() => window.history.back()}
+          title="Farm kushOG with kKUSH/ETH Liquidity"
+          subTitle=""
+          avatar={{ src: kOGLogo }}
+        />
         <Divider>Create the bridge to the Polkadot network and NFT Markets!</Divider>
         
         <p> kushOG is an extension to the KUSH.FINANCE ecosystem that will allow kSEED voters to acquire non ERC20 assets.</p>

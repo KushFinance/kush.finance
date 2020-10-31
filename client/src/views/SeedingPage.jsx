@@ -232,8 +232,7 @@ export default class SeedingPage extends Component {
             title="Seeding kSEED for kKUSH"
             subTitle=""
             avatar={{ src: kseedLogoIMG }}
-            />
-            
+          />
         <Alert
           message="Make sure to always claim mining rewards before staking more!"
           type="warning"

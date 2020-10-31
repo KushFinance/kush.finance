@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Divider } from 'antd'
+import { Switch, PageHeader } from 'antd'
 
 export default class SettingsPage extends Component {
   state = {
@@ -29,15 +29,17 @@ export default class SettingsPage extends Component {
     localStorage.setItem("kseedTotal","true");
     localStorage.setItem("kkushSupply","true");
     localStorage.setItem("kushOGSupply","true");
-    localStorage.setItem("darkMode","false");
     window.location.reload()
   }
   
   render() {
     return (
       <div className="subpage settings">
-        <h1>Settings</h1>
-        <Divider orientation="left"> Float wallet settings </Divider>
+        <PageHeader
+          className="site-page-header"
+          onBack={() => window.history.back()}
+          title="Settings"
+       />
         <div className="switch-settings">
           <Switch
           checked={this.state.kseedBalance}
@@ -67,13 +69,6 @@ export default class SettingsPage extends Component {
           checked={this.state.kkushSupply}
           onChange={()=>{this.changeStorage("kkushSupply")}} />
           <span>Show k.KUSH supply</span>
-        </div> 
-        <Divider orientation="left"> Theme settings </Divider>
-        <div className="switch-settings">
-        <Switch
-          checked={this.state.darkMode}
-          onChange={()=>{this.changeStorage("darkMode")}} />
-          <span>Dark mode</span>
         </div> 
         <button onClick={()=> this.resetSettings()}>Reset settings</button>
         <button onClick={()=> {window.location.reload()}}>Save</button>

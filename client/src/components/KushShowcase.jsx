@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../assets/logo.png'
-import Footer from './Footer';
-import { Row, Col, Divider, List, Avatar, Image, Button, Card, Typography, Space  } from "antd";
+import { PageHeader, Col, Divider, List, Avatar, Image, Button, Card, Typography, Space  } from "antd";
 import kseedLogoIMG from "../assets/logo.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png"
@@ -9,12 +8,17 @@ const { Paragraph } = Typography;
 class KushShowcase extends Component {
     render(){
         return(
-            <div className="kushShowcase">
+            <div className="subpage kushShowcase">
+              <PageHeader
+                className="site-page-header"
+                onBack={() => window.history.back()}
+                title="Kush Seed Showcase"
+            />
                 
                 <Image preview={false} width={250} src={Logo}/>
                 <h1>kush.finance</h1>
                 
-                 <Card style={{ width: 500}}>
+                 {/* <Card style={{ width: 500}}>
                  <Space size={65} align="baseline">
                 
                  <Button href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer"  type="primary" size="middle">BUY kSEED</Button>
@@ -46,18 +50,10 @@ class KushShowcase extends Component {
           description={"kOG [kushOG]"}
           /><Paragraph copyable> 0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4</Paragraph>
             </List.Item>
-
-            <List.Item>
-          <List.Item.Meta
-          avatar={<Avatar src="https://uniswap.info/static/media/logo_white.edb44e56.svg" />}
-          title={<a href="https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513" target="_blank" rel="noopener noreferrer">kSEED-ETH Official UniSwap Pair</a>}
-          />
-            </List.Item>
         </List>
          
-  </Card>
+  </Card> */}
                 
-                <Footer />
             </div>
         );
     }
