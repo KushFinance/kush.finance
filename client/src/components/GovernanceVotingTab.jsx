@@ -9,8 +9,6 @@ const { Title, Text } = Typography;
 export default function GovernanceVotingTab() {
   const [proposals, setProposals] = useState([]);
   const [votingModal, setVotingModal] = useState(false);
-  const [kSeedGovMethods, setkSeedGovMethods] = useState({});
-  const [kSeedMethods, setkSeedMethods] = useState({});
   const [currentProposal, setCurrentProposal] = useState({});
   const [currentBlock, setCurrentBlock] = useState(0);
   const [amount, setAmount] = useState(1);
@@ -23,7 +21,8 @@ export default function GovernanceVotingTab() {
   const kseedInstance = useSelector(state => state.kseedInstance);
   const web3 = useSelector(state => state.web3Instance);
 
-  const loadData = async (methods = kSeedGovMethods) => {
+  const loadData = async () => {
+    const { methods } = kseedGovInstance;
     const results = [];
     const addresses = await methods.getProposals().call();
     const currBlock = await methods.getBlockNumber().call();
@@ -40,30 +39,29 @@ export default function GovernanceVotingTab() {
   }
 
   useEffect(() => {
-    kseedGovInstance.then(async ({ methods, ...others }) => {
-      setkSeedGovMethods(methods);
+    (async () => {
+      if (kseedGovInstance.methods) {
+        loadData();
+      }
 
-      loadData(methods);
+      if (web3.eth) {
+        const accounts = await web3.eth.getAccounts();
+        setAccounts(accounts);
+      }
 
-      // GET USER'S ACCOUNTS
-      const accounts = await web3.eth.getAccounts();
-      setAccounts(accounts);
-
-      setContractAddress(others._address);
-    });
-
-    kseedInstance.then(({ methods }) => {
-      setkSeedMethods(methods);
-    })
-  }, [kseedGovInstance, kseedInstance]);
+      if (kseedGovInstance._address) {
+        setContractAddress(kseedGovInstance._address);
+      }
+    })();
+  }, [kseedGovInstance.methods, kseedInstance, web3]);
 
   const checkAllowance = async (amount) => {
-    const allowance = await kSeedMethods.allowance(accounts[0], contractAddress).call();
+    const allowance = await kseedInstance.methods.allowance(accounts[0], contractAddress).call();
     return BigInt(allowance) > amount;
   }
 
   const grantAllowance = async (amount) => {
-    const kseedApproval = await kSeedMethods.approve(contractAddress, amount).send({
+    const kseedApproval = await kseedInstance.methods.approve(contractAddress, amount).send({
       from: accounts[0]
     });
     return kseedApproval;
@@ -84,7 +82,7 @@ export default function GovernanceVotingTab() {
         }
       }
 
-      await kSeedGovMethods.voteForProposal(
+      await kseedGovInstance.methods.voteForProposal(
         BigInt(amount * 10 ** 18).toString(),
         currentProposal.optionIndex,
         currentProposal['1']
@@ -116,7 +114,7 @@ export default function GovernanceVotingTab() {
   const handleWithdrawal = async () => {
     setWithdrawing(true);
     try {
-      await kSeedGovMethods.withdrawkSeed().send({
+      await kseedGovInstance.methods.withdrawkSeed().send({
         from: accounts[0]
       });
       window.location.reload();
