@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+
+
+
+function toFixed(num, fixed) {
+  const re = new RegExp("^-?\\d+(?:.\\d{0," + (fixed || -1) + "})?");
+  return num.toString().match(re)[0];
+}
+
 function Wallet() {
 
   const [kseedBalance, setKseedBalance] = useState('0')
@@ -66,13 +74,13 @@ function Wallet() {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Balance <span className="walletPrice"> ${kseedBalance} </span>
+          Balance <span className="walletPrice"> ${parseFloat(kseedBalance).toFixed(2)} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Seeded <span className="walletPrice"> ${kseedTotalSeeded} </span>
+          Total Seeded <span className="walletPrice"> ${parseFloat(kseedTotalSeeded).toFixed(2)} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <span className="walletPrice"> ${kseedTotalSupply} </span>
+          Total Supply <span className="walletPrice"> ${parseFloat(kseedTotalSupply).toFixed(2)} </span>
         </div>
 
         <div className='coinTitle'>
@@ -96,7 +104,7 @@ function Wallet() {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <span className="walletPrice"> ${kushTotalSupply} </span>
+          Total Supply <span className="walletPrice"> ${parseFloat(kushTotalSupply).toFixed(2)} </span>
         </div>
         <div className='coinTitle'>
           <div className='flex align-end'>
@@ -119,7 +127,7 @@ function Wallet() {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <span className="walletPrice"> ${kushOGTotalSupply} </span>
+          Total Supply <span className="walletPrice"> ${parseFloat(kushOGTotalSupply).toFixed(2)} </span>
         </div>
       </div>
     </div>
