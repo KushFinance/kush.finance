@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from 'react'
-import { Statistic } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 
 function Wallet() {
-  const [kseedTotalSupply, setKseedTotalSupply] = useState(0)
 
+  const [kseedBalance, setKseedBalance] = useState('0')
+  const [kseedTotalSeeded, setKseedTotalSeeded] = useState('0')
+  const [kseedTotalSupply, setKseedTotalSupply] = useState('0')
+  const [kushTotalSupply, setKushTotalSupply] = useState('0')
+  const [kushOGTotalSupply, setKushOGTotalSupply] = useState('0')
+
+  
   const kseedInstance = useSelector((state) => state.kseedInstance)
+  const kushInstance = useSelector((state) => state.kushInstance)
+  const kushOGInstance = useSelector((state) => state.kushOGInstance)
+  const web3 = useSelector(state => state.web3Instance);
+  
+  const [accounts, setAccounts] = useState([]);
 
   useEffect(() => {
     (async () => {
-      if (kseedInstance.methods) {
-        const supply = await kseedInstance.methods.totalSupply().call();
-        setKseedTotalSupply(supply);
+      if (web3.eth && kseedInstance.methods) {
+        console.log(kseedInstance.methods)
+        const accounts = await web3.eth.getAccounts();
+        setAccounts(accounts);
+
+        let supply = await kseedInstance.methods.totalSupply().call();
+        setKseedTotalSupply(web3.utils.fromWei(supply));
+
+        let balance = await kseedInstance.methods.balanceOf(accounts[0]).call();
+        setKseedBalance(web3.utils.fromWei(balance))
+      }
+      if (kushInstance.methods) {
+        let supply = await kushInstance.methods.totalSupply().call();
+        setKushTotalSupply(web3.utils.fromWei(supply));
+      }
+      if (kushOGInstance.methods) {
+        let supply = await kushOGInstance.methods.totalSupply().call();
+        setKushOGTotalSupply(web3.utils.fromWei(supply));
       }
     })();
-  }, [kseedInstance]);
+  }, [kseedInstance, kushInstance, kushOGInstance, web3]);
 
   return (
     <div className='wallet'>
@@ -24,9 +48,9 @@ function Wallet() {
         <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kSEED</h2>
-            <span>USD 10.2</span>
+            <span>USD 10.0</span>
           </div>
-          <a>
+          <a href="https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
@@ -42,21 +66,21 @@ function Wallet() {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Balance {true && <Statistic value={222} precision={2} />}
+          Balance <span className="walletPrice"> ${kseedBalance} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Seeded {true && <Statistic value={222} precision={2} />}
+          Total Seeded <span className="walletPrice"> ${kseedTotalSeeded} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <Statistic value={kseedTotalSupply} precision={2} />
+          Total Supply <span className="walletPrice"> ${kseedTotalSupply} </span>
         </div>
 
         <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kKUSH</h2>
-            <span>USD 102.4</span>
+            <span>USD 10.0</span>
           </div>
-          <a>
+          <a href="https://etherscan.io/address/0x538b4b507d57bf9ebd8847ec395b7b061c150181" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
@@ -72,14 +96,14 @@ function Wallet() {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Total k.KUSH Supply {true && <Statistic value={222} precision={2} />}
+          Total Supply <span className="walletPrice"> ${kushTotalSupply} </span>
         </div>
         <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kOG</h2>
-            <span>USD 2.7</span>
+            <span>USD 10.0</span>
           </div>
-          <a>
+          <a href="https://etherscan.io/address/0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
@@ -95,7 +119,7 @@ function Wallet() {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Total k.OG Supply {true && <Statistic value={222} precision={2} />}
+          Total Supply <span className="walletPrice"> ${kushOGTotalSupply} </span>
         </div>
       </div>
     </div>

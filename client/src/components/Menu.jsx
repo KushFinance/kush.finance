@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Link from './Link';
+import { Link } from 'react-router-dom';
 import SeedingIMG from '../assets/farmkKUSH.png'
 import GovernIMG from '../assets/Vote.png'
 import FarmingIMG from '../assets/kushOGfarm.png'
@@ -30,10 +30,6 @@ function Menu(props) {
     },[page])
     return(
         <div className="menu">
-            <Address href="/kseed" handleChangePage={()=>{setPage("/kseed")}}>
-                <img src={KushIMG} alt="kSEED"></img>
-                kSEED
-            </Address>
             <Address href="/seeding" handleChangePage={()=>{setPage("/seeding")}}>
                 <img src={SeedingIMG} alt="Farm kKUSH"></img>
                 Farm kushKUSH
@@ -42,14 +38,18 @@ function Menu(props) {
                 <img src={FarmingIMG} alt="farming"></img>
                 Farm kushOG
             </Address>
-            <div className="menu--link blocked">
-                <img src={KushArtIMG} alt="Kush Art"></img>
-                KushART
-            </div>
             <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
                 <img src={GovernIMG} alt="Govern"></img>
                 Govern
             </Address>
+            <div className="menu--link blocked">
+                <img src={KushArtIMG} alt="Kush Art"></img>
+                KushART
+            </div>
+            <div className="menu--link blocked">
+                <img src={KushIMG} alt="about"></img>
+                About
+            </div>
             <div className="menu--link blocked">
                 <img src={KushIMG} alt="kushRPG"></img>
                 kushRPG

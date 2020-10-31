@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { AnimatedSwitch } from "react-router-transition";
 import Transition from "./utils/switchTransitionConfig";
-import { useGlobal } from "reactn";
 import GovernPage from "./views/GovernPage";
 import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
 import WalletPage from "./views/WalletPage";
-import SettingsPage from "./views/SettingsPage";
 import KushARTPage from "./views/KushARTPage";
 import Web3Connection from "./components/Web3Connection.jsx";
 import Header from "./components/Header";
@@ -20,13 +18,6 @@ import withWeb3 from "./utils/withWeb3";
 
 class App extends Component {
   render() {
-    if (!localStorage.getItem("kseedBalance")) {
-      localStorage.setItem("kseedBalance", "true");
-      localStorage.setItem("kseedSupply", "true");
-      localStorage.setItem("kseedTotal", "true");
-      localStorage.setItem("kkushSupply", "true");
-      localStorage.setItem("kushOGSupply", "true");
-    }
     return (
       <BrowserRouter>
         <div className='App'>
@@ -44,9 +35,6 @@ class App extends Component {
                   <Route exact path="/">
                     <Menu />
                   </Route>
-                  <Route path="/kseed">
-                    <KushShowcase />
-                  </Route>
                   <Route path="/seeding">
                     <SeedingPage />
                   </Route>
@@ -62,8 +50,8 @@ class App extends Component {
                   <Route path="/govern">
                     <GovernPage />
                   </Route>
-                  <Route path="/settings">
-                    <SettingsPage />
+                  <Route path="/about">
+                    <KushShowcase />
                   </Route>
                 </Web3Connection>
               </AnimatedSwitch>

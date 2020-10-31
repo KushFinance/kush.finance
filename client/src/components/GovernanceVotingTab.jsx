@@ -200,7 +200,7 @@ export default function GovernanceVotingTab() {
           ))}
         </div>
       ))}
-
+    
       {closedProposals.length > 0 && (
         <Divider>
           <Title level={2}>History</Title>
