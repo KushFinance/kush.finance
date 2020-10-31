@@ -12,6 +12,7 @@ import KushARTPage from "./views/KushARTPage";
 import Web3Connection from "./components/Web3Connection.jsx";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
+import KushShowcase from "./components/KushShowcase";
 import Wallet from "./components/Wallet";
 import Footer from "./components/Footer";
 import "./style/index.sass";
@@ -42,6 +43,9 @@ class App extends Component {
                 <Web3Connection>
                   <Route exact path="/">
                     <Menu />
+                  </Route>
+                  <Route path="/kseed">
+                    <KushShowcase />
                   </Route>
                   <Route path="/seeding">
                     <SeedingPage />
