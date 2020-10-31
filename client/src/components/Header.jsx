@@ -12,6 +12,10 @@ function Header(props){
                 <div className="title">
                     <h1> Home </h1>
                 </div>
+                {/* <div className="header--wallet">
+                    {window.location.pathname !== 'wallet' && <h1> Wallet </h1>}
+                    {window.location.pathname === 'wallet' && <h1> Home </h1>}
+                </div> */}
             </header>
         </>
         
