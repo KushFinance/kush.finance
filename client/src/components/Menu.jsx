@@ -48,10 +48,16 @@ export default function Menu(props) {
             <div className="menu--link blocked">
                 <img src={KushArtIMG} alt="Kush Art"></img>
                 <span> KushART </span>
+                <div class="show-phone">
+                    <span>Coming soon</span>
+                </div>
             </div>
             <div className="menu--link blocked">
                 <img src={RPGlogo} alt="about"></img>
                 <span> KushRPG </span>
+                <div class="show-phone">
+                    <span>Coming soon</span>
+                </div>
             </div>
         </div>
     );
