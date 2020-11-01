@@ -5,6 +5,8 @@ import kKUSHicon from "../assets/kKUSH.png";
 import { getWeb3Var } from "../shared";
 import kseedLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider,PageHeader } from "antd";
+import { createFromIconfontCN } from '@ant-design/icons';
+const SpiryIcon = createFromIconfontCN({ scriptUrl: '//at.alicdn.com/t/font_1952854_f44r3qwutiv.js'})
 
 export default class SeedingPage extends Component {
   state = {
@@ -230,6 +232,7 @@ export default class SeedingPage extends Component {
             className="site-page-header"
             onBack={() => window.history.back()}
             title="Seeding kSEED for kKUSH"
+            backIcon={<SpiryIcon type='iconLeft-' />}
             subTitle=""
             avatar={{ src: kseedLogoIMG }}
           />

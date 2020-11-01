@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { AnimatedSwitch } from "react-router-transition";
 import Transition from "./utils/switchTransitionConfig";
 import GovernPage from "./views/GovernPage";
 import FarmingPage from "./views/FarmingPage";
 import SeedingPage from "./views/SeedingPage";
-import WalletPage from "./views/WalletPage";
 import KushARTPage from "./views/KushARTPage";
 import Web3Connection from "./components/Web3Connection.jsx";
 import Header from "./components/Header";
@@ -38,7 +37,7 @@ function App() {
                   <SeedingPage />
                 </Route>
                 <Route path="/wallet">
-                  <WalletPage />
+                  <Wallet show />
                 </Route>
                 <Route path="/farming">
                   <FarmingPage />

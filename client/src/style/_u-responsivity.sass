@@ -29,7 +29,6 @@
 @media only screen and (max-width: 1170px)
     .header
         .label 
-            left: 25px
             transform: scale(.9)
             h1
                 display: none
@@ -37,14 +36,17 @@
             display: flex !important
     .wallet
         margin: 0 auto
+        width: 100%
         &:not(.show)
             display: none
 
 @media only screen and (max-width: 900px)
-    .pages
-        width: 95vw
+    .pages, .subpage
+        width: calc(100vw - 60px)
     .menu
        grid-template-columns: 1fr 1fr
+    .wallet
+        width: calc(100vw - 60px)
 
 
 @media only screen and (max-width: 520px)
@@ -53,10 +55,7 @@
             font-size: 2rem
         .label 
             left: 0
-        .header--wallet
-            right: 0 !important
     .pages
-        width: 80vw
         align-items: center
         justify-content: center
         margin-bottom: 20px

@@ -1,7 +1,10 @@
 import React from "react";
 import { Divider, Tabs, PageHeader } from "antd";
 import GovernanceVotingTab from "../components/GovernanceVotingTab";
+import { createFromIconfontCN } from '@ant-design/icons';
+const SpiryIcon = createFromIconfontCN({ scriptUrl: '//at.alicdn.com/t/font_1952854_f44r3qwutiv.js'})
 const { TabPane } = Tabs;
+
 
 export default function Pump() {
 
@@ -11,6 +14,7 @@ export default function Pump() {
       className="site-page-header"
       onBack={() => window.history.back()}
       title="Governing Page & Fund FAQ"
+      backIcon={<SpiryIcon type='iconLeft-' />}
     />
     <Tabs defaultActiveKey="1">
       <TabPane tab="INFO & FAQ" key="1">

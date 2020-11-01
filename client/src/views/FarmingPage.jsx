@@ -5,8 +5,9 @@ import { getWeb3Var } from "../shared";
 import ethLogo from "../assets/eth.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
-import { Popover,Input, Alert, Divider, PageHeader, Button } from "antd";
-import { useGlobal } from 'reactn';
+import { Popover, Input, Alert, Divider, PageHeader, Button } from "antd";
+import { createFromIconfontCN } from '@ant-design/icons';
+const SpiryIcon = createFromIconfontCN({ scriptUrl: '//at.alicdn.com/t/font_1952854_f44r3qwutiv.js'})
 
 export default class FarmingPage extends Component {
   state = {
@@ -222,6 +223,7 @@ export default class FarmingPage extends Component {
         <PageHeader
           className="site-page-header"
           onBack={() => window.history.back()}
+          backIcon={<SpiryIcon type='iconLeft-' />}
           title="Farm kushOG with kKUSH/ETH Liquidity"
           subTitle=""
           avatar={{ src: kOGLogo }}
