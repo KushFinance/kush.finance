@@ -9,7 +9,7 @@
     width: 100%
     .menu--link
         border-radius: 10px
-        background-color: rgba(255,255,255,.2)
+        background-color: rgba(255,255,255,.15)
         height: 300px
         display: flex
         position: relative
@@ -19,6 +19,11 @@
         font-size: 24px
         box-shadow: 0 4px 4px rgba(0,0,0,.25)
         font-weight: 700
+        transition: all .25s cubic-bezier(0.215,0.61,0.355,1)
+        &:hover
+            background-color: rgba(255,255,255,.17)
+            box-shadow: 0 18px 20px rgba(0,0,0,.45)
+
         img
             height: 130px
             width: auto
@@ -29,6 +34,11 @@
             justify-content: center
             width: 100%
             height: 100%
+            &:hover
+                color: unset
+            span
+                padding: 0 20px
+                text-align: center
         &.blocked
             &::before
                 content: ''
@@ -46,7 +56,6 @@
                 left: 50%
                 transform: translateX(-50%)
                 bottom: 6px
-                font-size: 24px
                 color: black
                 font-weight: 600
                 font-size: 1.2rem

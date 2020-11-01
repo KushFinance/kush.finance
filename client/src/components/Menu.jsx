@@ -5,8 +5,7 @@ import GovernIMG from '../assets/Vote.png'
 import FarmingIMG from '../assets/kushOGfarm.png'
 import KushIMG from '../assets/kSeedLogo.png'
 import KushArtIMG from '../assets/Deal.png'
-import WalletIMG from '../assets/walletIcon.png'
-import SettingsIMG from '../assets/settingsIcon.png'
+import RPGlogo from '../assets/RPGlogo.png'
 
 const Address = (props) => {
     return (
@@ -22,7 +21,7 @@ const Address = (props) => {
 	);
 }
 
-function Menu(props) {
+export default function Menu(props) {
     const [page,setPage] = useState(window.location.pathname)
     const onChangePage = props.onChangePage ? props.onChangePage : ()=>{};
     useEffect(()=>{
@@ -32,30 +31,28 @@ function Menu(props) {
         <div className="menu">
             <Address href="/seeding" handleChangePage={()=>{setPage("/seeding")}}>
                 <img src={SeedingIMG} alt="Farm kKUSH"></img>
-                Farm kushKUSH
+                <span> Farm kushKUSH </span>
             </Address>
             <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
                 <img src={FarmingIMG} alt="farming"></img>
-                Farm kushOG
+                <span> Farm kushOG </span>
             </Address>
             <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
                 <img src={GovernIMG} alt="Govern"></img>
-                Govern
+                <span> Govern </span>
+            </Address>
+            <Address href="/about" handleChangePage={()=>{setPage("/about")}}>
+                <img src={KushIMG} alt="about"></img>
+                <span> About </span>
             </Address>
             <div className="menu--link blocked">
                 <img src={KushArtIMG} alt="Kush Art"></img>
-                KushART
+                <span> KushART </span>
             </div>
             <div className="menu--link blocked">
-                <img src={KushIMG} alt="about"></img>
-                About
-            </div>
-            <div className="menu--link blocked">
-                <img src={KushIMG} alt="kushRPG"></img>
-                kushRPG
+                <img src={RPGlogo} alt="about"></img>
+                <span> KushRPG </span>
             </div>
         </div>
     );
 }
-
-export default Menu;

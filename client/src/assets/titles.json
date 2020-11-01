@@ -1,7 +1,8 @@
 {
   "/": "Home",
-  "/about": "about",
+  "/about": "About",
   "/seeding": "KushKUSH",
   "/govern": "Govern",
-  "/farming": "kushOG"
+  "/farming": "kushOG",
+  "/wallet": "Wallet"
 }

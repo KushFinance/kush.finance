@@ -9,7 +9,7 @@ function toFixed(num, fixed) {
   return num.toString().match(re)[0];
 }
 
-function Wallet() {
+function Wallet(props) {
 
   const [kseedBalance, setKseedBalance] = useState('0')
   const [kseedTotalSeeded, setKseedTotalSeeded] = useState('0')
@@ -50,15 +50,15 @@ function Wallet() {
   }, [kseedInstance, kushInstance, kushOGInstance, web3]);
 
   return (
-    <div className='wallet'>
+    <div className={`wallet ${props.show && 'show'}`}>
       <h1>Wallet</h1>
       <div className='wallet--content'>
         <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kSEED</h2>
-            <span>USD 10.0</span>
+            {/* <span>USD 10.0</span> */}
           </div>
-          <a href="https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
+          <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
@@ -86,9 +86,9 @@ function Wallet() {
         <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kKUSH</h2>
-            <span>USD 10.0</span>
+            {/* <span>USD 10.0</span> */}
           </div>
-          <a href="https://etherscan.io/address/0x538b4b507d57bf9ebd8847ec395b7b061c150181" target="_blank" rel="noopener noreferrer">
+          <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x538b4b507d57bf9ebd8847ec395b7b061c150181" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
@@ -106,12 +106,12 @@ function Wallet() {
         <div className='flex spaced align-end'>
           Total Supply <span className="walletPrice"> ${parseFloat(kushTotalSupply).toFixed(2)} </span>
         </div>
-        <div className='coinTitle'>
+        {/* <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kOG</h2>
             <span>USD 10.0</span>
           </div>
-          <a href="https://etherscan.io/address/0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer">
+          <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
@@ -128,7 +128,7 @@ function Wallet() {
         </div>
         <div className='flex spaced align-end'>
           Total Supply <span className="walletPrice"> ${parseFloat(kushOGTotalSupply).toFixed(2)} </span>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
-@media only screen and (max-width: 1170px)
-    .wallet
-        display: none
+
+
 @media only screen and (min-width: 1170px)
     .header--wallet
         display: none
@@ -19,9 +18,64 @@
             margin-left: 0 !important
     .process-button
         max-width: 100%
+        
 @media only screen and (max-width: 700px) 
     .subpage.wallet .flex
         flex-direction: column
         .ant-card
             margin: 10px auto
             
+
+@media only screen and (max-width: 1170px)
+    .header
+        .label 
+            left: 25px
+            transform: scale(.9)
+            h1
+                display: none
+        .header--wallet
+            display: flex !important
+    .wallet
+        margin: 0 auto
+        &:not(.show)
+            display: none
+
+@media only screen and (max-width: 900px)
+    .pages
+        width: 95vw
+    .menu
+       grid-template-columns: 1fr 1fr
+
+
+@media only screen and (max-width: 520px)
+    .header
+        h1
+            font-size: 2rem
+        .label 
+            left: 0
+        .header--wallet
+            right: 0 !important
+    .pages
+        width: 80vw
+        align-items: center
+        justify-content: center
+        margin-bottom: 20px
+    .menu
+        grid-template-columns: 140px 140px
+        grid-column-gap: 10px
+        grid-row-gap: 10px
+        justify-items: center
+        width: unset
+        .menu--link
+            height: 140px
+            width: 140px
+            img
+                height: 66px !important
+            &.blocked 
+                &::before
+                    height: 24px
+                &::after
+                    font-size: .66rem
+                    font-weight: 700
+            span
+                font-size: 18px
