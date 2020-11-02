@@ -29,7 +29,8 @@
 @media only screen and (max-width: 1170px)
     .header
         .label 
-            transform: scale(.9)
+            height: 50px
+            width: 50px
             h1
                 display: none
         .header--wallet
@@ -47,6 +48,8 @@
        grid-template-columns: 1fr 1fr
     .wallet
         width: calc(100vw - 60px)
+    .about
+        grid-template-columns: 1fr !important
 
 
 @media only screen and (max-width: 520px)
@@ -55,26 +58,27 @@
             font-size: 2rem
         .label 
             left: 0
+    .show-phone
+        display: flex !important
     .pages
         align-items: center
         justify-content: center
         margin-bottom: 20px
     .menu
-        grid-template-columns: 140px 140px
+        grid-template-columns: 1fr 1fr
         grid-column-gap: 10px
         grid-row-gap: 10px
         justify-items: center
         width: unset
         .menu--link
-            height: 140px
-            width: 140px
+            min-width: 120px
+            height: 100%
+            width: 100%
+            padding: 10px 0
             img
                 height: 66px !important
             &.blocked 
-                &::before
-                    height: 24px
-                &::after
-                    font-size: .66rem
-                    font-weight: 700
+                &::before, &::after
+                    display: none
             span
                 font-size: 18px

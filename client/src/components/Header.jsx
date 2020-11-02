@@ -1,10 +1,11 @@
 import React from "react"
-import { useLocation, Link } from "react-router-dom"
+import { useLocation, useHistory, Link } from "react-router-dom"
 import kushLogo from "../assets/kSeedLogo.png"
 import titles from "../assets/titles.json"
 
 export default function Header(){
     const location = useLocation();
+    const history = useHistory();
 
     return (
         <>
@@ -29,12 +30,12 @@ export default function Header(){
                         </Link>
                     }
                     {window.location.pathname === '/wallet' && 
-                        <Link to="/" >
+                        <div onClick={history.goBack} >
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1.5" y="1.5" width="37" height="37" rx="18.5" stroke="white" stroke-width="3"/>
                                 <path d="M22.6536 20.2188L26.6337 16.1143C27.1221 15.6106 27.1221 14.794 26.6337 14.2899L25.7491 13.3778C25.2607 12.8741 24.4689 12.8741 23.9801 13.3778L20 17.4822L16.0199 13.3778C15.5315 12.8741 14.7397 12.8741 14.2509 13.3778L13.3663 14.2899C12.8779 14.7936 12.8779 15.6102 13.3663 16.1143L17.3464 20.2188L13.3663 24.3232C12.8779 24.8269 12.8779 25.6435 13.3663 26.1476L14.2509 27.0597C14.7393 27.5634 15.5315 27.5634 16.0199 27.0597L20 22.9553L23.9801 27.0597C24.4685 27.5634 25.2607 27.5634 25.7491 27.0597L26.6337 26.1476C27.1221 25.6439 27.1221 24.8273 26.6337 24.3232L22.6536 20.2188Z" fill="white"/>
                             </svg>
-                        </Link>
+                        </div>
                     }
                 </div>
             </header>
