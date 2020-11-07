@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-
-
-
-function toFixed(num, fixed) {
-  const re = new RegExp("^-?\\d+(?:.\\d{0," + (fixed || -1) + "})?");
-  return num.toString().match(re)[0];
-}
-
-function Wallet(props) {
+export default function Wallet(props) {
 
   const [kseedBalance, setKseedBalance] = useState('0')
   const [kseedTotalSeeded, setKseedTotalSeeded] = useState('0')
@@ -22,15 +14,11 @@ function Wallet(props) {
   const kushInstance = useSelector((state) => state.kushInstance)
   const kushOGInstance = useSelector((state) => state.kushOGInstance)
   const web3 = useSelector(state => state.web3Instance);
+  const accounts = useSelector(state => state.accounts);
   
-  const [accounts, setAccounts] = useState([]);
-
   useEffect(() => {
     (async () => {
       if (web3.eth && kseedInstance.methods) {
-        console.log(kseedInstance.methods)
-        const accounts = await web3.eth.getAccounts();
-        setAccounts(accounts);
 
         let supply = await kseedInstance.methods.totalSupply().call();
         setKseedTotalSupply(web3.utils.fromWei(supply));
@@ -133,5 +121,3 @@ function Wallet(props) {
     </div>
   )
 }
-
-export default Wallet
