@@ -18,8 +18,7 @@ export default function Wallet(props) {
   
   useEffect(() => {
     (async () => {
-      if (web3.eth && kseedInstance.methods) {
-
+      if (kseedInstance.methods) {
         let supply = await kseedInstance.methods.totalSupply().call();
         setKseedTotalSupply(web3.utils.fromWei(supply));
 

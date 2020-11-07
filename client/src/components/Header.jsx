@@ -7,11 +7,14 @@ export default function Header(){
     const location = useLocation();
     const history = useHistory();
 
+    function handleGoHome(){
+        window.location.href = "/"
+    }
     return (
         <>
             <header className="header">
                 <div className="label">
-                    <img src={kushLogo} alt="icon"/>
+                    <img src={kushLogo} alt="icon" onClick={handleGoHome}/>
                     <h1> Kush.Finance </h1>
                 </div>
                 <div className="title">

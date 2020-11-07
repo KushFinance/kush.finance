@@ -35,8 +35,6 @@ export default function SeedingPage() {
   };
 
   async function getkSeedBalance() {
-    console.log("AAAAAAA")
-    console.log(accounts)
     let _kseedBalance = await kseedInstance.methods.balanceOf(accounts[0]).call();
     setKseedBalance(web3.utils.fromWei(_kseedBalance));
   };
@@ -93,7 +91,8 @@ export default function SeedingPage() {
     }
     setIsWithdrawing(true)
     try {
-      let unstakeRes = await kushInstance.methods.withdraw(web3.utils.toWei(stakeAmount.toString()))
+      let unstakeRes = await kushInstance.methods
+        .withdraw(web3.utils.toWei(stakeAmount.toString()))
         .send({
           from: accounts[0],
         });
@@ -115,7 +114,6 @@ export default function SeedingPage() {
       return;
     }
     setIsApproving(true);
-    alert(accounts[0])
     let approveStaking = await kseedInstance.methods
       .approve(
         kushInstance._address,
@@ -154,7 +152,6 @@ export default function SeedingPage() {
     
     (async () => { 
       if(web3.eth && kseedInstance.methods && kushInstance.methods){
-        const networkId = await web3.eth.net.getId();
         try {
   
           getAllowance();
@@ -164,7 +161,6 @@ export default function SeedingPage() {
           getkKushRewards();
   
           setLoaded(true)
-          console.log("DEU CERTO")
         } catch (error) {
           alert(
             `Failed to load web3, accounts, or contract. Check console for details.`
@@ -181,7 +177,6 @@ export default function SeedingPage() {
             onBack={() => window.history.back()}
             title="Seeding kSEED for kKUSH"
             backIcon={<SpiryIcon type='iconLeft-' />}
-            subTitle=""
             avatar={{ src: kseedLogoIMG }}
           />
         <Alert
@@ -210,48 +205,39 @@ export default function SeedingPage() {
             <button onClick={setMaxkSeed.bind(this)}> Max amount to stake </button>
           </div>
         </div>
-        {!isApproved ? (
+        {!isApproved ?
           <div type="primary" className="process-button" onClick={approvekSeed} block >
-            {isApproving ? <div>APPROVING...</div> : <div>STEP 1/2: APPROVE</div>}
+            <div> {isApproving ? "APPROVING..." : "STEP 1/2: APPROVE"} </div>
           </div>
-        ) : null}
-        {isApproved ? (
+          :
           <div
             type="primary"
-            className={`process-button ${
-              stakeAmount > 0 && stakeAmount < kseedBalance ? 
-              "" : "disabled" }
-            `}
+            className={`process-button ${ stakeAmount > 0 && stakeAmount < kseedBalance ? "" : "disabled" }`}
             onClick={stakekSeed}
-            block
           >
-            {!isStaking ? <div>STEP 2/2: STAKE</div> : null}
-            {isStaking ? <div>STAKING...</div> : null}
+            <div>
+              {isStaking ? "STAKING..." : "STEP 2/2: STAKE"}
+            </div>
           </div>
-        ) : null}
+        }
         <div
-          className={`process-button withdraw-button ${
-            (kseedBalance > 0 || stakeAmount > 0) && stakeAmount <= stakedAmount ?
-              "" : "disabled"}
-          `}
+          className={`process-button withdraw-button ${ (kseedBalance > 0 || stakeAmount > 0) && stakeAmount <= stakedAmount ? "" : "disabled"}`}
           onClick={withdrawkSeed}
         >
-          {!isWithdrawing ? <div>WITHDRAW</div> : null}
-          {isWithdrawing ? <div>WITHDRAWING...</div> : null}
+          <div>
+            {isWithdrawing ? "WITHDRAWING..." : "WITHDRAW"}
+          </div>
         </div>
         <Divider />
         <div className="flex spaced full-w align-center">
-        <PageHeader
-    className="site-page-header"
-    title="Get kKUSH"
-    avatar={{ src: kKUSHicon }}
-  />
+          <PageHeader
+            className="site-page-header"
+            title="Get kKUSH"
+            avatar={{ src: kKUSHicon }}
+          />
           <button onClick={getkKushRewards}> UPDATE </button>
         </div>
         <p> INFO: KUSH rewards grow per block and are updated on each transaction(send) to functions with the "updateStakingRewards" modifier. </p>
-        
-        
-        
         <input
           className="input"
           disabled
@@ -260,9 +246,7 @@ export default function SeedingPage() {
           type="number"
         ></input>
         <div
-          className={`process-button ${
-            kkushRewards > 0 ? "" : "disabled"
-          }`}
+          className={`process-button ${kkushRewards > 0 ? "" : "disabled"}`}
           onClick={claimRewards}
         >
           CLAIM

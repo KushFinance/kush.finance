@@ -42,13 +42,6 @@ class Footer extends Component {
                             </div>
                         </a>
                     </li>
-                    <li style={{backgroundColor: "#62dc33"}}>
-                        <a target="_blank" rel="noopener noreferrer" href="https://www.unicrypt.network/uniswap-browser/pair/0xDCfF4c70131B476595B449C7dB17cd92663aa513">
-                            <div className="social-icon">
-                                <img src={unicryptIMG} alt="unicrypt"/>
-                            </div>
-                        </a>
-                    </li>
                 </ul>
             </div>
         );
