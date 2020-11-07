@@ -43,4 +43,13 @@ const web3Instance = (state = {}, action) => {
   }
 }
 
-export default { kseedInstance, kseedGovInstance, kushInstance, kushOGInstance, web3Instance };
+const accounts = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_ACCOUNTS':
+      return action.accounts;
+    default:
+      return state;
+  }
+}
+
+export default { kseedInstance, kseedGovInstance, kushInstance, kushOGInstance, web3Instance, accounts };

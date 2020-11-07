@@ -219,7 +219,7 @@ export default class FarmingPage extends Component {
 
   render() {
     return (
-      <div class="subpage">
+      <div className="subpage">
         <PageHeader
           className="site-page-header"
           onBack={() => window.history.back()}

@@ -1,239 +1,182 @@
-import React, { Component } from "react";
+import React, {useState, useEffect} from "react";
+import { useSelector } from 'react-redux'
 import kSeedToken from "../contracts/kSeedToken.json";
 import kKushToken from "../contracts/kKushToken.json";
 import kKUSHicon from "../assets/kKUSH.png";
-import { getWeb3Var } from "../shared";
 import kseedLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider,PageHeader } from "antd";
 import { createFromIconfontCN } from '@ant-design/icons';
 const SpiryIcon = createFromIconfontCN({ scriptUrl: '//at.alicdn.com/t/font_1952854_f44r3qwutiv.js'})
 
-export default class SeedingPage extends Component {
-  state = {
-    loaded: false,
-    stakeAmount: 0,
-    kseedBalance: 0,
-    stakedAmount: 0,
-    isApproved: false,
-    isApproving: false,
-    isStaking: false,
-    isWithdrawing: false,
-    kkushRewards: 0,
-    totalkSeedSupply: 0,
-    allowance: 0,
-  };
+export default function SeedingPage() {
+  const [loaded, setLoaded] = useState(false);
+  const [kseedBalance, setKseedBalance] = useState(0);
+  const [totalkSeedSupply, setTotalkSeedSupply] = useState(0);
+  const [isApproving, setIsApproving] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
+  const [stakeAmount, setStakeAmount] = useState(0);
+  const [isStaking, setIsStaking] = useState(false);
+  const [stakedAmount, setStakedAmount] = useState(0);
+  const [isWithdrawing, setIsWithdrawing] = useState(false);
+  const [kkushRewards, setKkushRewards] = useState(0);
+  const [allowance, setAllowance] = useState(0);
 
-  handleClick = () => {
-    this.props.toggle();
-  };
+  const kseedInstance = useSelector((state) => state.kseedInstance)
+  const kushInstance = useSelector((state) => state.kushInstance)
+  const web3 = useSelector(state => state.web3Instance);
+  const accounts = useSelector(state => state.accounts);
 
-  /** getters */
-  getAllowance = async () => {
-    let _kseedAllowance = await this.kseedInstance.methods
-      .allowance(this.accounts[0], this.kkushInstance._address)
-      .call();
+  async function getAllowance() {
+    let _kseedAllowance = await kseedInstance.methods.allowance(accounts[0], kushInstance._address).call();
     if (_kseedAllowance > 0) {
-      this.setState({
-        isApproved: true,
-        allowance: this.web3.utils.fromWei(_kseedAllowance.toString()),
-      });
+      setIsApproved(true);
+      setAllowance(web3.utils.fromWei(_kseedAllowance.toString()));
     }
   };
 
-  getkSeedBalance = async () => {
-    let _kseedBalance = await this.kseedInstance.methods
-      .balanceOf(this.accounts[0])
-      .call();
-    this.setState({
-      kseedBalance: this.web3.utils.fromWei(_kseedBalance),
-    });
+  async function getkSeedBalance() {
+    let _kseedBalance = await kseedInstance.methods.balanceOf(accounts[0]).call();
+    setKseedBalance(web3.utils.fromWei(_kseedBalance));
   };
 
-  getkSeedSupply = async () => {
-    let _kseedSupply = await this.kseedInstance.methods.totalSupply().call();
-    this.setState({
-      totalkSeedSupply: this.web3.utils.fromWei(_kseedSupply),
-    });
+  async function getkSeedSupply() {
+    let _kseedSupply = await kseedInstance.methods.totalSupply().call();
+    setTotalkSeedSupply(web3.utils.fromWei(_kseedSupply));
   };
 
-  getMyStakeAmount = async () => {
-    let stakeA = await this.kkushInstance.methods
-      .getAddressStakeAmount(this.accounts[0])
-      .call();
-
-    this.setState({ stakedAmount: this.web3.utils.fromWei(stakeA) });
+  async function getMyStakeAmount() {
+    let _stakedAmount = await kushInstance.methods.getAddressStakeAmount(accounts[0]).call();
+    setStakedAmount(web3.utils.fromWei(_stakedAmount));
   };
 
-  getkKushRewards = async () => {
-    let cRewards = await this.kkushInstance.methods
-      .myRewardsBalance(this.accounts[0])
-      .call();
-
-    this.setState({ kkushRewards: this.web3.utils.fromWei(cRewards) });
+  async function getkKushRewards(){
+    let cRewards = await kushInstance.methods.myRewardsBalance(accounts[0]).call();
+    setKkushRewards(web3.utils.fromWei(cRewards));
   };
 
   /** setters & modifiers */
-  updateStakingInput(e) {
-    this.setState({ stakeAmount: e.target.value });
-
-    if (
-      this.state.stakeAmount > this.state.allowance ||
-      this.state.kseedBalance
-    ) {
+  function updateStakingInput(e) {
+    setStakeAmount(e.target.value);
+    if ( stakeAmount > allowance || kseedBalance) {
       // disable button
     } else {
       // enable button
     }
-
-    /*
-    if (this.state.stakeAmount > this.state.allowance && !this.state.isApproved) {
-        this.setState({isApproved: false})
-    }
-    */
   }
 
-  stakekSeed = async () => {
-    if (
-      this.state.isStaking ||
-      this.state.stakeAmount === 0 ||
-      this.state.stakeAmount > this.state.kseedBalance
-    ) {
+  async function stakekSeed() {
+    if ( isStaking || stakeAmount === 0 || stakeAmount > kseedBalance) {
       return;
     }
 
-    this.setState({ isStaking: true });
+    setIsStaking(true);
     try {
-      let stakeRes = await this.kkushInstance.methods
-        .stake(this.web3.utils.toWei(this.state.stakeAmount.toString()))
+      let stakeRes = await kushInstance.methods.stake(web3.utils.toWei(stakeAmount.toString()))
         .send({
-          from: this.accounts[0],
+          from: accounts[0],
         });
       if (stakeRes["status"]) {
-        this.setState({ isStaking: false, stakeAmount: 0 });
-        this.getMyStakeAmount();
+        setIsStaking(false);
+        setStakeAmount(0);
+        getMyStakeAmount();
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  withdrawkSeed = async () => {
-    if (this.state.isWithdrawing || this.state.stakeAmount === 0) {
+  async function withdrawkSeed(){
+    if (isWithdrawing || stakeAmount === 0) {
       return;
     }
-    this.setState({ isWithdrawing: true });
+    setIsWithdrawing(true)
     try {
-      let unstakeRes = await this.kkushInstance.methods
-        .withdraw(this.web3.utils.toWei(this.state.stakeAmount.toString()))
+      let unstakeRes = await kushInstance.methods
+        .withdraw(web3.utils.toWei(stakeAmount.toString()))
         .send({
-          from: this.accounts[0],
+          from: accounts[0],
         });
 
       if (unstakeRes["status"]) {
-        this.setState({ isWithdrawing: false, stakeAmount: 0 });
-        this.getMyStakeAmount();
+        setIsWithdrawing(false);
+        setStakeAmount(0);
+        getMyStakeAmount();
       } else {
-        this.setState({ isWithdrawing: false });
+        setIsWithdrawing(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  approvekSeed = async () => {
-    if (this.state.isApproving) {
+  const approvekSeed = async () => {
+    if (isApproving) {
       return;
     }
-    this.setState({ isApproving: true });
-
-    let approveStaking = await this.kseedInstance.methods
+    setIsApproving(true);
+    let approveStaking = await kseedInstance.methods
       .approve(
-        this.kkushInstance._address,
-        this.web3.utils.toWei(this.state.totalkSeedSupply.toString())
-      )
-      .send({
-        from: this.accounts[0],
-      });
+        kushInstance._address,
+        web3.utils.toWei(totalkSeedSupply.toString())
+      ).send({ from: accounts[0] });
 
     if (approveStaking["status"]) {
-      this.setState({ isApproving: false, isApproved: true });
+      setIsApproving(false);
+      setIsApproved(true);
     }
   };
 
-  setInputField() {
-    if (this.state.stakeAmount >= 0) {
-      return this.state.stakeAmount;
+  const setInputField = () => {
+    if (stakeAmount >= 0) {
+      return stakeAmount;
     } else {
-      return "";
+      return null;
     }
   }
 
-  setMaxkSeed() {
-    this.setState({ stakeAmount: this.state.kseedBalance });
+  function setMaxkSeed() {
+    setStakeAmount(kseedBalance);
   }
 
-  setMaxkSeedUnstake() {
-    this.setState({ stakeAmount: this.state.stakedAmount });
+  function setMaxkSeedUnstake() {
+    setStakeAmount(stakedAmount);
   }
 
-  claimRewards = async () => {
-    if (this.state.kkushRewards > 0) {
-      await this.kkushInstance.methods.getReward().send({
-        from: this.accounts[0],
-      });
-
-      this.getkKushRewards();
+  async function claimRewards() {
+    if (kkushRewards > 0) {
+      await kushInstance.methods.getReward().send({ from: accounts[0] });
+      getkKushRewards();
     }
   };
-
-  componentDidMount = async () => {
-    try {
-      this.web3 = getWeb3Var();
-
-      // Get network provider and web3 instance.
-
-      // Use web3 to get the user's accounts.
-      this.accounts = await this.web3.eth.getAccounts();
-
-      // Get the contract instance.
-      this.networkId = await this.web3.eth.net.getId();
-
-      this.kseedInstance = new this.web3.eth.Contract(
-        kSeedToken.abi,
-        process.env.REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS
-      );
-
-      this.kkushInstance = new this.web3.eth.Contract(
-        kKushToken.abi,
-        process.env.REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS
-      );
-
-      this.getAllowance();
-      this.getkSeedSupply();
-      this.getkSeedBalance();
-      this.getMyStakeAmount();
-      this.getkKushRewards();
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ loaded: true });
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
-      );
-      console.error(error);
-    }
-  };
-  render() {
+  useEffect(()=>{
+    
+    (async () => { 
+      if(web3.eth && kseedInstance.methods && kushInstance.methods){
+        try {
+  
+          getAllowance();
+          getkSeedSupply();
+          getkSeedBalance();
+          getMyStakeAmount();
+          getkKushRewards();
+  
+          setLoaded(true)
+        } catch (error) {
+          alert(
+            `Failed to load web3, accounts, or contract. Check console for details.`
+          );
+          console.error(error);
+        }
+      }
+    })();
+  },[kseedInstance, kushInstance, web3])
     return (
-      <div class="subpage seeding">
+      <div className="subpage seeding">
          <PageHeader
             className="site-page-header"
             onBack={() => window.history.back()}
             title="Seeding kSEED for kKUSH"
             backIcon={<SpiryIcon type='iconLeft-' />}
-            subTitle=""
             avatar={{ src: kseedLogoIMG }}
           />
         <Alert
@@ -246,81 +189,68 @@ export default class SeedingPage extends Component {
           <img alt="kSeed" src={kseedLogoIMG} />
           <div className="block">
             <div className="desc">Amount staked</div>
-            <div className="val kseed-balance">{this.state.stakedAmount}</div>
+            <div className="val kseed-balance">{stakedAmount}</div>
           </div>
-          <div class="block">
+          <div className="block">
             <div className="desc">Your kSEED balance</div>
-            <div className="val kseed-balance">{this.state.kseedBalance}</div>
+            <div className="val kseed-balance">{kseedBalance}</div>
           </div>
         </div>
         <div className="farm-input">
           <div>
-            <Input prefix="kSEED" onChange={this.updateStakingInput.bind(this)} value={this.setInputField()} />
+            <Input prefix="kSEED" onChange={updateStakingInput.bind(this)} value={setInputField()} />
           </div>
           <div className="farm-buttons">
-            <button onClick={this.setMaxkSeedUnstake.bind(this)}> Max amount to unstake </button>
-            <button onClick={this.setMaxkSeed.bind(this)}> Max amount to stake </button>
+            <button onClick={setMaxkSeedUnstake.bind(this)}> Max amount to unstake </button>
+            <button onClick={setMaxkSeed.bind(this)}> Max amount to stake </button>
           </div>
         </div>
-        {!this.state.isApproved ? (
-          <div type="primary" className="process-button" onClick={this.approvekSeed} block >
-            {!this.state.isApproving ? <div>STEP 1/2: APPROVE</div> : null}
-            {this.state.isApproving ? <div>APPROVING...</div> : null}
+        {!isApproved ?
+          <div type="primary" className="process-button" onClick={approvekSeed} block >
+            <div> {isApproving ? "APPROVING..." : "STEP 1/2: APPROVE"} </div>
           </div>
-        ) : null}
-        {this.state.isApproved ? (
+          :
           <div
             type="primary"
-            className={`process-button ${
-              this.state.stakeAmount > 0 && this.state.stakeAmount < this.state.kseedBalance ? 
-              "" : "disabled" }
-            `}
-            onClick={this.stakekSeed}
-            block
+            className={`process-button ${ stakeAmount > 0 && stakeAmount < kseedBalance ? "" : "disabled" }`}
+            onClick={stakekSeed}
           >
-            {!this.state.isStaking ? <div>STEP 2/2: STAKE</div> : null}
-            {this.state.isStaking ? <div>STAKING...</div> : null}
+            <div>
+              {isStaking ? "STAKING..." : "STEP 2/2: STAKE"}
+            </div>
           </div>
-        ) : null}
+        }
         <div
-          className={`process-button withdraw-button ${
-            (this.state.kseedBalance > 0 || this.state.stakeAmount > 0) && this.state.stakeAmount <= this.state.stakedAmount ?
-              "" : "disabled"}
-          `}
-          onClick={this.withdrawkSeed}
+          className={`process-button withdraw-button ${ (kseedBalance > 0 || stakeAmount > 0) && stakeAmount <= stakedAmount ? "" : "disabled"}`}
+          onClick={withdrawkSeed}
         >
-          {!this.state.isWithdrawing ? <div>WITHDRAW</div> : null}
-          {this.state.isWithdrawing ? <div>WITHDRAWING...</div> : null}
+          <div>
+            {isWithdrawing ? "WITHDRAWING..." : "WITHDRAW"}
+          </div>
         </div>
         <Divider />
         <div className="flex spaced full-w align-center">
-        <PageHeader
-    className="site-page-header"
-    title="Get kKUSH"
-    avatar={{ src: kKUSHicon }}
-  />
-          <button onClick={this.getkKushRewards}> UPDATE </button>
+          <PageHeader
+            className="site-page-header"
+            title="Get kKUSH"
+            avatar={{ src: kKUSHicon }}
+          />
+          <button onClick={getkKushRewards}> UPDATE </button>
         </div>
         <p> INFO: KUSH rewards grow per block and are updated on each transaction(send) to functions with the "updateStakingRewards" modifier. </p>
-        
-        
-        
         <input
           className="input"
           disabled
-          value={this.state.kkushRewards}
-          placeholder={this.state.kkushRewards}
+          value={kkushRewards}
+          placeholder={kkushRewards}
           type="number"
         ></input>
         <div
-          className={`process-button ${
-            this.state.kkushRewards > 0 ? "" : "disabled"
-          }`}
-          onClick={this.claimRewards}
+          className={`process-button ${kkushRewards > 0 ? "" : "disabled"}`}
+          onClick={claimRewards}
         >
           CLAIM
         </div>
       </div>
     );
-  }
 }
