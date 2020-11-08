@@ -1,11 +1,10 @@
 import React from "react";
 import Logo from "../assets/logo.png";
-import { PageHeader, Image, Typography, List, Avatar } from "antd";
+import { PageHeader, Image, List, Avatar } from "antd";
 import kseedLogoIMG from "../assets/logo.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
 import { createFromIconfontCN } from "@ant-design/icons";
-const { Paragraph } = Typography;
 const SpiryIcon = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1952854_f44r3qwutiv.js",
 });
@@ -43,19 +42,22 @@ export default function About() {
       />
       <div className="about">
         <Image preview={false} width={250} src={Logo} />
-        <List
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={ <Avatar src={item.avatar} /> }
-                title={<a href={item.etherscan}>{item.title}</a>}
-                description={item.description}
-                />
-            </List.Item>
-          )}
-        />
+        <div>
+          <List
+            itemLayout="horizontal"
+            dataSource={data}
+            renderItem={(item) => (
+              <List.Item>
+                <List.Item.Meta
+                  avatar={ <Avatar src={item.avatar} /> }
+                  title={<a href={item.etherscan}>{item.title}</a>}
+                  description={item.description}
+                  />
+              </List.Item>
+            )}
+          />
+          <a href="https://learn.kush.finance" target="_blank" rel="noopener noreferrer">Learn more here</a>
+        </div>
       </div>
     </div>
   );

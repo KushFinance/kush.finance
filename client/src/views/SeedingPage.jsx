@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { useSelector } from 'react-redux'
-import kSeedToken from "../contracts/kSeedToken.json";
-import kKushToken from "../contracts/kKushToken.json";
 import kKUSHicon from "../assets/kKUSH.png";
 import kseedLogoIMG from "../assets/logo.png";
 import { Input, Alert, Divider,PageHeader } from "antd";

@@ -7,12 +7,14 @@ import kSeedToken from "../contracts/kSeedToken.json";
 import kSeedGovToken from "../contracts/kSEEDGovernance.json";
 import KushToken from "../contracts/kKushToken.json";
 import KushOGToken from "../contracts/kushOGToken.json";
+import KushOGUniToken from "../contracts/kushOGtokenUni.json";
 
 const {
   REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS,
   REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS,
   REACT_APP_KUSHOG_TOKEN_CONTRACT_ADDRESS,
-  REACT_APP_KSEEDGOV_TOKEN_CONTRACT_ADDRESS
+  REACT_APP_KSEEDGOV_TOKEN_CONTRACT_ADDRESS,
+  REACT_APP_KUSHOG_UNI_TOKEN_CONTRACT_ADDRESS
 } = process.env;
 
 function withWeb3(Component) {
@@ -23,6 +25,7 @@ function withWeb3(Component) {
     const kseedGovInstance = useSelector(state => state.kseedGovInstance);
     const kushInstance = useSelector(state => state.kushInstance);
     const kushOGInstance = useSelector(state => state.kushOGInstance);
+    const kushOGUniInstance = useSelector(state => state.kushOGUniInstance);
 
     const dispatch = useDispatch();
 
@@ -46,6 +49,11 @@ function withWeb3(Component) {
       dispatch({ type: 'CREATE_KUSH_OG_INSTANCE', instance });
     }
 
+    async function createkKushOGUniInstance() {
+      const instance = await creator.createInstance(KushOGUniToken, REACT_APP_KUSHOG_UNI_TOKEN_CONTRACT_ADDRESS);
+      dispatch({ type: 'CREATE_KUSH_OG_UNI_INSTANCE', instance });
+    }
+
     useEffect(() => {
       if (!kseedInstance.methods) {
         createkSeedInstance();
@@ -61,6 +69,9 @@ function withWeb3(Component) {
 
       if (!kushOGInstance.methods) {
         createkKushOGInstance();
+      }
+      if (!kushOGUniInstance.methods) {
+        createkKushOGUniInstance();
       }
     }, []); // eslint-disable-line
 

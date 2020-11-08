@@ -7,7 +7,6 @@ import twitterIMG from "../assets/twitter.png"
 import githubIMG from "../assets/github.png"
 import telegramIMG from "../assets/telegram.png"
 import uniIMG from "../assets/uni.png"
-import unicryptIMG from "../assets/unycrypt.svg"
 
 class Footer extends Component {
     render(){

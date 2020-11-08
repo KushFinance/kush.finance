@@ -21,16 +21,19 @@ export default function Wallet(props) {
       if (kseedInstance.methods) {
         let supply = await kseedInstance.methods.totalSupply().call();
         setKseedTotalSupply(web3.utils.fromWei(supply));
-
+        console.log(kseedInstance.methods)
         let balance = await kseedInstance.methods.balanceOf(accounts[0]).call();
         setKseedBalance(web3.utils.fromWei(balance))
       }
       if (kushInstance.methods) {
         let supply = await kushInstance.methods.totalSupply().call();
         setKushTotalSupply(web3.utils.fromWei(supply));
+
+        let seeded = await kushInstance.methods.totalStakedSupply().call();
+        setKseedTotalSeeded(web3.utils.fromWei(seeded));
       }
       if (kushOGInstance.methods) {
-        let supply = await kushOGInstance.methods.totalSupply().call();
+        let supply = await kushOGInstance.methods.totalStakedSupply().call();
         setKushOGTotalSupply(web3.utils.fromWei(supply));
       }
     })();
