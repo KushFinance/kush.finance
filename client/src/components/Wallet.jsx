@@ -7,6 +7,7 @@ export default function Wallet(props) {
   const [kseedTotalSeeded, setKseedTotalSeeded] = useState('0')
   const [kseedTotalSupply, setKseedTotalSupply] = useState('0')
   const [kushTotalSupply, setKushTotalSupply] = useState('0')
+  const [kushBalance, setKushBalance] = useState('0')
   const [kushOGTotalSupply, setKushOGTotalSupply] = useState('0')
 
   
@@ -28,6 +29,8 @@ export default function Wallet(props) {
       if (kushInstance.methods) {
         let supply = await kushInstance.methods.totalSupply().call();
         setKushTotalSupply(web3.utils.fromWei(supply));
+        let balance = await kushInstance.methods.balanceOf(accounts[0]).call();
+        setKushBalance(web3.utils.fromWei(balance));
 
         let seeded = await kushInstance.methods.totalStakedSupply().call();
         setKseedTotalSeeded(web3.utils.fromWei(seeded));
@@ -92,6 +95,9 @@ export default function Wallet(props) {
               />
             </svg>
           </a>
+        </div>
+        <div className='flex spaced align-end'>
+          Balance <span className="walletPrice"> ${parseFloat(kushBalance).toFixed(2)} </span>
         </div>
         <div className='flex spaced align-end'>
           Total Supply <span className="walletPrice"> ${parseFloat(kushTotalSupply).toFixed(2)} </span>
