@@ -1,16 +1,23 @@
 import React from "react";
-import { Divider, Tabs } from "antd";
+import { Divider, Tabs, PageHeader } from "antd";
 import GovernanceVotingTab from "../components/GovernanceVotingTab";
+import { createFromIconfontCN } from '@ant-design/icons';
+const SpiryIcon = createFromIconfontCN({ scriptUrl: '//at.alicdn.com/t/font_1952854_f44r3qwutiv.js'})
 const { TabPane } = Tabs;
+
 
 export default function Pump() {
 
   return (
+    <div className="subpage govern">
+    <PageHeader
+      className="site-page-header"
+      onBack={() => window.history.back()}
+      title="Governing Page & Fund FAQ"
+      backIcon={<SpiryIcon type='iconLeft-' />}
+    />
     <Tabs defaultActiveKey="1">
       <TabPane tab="INFO & FAQ" key="1">
-      <div className="subpage govern">
-        <h1>Governing Page {"&"} Fund FAQ</h1>
-
         <Divider orientation="left">Welcome to the steering wheel of a multi-million dollar machine</Divider>
         <p>In this system, kSEED holders will be able to freely govern the protocol as they wish. </p>
         <p>The voting and function calls operate on a bidding system.</p>
@@ -71,7 +78,6 @@ export default function Pump() {
         <p>To look over any code in the ecosystem.</p>
         
         <button className="disabled launch-date">Voting starts late October</button>
-      </div>
       </TabPane>
       <TabPane tab="Governance Voting"  key="2">
        <GovernanceVotingTab/>
@@ -86,5 +92,6 @@ export default function Pump() {
        
       </TabPane>
     </Tabs>
+      </div>
   );
 }

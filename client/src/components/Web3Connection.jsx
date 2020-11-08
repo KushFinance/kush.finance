@@ -5,11 +5,11 @@ import Web3 from "web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-import React, { useContext, useState, useEffect} from "react";
+import React, { useEffect} from "react";
 //window.ethereum
 
 import { useGlobal } from "reactn";
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const Web3Wrapper = (props) => {
 

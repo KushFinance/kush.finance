@@ -1,8 +1,11 @@
 .subpage
-    display: flex
-    justify-content: left
-    align-items: flex-start
-    flex-direction: column
+    border-radius: 10px
+    box-shadow: 0 4px 4px rgba(0,0,0,.25)
+    background-color: rgba(255,255,255,.15)
+    padding: 10px 20px
+    min-height: 400px
+    max-width: 100%
+    word-break: break-word
     h1, h2
         color: #eee
 
@@ -41,4 +44,7 @@
             button + button
                 margin-left: 10px
 
-                
+    .about
+        display: grid
+        grid-template-columns: 300px 1fr
+        

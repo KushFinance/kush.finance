@@ -8,12 +8,14 @@
         width: 5px
         background-color: transparent
     &::-webkit-scrollbar-thumb
-        background: linear-gradient(0deg, rgba(56,212,34,1) 0%, rgba(154,255,195,1) 40%, rgba(196,203,234,1) 50%, rgba(207,180,255,1) 60%, rgba(254,156,243,1) 100%)
+        background: rgba(10,10,10,.4)
+
 html
     display: flex
     justify-content: center
     color: map-get($colors, text)
-    font-family: 'Inter' !important
+    font-family: 'Inter', sans-serif 
+    font-weight: 600
     color: #eee 
 img
     max-height: 100%
@@ -22,7 +24,7 @@ a
     color: white
     text-decoration: none
     &:hover
-        color: #49fc1d
+        color: #88dd8f
 
 ul
     list-style-type: none
@@ -42,9 +44,7 @@ button
 body
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
-    background-image: url('../assets/Marijuana-pattern.gif')
-    &.dark-mode
-        background-color: black
+    background-color: #000
 
 code
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",monospace

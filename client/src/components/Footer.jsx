@@ -7,7 +7,6 @@ import twitterIMG from "../assets/twitter.png"
 import githubIMG from "../assets/github.png"
 import telegramIMG from "../assets/telegram.png"
 import uniIMG from "../assets/uni.png"
-import unicryptIMG from "../assets/unycrypt.svg"
 
 class Footer extends Component {
     render(){
@@ -39,13 +38,6 @@ class Footer extends Component {
                         <a target="_blank" rel="noopener noreferrer" href="https://uniswap.info/pair/0xdcff4c70131b476595b449c7db17cd92663aa513">
                             <div className="social-icon">
                                 <img src={uniIMG} alt="uni"/>
-                            </div>
-                        </a>
-                    </li>
-                    <li style={{backgroundColor: "#62dc33"}}>
-                        <a target="_blank" rel="noopener noreferrer" href="https://www.unicrypt.network/uniswap-browser/pair/0xDCfF4c70131B476595B449C7dB17cd92663aa513">
-                            <div className="social-icon">
-                                <img src={unicryptIMG} alt="unicrypt"/>
                             </div>
                         </a>
                     </li>

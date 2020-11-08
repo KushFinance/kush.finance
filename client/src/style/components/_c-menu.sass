@@ -1,32 +1,75 @@
 
 .menu
-    display: flex
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-column-gap: 20px
+    grid-row-gap: 20px
+    justify-items: stretch
+    align-items: stretch
     width: 100%
-    align-items: center
-    color: white
+    .menu--link
+        border-radius: 10px
+        background-color: rgba(255,255,255,.2)
+        height: 300px
+        display: flex
+        position: relative
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        font-size: 24px
+        box-shadow: 0 4px 4px rgba(0,0,0,.25)
+        font-weight: 700
+        transition: all .25s cubic-bezier(0.215,0.61,0.355,1)
+        &:hover
+            background-color: rgba(255,255,255,.17)
+            box-shadow: 0 18px 20px rgba(0,0,0,.45)
 
-    ul
-        list-style-type: none
-        width: 100%
-        li
-            margin-bottom: 10px
-            background-color: rgba(255,253,248, .75)
-            border-radius: 4px
-            padding: 3px 5px
-            transition: all .12s
-            &.active
-                border-right: 18px solid rgba(0,0,0,.8)
+        img
+            height: 130px
+            width: auto
+        a
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            width: 100%
+            height: 100%
             &:hover
-                box-shadow: 0 0 10px rgba(0,0,0,.3)
-            a
-                color: #444
-                font-size: 18px
-                font-weight: bold
-                display: flex
-                align-items: center
-                flex-direction: row
+                color: unset
+            span
+                padding: 0 20px
+                text-align: center
+        &.blocked
+            &::before
+                content: ''
                 width: 100%
-                img
-                    width: 60px
-                    height: 60px
-                    margin-right: 10px
+                position: absolute
+                left: 0
+                bottom: 0
+                height: 40px
+                background-color: #F1CB00
+                border-bottom-left-radius: 10px
+                border-bottom-right-radius: 10px 
+            &::after
+                content: 'Coming soon'
+                position: absolute
+                left: 50%
+                transform: translateX(-50%)
+                bottom: 6px
+                color: black
+                font-weight: 600
+                font-size: 1.2rem
+                width: 100%
+                text-align: center
+        .show-phone
+            display: none
+            background-color: #F1CB00
+            border-bottom-left-radius: 10px
+            color: black
+            font-weight: 600
+            font-size: 1.2rem
+            border-bottom-right-radius: 10px 
+            width: 100%
+            transform: translateY(10px)
+            justify-content: center
+            align-items: center

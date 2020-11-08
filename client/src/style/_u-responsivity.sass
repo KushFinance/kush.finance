@@ -1,21 +1,14 @@
+
+
+@media only screen and (min-width: 1170px)
+    .header--wallet
+        display: none
 @media only screen and (max-width: 900px) 
     .button-drawer
         display: block
         z-index: 100
-    .kushShowcase .footer
-        display: flex
     .balance, .sidebar
         display: none
-    .content
-        width: 100%
-        padding: 24px 42px 0 42px
-    .App
-        min-height: 100vh
-        margin: 0
-        
-    .menu ul li a img
-        width: 48px
-        height: 48px
     .hideOnMobile
         display: none
     .farm-buttons
@@ -25,6 +18,7 @@
             margin-left: 0 !important
     .process-button
         max-width: 100%
+        
 @media only screen and (max-width: 700px) 
     .subpage.wallet .flex
         flex-direction: column
@@ -32,6 +26,56 @@
             margin: 10px auto
             
 
-@media only screen and (min-width: 1780px) 
-    .float-wallet
-        background: linear-gradient(90deg, rgba(51,51,51,.9) 0%, rgba(29,29,29,.9) 100%)
+@media only screen and (max-width: 1170px)
+    .header
+        .label 
+            height: 50px
+            width: 50px
+            h1
+                display: none
+        .header--wallet
+            display: flex !important
+    .wallet
+        margin: 0 auto
+        width: 100%
+        &:not(.show)
+            display: none
+
+@media only screen and (max-width: 900px)
+    .pages, .subpage
+        width: calc(100vw - 60px)
+    .menu
+       grid-template-columns: 1fr 1fr
+    .wallet
+        width: calc(100vw - 60px)
+    .about
+        grid-template-columns: 1fr !important
+
+
+@media only screen and (max-width: 520px)
+    .show-phone
+        display: flex !important
+    .pages
+        align-items: center
+        justify-content: center
+        margin-bottom: 20px
+    .menu
+        grid-template-columns: 1fr 1fr
+        grid-column-gap: 10px
+        grid-row-gap: 10px
+        justify-items: center
+        width: unset
+        .menu--link
+            min-width: 120px
+            height: 142px
+            width: 100%
+            padding: 10px 0
+            a
+                justify-content: flex-start
+            img
+                height: 66px !important
+            &.blocked 
+                &::before, &::after
+                    display: none
+            span
+                font-size: 18px
