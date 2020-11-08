@@ -42,19 +42,22 @@ export default function About() {
       />
       <div className="about">
         <Image preview={false} width={250} src={Logo} />
-        <List
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={ <Avatar src={item.avatar} /> }
-                title={<a href={item.etherscan}>{item.title}</a>}
-                description={item.description}
-                />
-            </List.Item>
-          )}
-        />
+        <div>
+          <List
+            itemLayout="horizontal"
+            dataSource={data}
+            renderItem={(item) => (
+              <List.Item>
+                <List.Item.Meta
+                  avatar={ <Avatar src={item.avatar} /> }
+                  title={<a href={item.etherscan}>{item.title}</a>}
+                  description={item.description}
+                  />
+              </List.Item>
+            )}
+          />
+          <a href="https://learn.kush.finance" target="_blank" rel="noopener noreferrer">Learn more here</a>
+        </div>
       </div>
     </div>
   );
