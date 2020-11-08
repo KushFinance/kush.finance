@@ -1,11 +1,10 @@
 import React from "react";
 import Logo from "../assets/logo.png";
-import { PageHeader, Image, Typography, List, Avatar } from "antd";
+import { PageHeader, Image, List, Avatar } from "antd";
 import kseedLogoIMG from "../assets/logo.png";
 import kKUSHicon from "../assets/kKUSH.png";
 import kOGLogo from "../assets/kOGlogo.png";
 import { createFromIconfontCN } from "@ant-design/icons";
-const { Paragraph } = Typography;
 const SpiryIcon = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1952854_f44r3qwutiv.js",
 });
