@@ -36,7 +36,7 @@ export default function Wallet(props) {
         setKseedTotalSeeded(web3.utils.fromWei(seeded));
       }
       if (kushOGInstance.methods) {
-        let supply = await kushOGInstance.methods.totalStakedSupply().call();
+        let supply = await kushOGInstance.methods.totalSupply().call();
         setKushOGTotalSupply(web3.utils.fromWei(supply));
       }
     })();
@@ -67,13 +67,13 @@ export default function Wallet(props) {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Balance <span className="walletPrice"> ${parseFloat(kseedBalance).toFixed(2)} </span>
+          Balance <span className="walletPrice"> {parseFloat(kseedBalance).toFixed(2)} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Seeded <span className="walletPrice"> ${parseFloat(kseedTotalSeeded).toFixed(2)} </span>
+          Total Seeded <span className="walletPrice"> {parseFloat(kseedTotalSeeded).toFixed(2)} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <span className="walletPrice"> ${parseFloat(kseedTotalSupply).toFixed(2)} </span>
+          Total Supply <span className="walletPrice"> {parseFloat(kseedTotalSupply).toFixed(2)} </span>
         </div>
 
         <div className='coinTitle'>
@@ -97,15 +97,15 @@ export default function Wallet(props) {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Balance <span className="walletPrice"> ${parseFloat(kushBalance).toFixed(2)} </span>
+          Balance <span className="walletPrice"> {parseFloat(kushBalance).toFixed(2)} </span>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <span className="walletPrice"> ${parseFloat(kushTotalSupply).toFixed(2)} </span>
+          Total Supply <span className="walletPrice"> {parseFloat(kushTotalSupply).toFixed(2)} </span>
         </div>
-        {/* <div className='coinTitle'>
+         <div className='coinTitle'>
           <div className='flex align-end'>
             <h2 className='m0'>kOG</h2>
-            <span>USD 10.0</span>
+            
           </div>
           <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer">
             <svg
@@ -124,7 +124,7 @@ export default function Wallet(props) {
         </div>
         <div className='flex spaced align-end'>
           Total Supply <span className="walletPrice"> ${parseFloat(kushOGTotalSupply).toFixed(2)} </span>
-        </div> */}
+        </div> 
       </div>
     </div>
   )

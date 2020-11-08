@@ -31,19 +31,21 @@ export default function Menu(props) {
         <div className="menu">
             <Address href="/seeding" handleChangePage={()=>{setPage("/seeding")}}>
                 <img src={SeedingIMG} alt="Farm kKUSH"></img>
-                <span> Farm kushKUSH </span>
+                <span>Seed kSEED</span>
+                <span> Earn kKUSH</span>
             </Address>
             <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
                 <img src={FarmingIMG} alt="farming"></img>
-                <span> Farm kushOG </span>
+                <span>Farm kKUSH/ETH</span>
+                <span>Earn kushOG</span>
             </Address>
             <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
                 <img src={GovernIMG} alt="Govern"></img>
-                <span> Govern </span>
+                <span>Govern</span>
             </Address>
             <Address href="/about" handleChangePage={()=>{setPage("/about")}}>
                 <img src={KushIMG} alt="about"></img>
-                <span> About </span>
+                <span>About</span>
             </Address>
             <div className="menu--link blocked">
                 <img src={KushArtIMG} alt="Kush Art"></img>
