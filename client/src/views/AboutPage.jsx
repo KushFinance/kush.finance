@@ -9,26 +9,34 @@ const SpiryIcon = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1952854_f44r3qwutiv.js",
 });
 
+const {
+  REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS,
+  REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS,
+  REACT_APP_KUSHOG_TOKEN_CONTRACT_ADDRESS,
+  REACT_APP_KSEEDGOV_TOKEN_CONTRACT_ADDRESS,
+  REACT_APP_KUSHOG_UNI_TOKEN_CONTRACT_ADDRESS
+} = process.env;
+
 export default function About() {
   
   const data = [
     {
       title: 'kSEED',
       avatar: kseedLogoIMG,
-      description: 'address: 0x3f09400313e83d53366147e3ea0e4e2279d80850',
-      etherscan: 'https://etherscan.io/address/0x3f09400313e83d53366147e3ea0e4e2279d80850'
+      description: <>address: {REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS}<br/>governance: {REACT_APP_KSEEDGOV_TOKEN_CONTRACT_ADDRESS}</>,
+      etherscan: `https://etherscan.io/address/${REACT_APP_KSEED_TOKEN_CONTRACT_ADDRESS}`
     },
     {
       title: 'kushKUSH',
       avatar: kKUSHicon,
-      description: 'address: 0x538b4b507d57bf9ebd8847ec395b7b061c150181',
-      etherscan: 'https://etherscan.io/address/0x538b4b507d57bf9ebd8847ec395b7b061c150181'
+      description: <>address: {REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS}</>,
+      etherscan: `https://etherscan.io/address/${REACT_APP_KUSH_TOKEN_CONTRACT_ADDRESS}`
     },
     {
       title: 'kushOG',
       avatar: kOGLogo,
-      description: 'address: 0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4',
-      etherscan: 'https://etherscan.io/address/0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4'
+      description: <>address: {REACT_APP_KUSHOG_TOKEN_CONTRACT_ADDRESS}<br/>uni contract: {REACT_APP_KUSHOG_UNI_TOKEN_CONTRACT_ADDRESS}</>,
+      etherscan: `https://etherscan.io/address/${REACT_APP_KUSHOG_TOKEN_CONTRACT_ADDRESS}`
     },
   ];
 
@@ -52,7 +60,7 @@ export default function About() {
                   avatar={ <Avatar src={item.avatar} /> }
                   title={<a href={item.etherscan}>{item.title}</a>}
                   description={item.description}
-                  />
+                />
               </List.Item>
             )}
           />
