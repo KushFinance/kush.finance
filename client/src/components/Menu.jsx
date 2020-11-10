@@ -32,11 +32,11 @@ export default function Menu(props) {
             <Address href="/seeding" handleChangePage={()=>{setPage("/seeding")}}>
                 <img src={SeedingIMG} alt="Farm kKUSH"></img>
                 <span>Seed kSEED</span>
-                <span> Earn kKUSH</span>
+                <span>Earn kKUSH</span>
             </Address>
             <Address href="/farming" handleChangePage={()=>{setPage("/farming")}}>
                 <img src={FarmingIMG} alt="farming"></img>
-                <span>Farm kKUSH/ETH</span>
+                <span>Farm kKUSH</span>
                 <span>Earn kushOG</span>
             </Address>
             <Address href="/govern" handleChangePage={()=>{setPage("/govern")}}>
