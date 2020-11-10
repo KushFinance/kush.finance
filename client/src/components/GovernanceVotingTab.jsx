@@ -53,7 +53,7 @@ export default function GovernanceVotingTab() {
         setContractAddress(kseedGovInstance._address);
       }
     })();
-  }, [kseedGovInstance.methods, kseedInstance, web3]);
+  }, [kseedGovInstance.methods, kseedInstance.methods, web3]);
 
   const checkAllowance = async (amount) => {
     const allowance = await kseedInstance.methods.allowance(accounts[0], contractAddress).call();

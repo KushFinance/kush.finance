@@ -192,7 +192,7 @@ export default function FarmingPage() {
       <p> 20% of all minted kushOG will go to a funding contract.</p>
       <p> kushOG is a rarity. The only way to mint more k.OG is to provide liquidity for k.KUSH.</p>
       
-      <Divider>How to farm kushOG[$kOG]?</Divider>
+      <Divider>How to farm kushOG ($kOG)?</Divider>
       <h2>Instructions </h2>
       <p> 1. Go to Uniswap kKush/ETH pair. </p>
       <p> 2. Add Liquidity. </p>
@@ -214,15 +214,15 @@ export default function FarmingPage() {
           /
       <img className="balance-logo-image" src={ethLogo} alt="ETH logo" />
       <div className="block amount-staked-image">
-      </div>  
-        <div className="block">
-          <div className="desc">Amount in Wallet</div>
-          <div className="val kush-balance">
-            {kushOGUniAmount}
-          </div>
+      </div>
+      <div className="block">
+        <div className="desc">Amount in Wallet</div>
+        <div className="val kush-balance">
+          {kushOGUniAmount}
         </div>
-        <div className="block">
-          <div className="desc">Amount farming</div>
+      </div>
+      <div className="block">
+        <div className="desc">Amount farming</div>
           <div className="val kush-balance">
             {stakedAmount}
           </div>

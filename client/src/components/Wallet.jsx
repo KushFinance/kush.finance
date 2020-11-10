@@ -123,7 +123,7 @@ export default function Wallet(props) {
           </a>
         </div>
         <div className='flex spaced align-end'>
-          Total Supply <span className="walletPrice"> ${parseFloat(kushOGTotalSupply).toFixed(2)} </span>
+          Total Supply <span className="walletPrice"> {parseFloat(kushOGTotalSupply).toFixed(2)} </span>
         </div> 
       </div>
     </div>
