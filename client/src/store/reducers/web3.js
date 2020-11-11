@@ -27,7 +27,7 @@ const kushInstance = (state = {}, action) => {
 
 const kushOGInstance = (state = {}, action) => {
   switch (action.type) {
-    case 'CREATE_KUSHOG_INSTANCE':
+    case 'CREATE_KUSH_OG_INSTANCE':
       return action.instance;
     default:
       return state;

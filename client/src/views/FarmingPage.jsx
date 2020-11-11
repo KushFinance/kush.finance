@@ -153,27 +153,30 @@ export default function FarmingPage() {
     }
   };
 
-  useEffect(()=>{
-    (async ()=>{
+  useEffect(() => {
+    (async () => {
       if(kushOGInstance.methods && kushOGUniInstance.methods){
+        console.log('main', kushOGInstance.methods)
+        console.log('uni', kushOGUniInstance.methods)
+
         try {
-          getkushOGUniStakeAmount();
-          getkushOGSupply();
-          getkushOGUniAllowance();
-          getkushOGUniAmount();
-          getRewardsAmount();
-          
+          await getkushOGUniStakeAmount();
+          await getkushOGSupply();
+          await getkushOGUniAllowance();
+          await getkushOGUniAmount();
+          await getRewardsAmount();
+
           setLoaded(true);
         } catch (error) {
           alert(
             `Failed to load web3, accounts, or contract. Check console for details.`
-            );
-            console.error(error);
+          );
+          console.error(error);
         }
       }
     })();
   }
-  ,[web3, kushOGInstance, kushOGUniInstance]);
+  ,[web3, kushOGInstance.methods, kushOGUniInstance.methods]);
 
   return (
     <div className="subpage">

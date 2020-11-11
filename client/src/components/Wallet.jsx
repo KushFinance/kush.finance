@@ -8,36 +8,36 @@ export default function Wallet(props) {
   const [kseedTotalSupply, setKseedTotalSupply] = useState('0')
   const [kushTotalSupply, setKushTotalSupply] = useState('0')
   const [kushBalance, setKushBalance] = useState('0')
+  const [kushOGBalance, setKushOGBalance] = useState('0')
   const [kushOGTotalSupply, setKushOGTotalSupply] = useState('0')
 
-  
   const kseedInstance = useSelector((state) => state.kseedInstance)
   const kushInstance = useSelector((state) => state.kushInstance)
   const kushOGInstance = useSelector((state) => state.kushOGInstance)
   const web3 = useSelector(state => state.web3Instance);
   const accounts = useSelector(state => state.accounts);
-  
+
   useEffect(() => {
     (async () => {
       if (kseedInstance.methods) {
-        let supply = await kseedInstance.methods.totalSupply().call();
+        const supply = await kseedInstance.methods.totalSupply().call();
         setKseedTotalSupply(web3.utils.fromWei(supply));
-        console.log(kseedInstance.methods)
-        let balance = await kseedInstance.methods.balanceOf(accounts[0]).call();
+        const balance = await kseedInstance.methods.balanceOf(accounts[0]).call();
         setKseedBalance(web3.utils.fromWei(balance))
       }
       if (kushInstance.methods) {
-        let supply = await kushInstance.methods.totalSupply().call();
+        const supply = await kushInstance.methods.totalSupply().call();
         setKushTotalSupply(web3.utils.fromWei(supply));
-        let balance = await kushInstance.methods.balanceOf(accounts[0]).call();
+        const balance = await kushInstance.methods.balanceOf(accounts[0]).call();
         setKushBalance(web3.utils.fromWei(balance));
-
-        let seeded = await kushInstance.methods.totalStakedSupply().call();
+        const seeded = await kushInstance.methods.totalStakedSupply().call();
         setKseedTotalSeeded(web3.utils.fromWei(seeded));
       }
       if (kushOGInstance.methods) {
-        let supply = await kushOGInstance.methods.totalSupply().call();
+        const supply = await kushOGInstance.methods.totalSupply().call();
         setKushOGTotalSupply(web3.utils.fromWei(supply));
+        const balance = await kushOGInstance.methods.balanceOf(accounts[0]).call();
+        setKushOGBalance(web3.utils.fromWei(balance));
       }
     })();
   }, [kseedInstance, kushInstance, kushOGInstance, web3]);
@@ -122,6 +122,9 @@ export default function Wallet(props) {
             </svg>
           </a>
         </div>
+        <div className='flex spaced align-end'>
+          Balance <span className="walletPrice"> {parseFloat(kushOGBalance).toFixed(2)} </span>
+        </div> 
         <div className='flex spaced align-end'>
           Total Supply <span className="walletPrice"> {parseFloat(kushOGTotalSupply).toFixed(2)} </span>
         </div> 

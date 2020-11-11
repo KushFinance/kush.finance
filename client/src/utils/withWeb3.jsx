@@ -46,6 +46,7 @@ function withWeb3(Component) {
 
     async function createkKushOGInstance() {
       const instance = await creator.createInstance(KushOGToken.abi, REACT_APP_KUSHOG_TOKEN_CONTRACT_ADDRESS);
+      console.log('main instance', instance)
       dispatch({ type: 'CREATE_KUSH_OG_INSTANCE', instance });
     }
 
@@ -70,6 +71,7 @@ function withWeb3(Component) {
       if (!kushOGInstance.methods) {
         createkKushOGInstance();
       }
+
       if (!kushOGUniInstance.methods) {
         createkKushOGUniInstance();
       }
