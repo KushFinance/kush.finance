@@ -180,7 +180,7 @@ export default function GovernanceVotingTab() {
               description={
                 <Row>
                   <Col md={16} sm={24}>
-                    {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes (kSEED)`}
+                    {`${Number(proposal['4'][index]* 10 ** -18).toFixed(2)} votes ($kSEED)`}
                   </Col>
                   <Col md={8} sm={24}>
                     <Button
@@ -231,7 +231,7 @@ export default function GovernanceVotingTab() {
                 description={
                   <Row>
                     <Col md={16} sm={24}>
-                      {`${Number(proposal['4'][index]* 10 ** -18).toFixed(18)} votes ($kSeed)`}
+                      {`${Number(proposal['4'][index]* 10 ** -18).toFixed(2)} votes ($kSEED)`}
                     </Col>
                   </Row>
                 }
