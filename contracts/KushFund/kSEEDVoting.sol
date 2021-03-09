@@ -50,12 +50,14 @@
 pragma solidity ^0.6.6;
 pragma experimental ABIEncoderV2;
 
-import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
+
 import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
 import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol';
 import './KushFundInterface.sol';
+//import './Connector.sol';
+
 
 contract kSEEDVoting {
   using SafeERC20 for IERC20;
@@ -303,7 +305,7 @@ contract kSEEDVoting {
     kkushAddress = _addr;
     kkushIERC20 = IERC20(kkushAddress);
 
-    emit NewkKUshAddress(kkushAddress);
+    emit NewkKushAddress(kkushAddress);
   }
 
   function setkushOGAddress(address _addr)
@@ -437,11 +439,11 @@ contract kSEEDVoting {
       determinekKushCost(msg.sender, _votes)
     );
     //Store KUSH in burn amount variable
-    burnPool.add(determineCkKushCost(msg.sender, _votes));
+    burnPool.add(determinekKushCost(msg.sender, _votes));
 
     if (votedkSeed[msg.sender].kseedLocked > 0) {
       if (votedkSeed[msg.sender].releaseBlock < block.number) {
-        kSeedIERC20.safeTransfer(
+        kseedIERC20.safeTransfer(
           msg.sender,
           votedkSeed[msg.sender].kseedLocked
         );
@@ -551,8 +553,8 @@ contract kSEEDVoting {
     currentVotingEndBlock = block.number.add(
       currentVotingStartBlock.add(votingPeriodBlockLength)
     );
-    NConnector connectorContract = NConnector(connectorAddress);
-    NFund fundContract = NFund(fundAddress);
+    Connector connectorContract = Connector(connectorAddress);
+    KushFund fundContract = KushFund(fundAddress);
     connectorContract.executeBid(
       currentBids[topBidAddress].functionCode,
       currentBids[topBidAddress].functionName,
@@ -667,7 +669,7 @@ contract kSEEDVoting {
       _kseedAmount
     );
     uint256 kseedSupply = ERC20(kseedAddress).totalSupply();
-    uint256 kkushSupply = ERC20(kkushUni).totalSupply();
+    uint256 kkushSupply = ERC20(kkushpUni).totalSupply();
     uint256 rewardsPool = kseedSupply;
 
     if (isRewardingkKush) {

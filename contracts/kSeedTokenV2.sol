@@ -858,7 +858,7 @@ interface IWETH {
     event Withdrawal(address indexed src, uint256 wad);
 }
 
-interface kSeedV2 {
+interface kKushV2 {
     function kseedV2LPStaked(address, uint256) external;   
     function kseedV2LPUnstaked(address, uint256) external;
     function kOGV2LPStaked(address, uint256) external;

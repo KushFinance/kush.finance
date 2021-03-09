@@ -9,6 +9,7 @@
   "private": false,
   "dependencies": {
     "@myetherwallet/mewconnect-web-client": "^2.1.5-beta.1",
+    "@openzeppelin/contracts": "^3.4.1",
     "@uniswap/v2-periphery": "^1.1.0-beta.0",
     "@walletconnect/web3-provider": "^1.2.2",
     "dotenv": "^8.2.0",
