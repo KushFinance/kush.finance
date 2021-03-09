@@ -999,11 +999,11 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
 
         if (block.number > userStake[msg.sender].lastBlockChecked) {
             uint256 rewardBlocks = block.number.sub(userStake[msg.sender].lastBlockChecked);
-            uint256 stakedAmount = userStake[msg.sender].stakedkSeedV2LP;
+            uint256 stakedAmount = userStake[msg.sender].stakedkseedV2LP;
             if (userStake[msg.sender].stakedkushOGV2LP > 0) {
                 stakedAmount = stakedAmount.add(userStake[msg.sender].stakedkushOGV2LP);
             }
-            if (userStake[msg.sender].stakekushOGV2LP > 0) {
+            if (userStake[msg.sender].stakedkushOGV2LP > 0) {
                 uint256 reward = stakedAmount.mul(rewardBlocks) / miningDifficulty;
                 userStake[msg.sender].kseedV2Rewards = userStake[msg.sender].kseedV2Rewards.add(reward);
                 userStake[msg.sender].lastBlockChecked = block.number;
@@ -1083,8 +1083,8 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
        IERC20(kseedV2LP).safeTransferFrom(msg.sender, address(this), _amount);
        userStake[msg.sender].stakedkseedV2LP = userStake[msg.sender].stakedkseedV2LP.add(_amount);
        userStake[msg.sender].blockStaked = block.number;
-       //Notify CatnipV2 contract
-       kKUSHV2(kkushV2).kseedV2LPStaked(msg.sender, _amount);
+       //Notify kKush 2.0 contract
+       kKushV2(kkushV2).kseedV2LPStaked(msg.sender, _amount);
        
        emit kseedV2LPStaked(msg.sender, _amount);
     }
@@ -1093,12 +1093,12 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
       * @param _amount Amount of liquidity tokens being unstaked.
       */
     function unstakekseedV2LP(uint256 _amount) public _updateRewards delegatedOnly {
-       require(_amount <= userStake[msg.sender].stakedkSeedV2LP, "Insufficient stake balance");
+       require(_amount <= userStake[msg.sender].stakedkseedV2LP, "Insufficient stake balance");
        IERC20(kseedV2LP).safeTransfer(msg.sender, _amount);
        userStake[msg.sender].stakedkseedV2LP = userStake[msg.sender].stakedkseedV2LP.sub(_amount);
 
-       //Notify kKUSHV2 contract
-       kKUSHV2(kkushV2).kseedV2LPUnstaked(msg.sender, _amount);
+       //Notify kKush 2.0 contract
+       kKushV2(kkushV2).kseedV2LPUnstaked(msg.sender, _amount);
        
        emit kseedV2LPUnstaked(msg.sender, _amount);
     }
@@ -1110,8 +1110,8 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
        IERC20(kOGV2LP).safeTransferFrom(msg.sender, address(this), _amount);
        userStake[msg.sender].stakedkushOGV2LP = userStake[msg.sender].stakedkushOGV2LP.add(_amount);
 
-       //Notify CatnipV2 contract
-       kKUSHV2(kkushV2).kOGV2LPStaked(msg.sender, _amount);
+       //Notify kKush 2.0 contract
+       kKushV2(kkushV2).kOGV2LPStaked(msg.sender, _amount);
        
        emit kOGV2LPStaked(msg.sender, _amount);
     }
@@ -1122,10 +1122,10 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
     function unstakekushOGV2LP(uint256 _amount) public _updateRewards delegatedOnly {
        require(_amount <= userStake[msg.sender].stakedkushOGV2LP, "Insufficient stake balance");
        IERC20(kOGV2LP).safeTransfer(msg.sender, _amount);
-       userStake[msg.sender].stakedDNyanV2LP = userStake[msg.sender].stakedkushOGV2LP.sub(_amount);
+       userStake[msg.sender].stakedkushOGV2LP = userStake[msg.sender].stakedkushOGV2LP.sub(_amount);
 
-       //Notify CatnipV2 contract
-        kKUSHV2(kkushV2).kOGV2LPUnstaked(msg.sender, _amount);
+       //Notify kKUSH 2.0 contract
+        kKushV2(kkushV2).kOGV2LPUnstaked(msg.sender, _amount);
        
        emit kOGV2LPUnstaked(msg.sender, _amount);
     }
@@ -1150,11 +1150,11 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
         if (block.number > stakerLastBlock) {
             uint256 rewardBlocks = block.number.sub(stakerLastBlock);
             
-            uint256 stakedAmount = userStake[staker].stakedkSeedV2LP;
+            uint256 stakedAmount = userStake[staker].stakedkseedV2LP;
             if (userStake[staker].stakedkushOGV2LP > 0) {
                 stakedAmount = stakedAmount.add(userStake[staker].stakedkushOGV2LP);
             }
-            if (userStake[staker].stakedkSeedV2LP > 0) {
+            if (userStake[staker].stakedkseedV2LP > 0) {
                 uint256 reward = stakedAmount.mul(rewardBlocks) / miningDifficulty;
                 currentRewards = currentRewards.add(reward);
                 
@@ -1188,8 +1188,8 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
           require(ERC20(kseedV2LP).balanceOf(_recipient) == 0, "Recipient holds kSEED-2 liquidity.");
           require(lastLPCount <= ERC20(kseedV2LP).totalSupply());
         }
-        // require(ERC20(nyanV2LP).balanceOf(_recipient) == 0, "Recipient holds Nyan-2 liquidity.");
-        if((_recipient == uniswapRouterV2) || (_recipient == nyanV2LP)) {
+        // require(ERC20(kseedV2LP).balanceOf(_recipient) == 0, "Recipient holds kSEED-2.0 liquidity.");
+        if((_recipient == uniswapRouterV2) || (_recipient == kseedV2LP)) {
           // Check if the recipient is an address that has staked or holds LP
           require(ERC20(kseedV2LP).balanceOf(_recipient) == 0, "Recipient holds kSEED-2 liquidity.");
           
@@ -1209,9 +1209,9 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
     function transferFrom(address _sender, address _recipient, uint256 _amount) delegatedOnly public override returns(bool) {
         uint256 transferFee = _amount.div(100);
 
-        if((msg.sender == uniswapRouterV2) || (msg.sender == nyanV2LP)) { 
+        if((msg.sender == uniswapRouterV2) || (msg.sender == kseedV2LP)) { 
           require(ERC20(kseedV2LP).balanceOf(_sender) == 0, "Recipient holds kSEED-2 liquidity.");
-          // require(userStake[msg.sender].nyanV2LPStaked == 0);
+          // require(userStake[msg.sender].kseedV2LPStaked == 0);
         }
 
         if ((_recipient == uniswapRouterV2) || (_recipient == kseedV2LP)) {
@@ -1225,7 +1225,7 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
         return super.transferFrom(_sender, _recipient, _amount.sub(transferFee));
     }
     
-    /** @notice Set the address for the nyanV2 liquidity token.
+    /** @notice Set the address for the kseedV2 liquidity token.
       * @param _V2LP Address of the liquidity token.
       */
     function setkSeedV2LPAddress(address _V2LP) public _onlyOwner delegatedOnly {
@@ -1234,22 +1234,22 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
        emit kseedV2LPAddressSet(_V2LP);
     }  
     
-    // /** @notice Set the address for the dNyanV2 liquidity token.
+    // /** @notice Set the address for the dkseedV2 liquidity token.
     //   * @param _V2LP Address of the liquidity token.
     //   */
-    // function setDNyanV2LPAddress(address _V2LP) public _onlyOwner delegatedOnly {
-    //    dNyanV2LP = _V2LP;
+    // function setDkseedV2LPAddress(address _V2LP) public _onlyOwner delegatedOnly {
+    //    dkseedV2LP = _V2LP;
        
-    //    emit dNyanV2LPAddressSet(_V2LP);
+    //    emit dkseedV2LPAddressSet(_V2LP);
     // } 
     
-    // /** @notice Set the address for the Nyan Fund.
-    //   * @param _fund Address of the Nyan Fund.
+    // /** @notice Set the address for the kseed Fund.
+    //   * @param _fund Address of the kseed Fund.
     //   */
-    // function setNyanFundAddress(address _fund) public _onlyOwner delegatedOnly {
+    // function setkseedFundAddress(address _fund) public _onlyOwner delegatedOnly {
     //    fundAddress = _fund;
        
-    //    emit NyanFundAddressSet(_fund);
+    //    emit kseedFundAddressSet(_fund);
     // } 
     
     event UniswapAddressesSet(address factory, address router);
@@ -1281,7 +1281,7 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
     //    emit LGEEndBlockSet(_block);
     // } 
     
-    /** @notice Set the nyanV2LP address.
+    /** @notice Set the kseedV2LP address.
       */
     function getV2UniPair() public returns (address) {
         require(kseedV2LP == address(0));
@@ -1293,39 +1293,39 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
         return kseedV2LP;
     }
     
-    /** @notice Add NyanV1 and ETH to the contract.
-      * @param _nyanAmount Amount of NyanV1 to add.
+    /** @notice Add kseedV1 and ETH to the contract.
+      * @param _kseedAmount Amount of kseedV1 to add.
       */
-    // function addNyanAndETH(uint256 _nyanAmount) public payable delegatedOnly {
+    // function addkseedAndETH(uint256 _kseedAmount) public payable delegatedOnly {
     //   require(!isETHLGEOver, "ETH LGE is over");
-    //   require (_nyanAmount > 0, "Insufficient Nyan");
-    //   uint256 ETHFee = _nyanAmount.div(10);
+    //   require (_kseedAmount > 0, "Insufficient kseed");
+    //   uint256 ETHFee = _kseedAmount.div(10);
     //   require(ETHFee <= msg.value, "Insufficient ETH");
-    //   IERC20(nyanV1).safeTransferFrom(msg.sender, address(this), _nyanAmount);
-    //   _mint(address(this), _nyanAmount);
-    //   totalNyanV1Swapped = totalNyanV1Swapped.add(_nyanAmount);
-    //   userETHLGE[msg.sender].nyanContributed = userETHLGE[msg.sender].nyanContributed.add(_nyanAmount);
+    //   IERC20(kseedV1).safeTransferFrom(msg.sender, address(this), _kseedAmount);
+    //   _mint(address(this), _kseedAmount);
+    //   totalkseedV1Swapped = totalkseedV1Swapped.add(_kseedAmount);
+    //   userETHLGE[msg.sender].kseedContributed = userETHLGE[msg.sender].kseedContributed.add(_kseedAmount);
     //   userETHLGE[msg.sender].ETHContributed = userETHLGE[msg.sender].ETHContributed.add(msg.value);
-    //   totalNyanSupplied = totalNyanSupplied.add(_nyanAmount);
+    //   totalkseedSupplied = totalkseedSupplied.add(_kseedAmount);
     //   totalETHSupplied = totalETHSupplied.add(msg.value);
-    //   emit NyanxETHSupplied(msg.sender, _nyanAmount, msg.value);
+    //   emit kseedxETHSupplied(msg.sender, _kseedAmount, msg.value);
     // } 
     
-    /** @notice Initialize the NyanV2/ETH pool on UniswapV2.
+    /** @notice Initialize the kseedV2/ETH pool on UniswapV2.
       */
     // function initializeV2ETHPool() public {
     //     require(block.number >= ETHLGEEndBlock, "The ETH LGE has not ended");
     //     require(!isETHLGEOver, "ETH LGE complete");
     
-    //     IUniswapV2Pair v1LP = IUniswapV2Pair(nyanV1LP);
+    //     IUniswapV2Pair v1LP = IUniswapV2Pair(kseedV1LP);
     //     uint112 v1ETH;
-    //     uint112 v1Nyan;
+    //     uint112 v1kseed;
     //     uint32 lastTimestamp;
-    //     (v1ETH, v1Nyan, lastTimestamp) = v1LP.getReserves();
-    //     uint256 lgeETHxV1Nyan = address(this).balance.mul(v1Nyan);
-    //     uint256 divV1ETH = lgeETHxV1Nyan.div(v1ETH);
+    //     (v1ETH, v1kseed, lastTimestamp) = v1LP.getReserves();
+    //     uint256 lgeETHxV1kseed = address(this).balance.mul(v1kseed);
+    //     uint256 divV1ETH = lgeETHxV1kseed.div(v1ETH);
         
-    //     IUniswapV2Pair v2LP = IUniswapV2Pair(nyanV2LP);
+    //     IUniswapV2Pair v2LP = IUniswapV2Pair(kseedV2LP);
     //     address WETH = IUniswapV2Router02(uniswapRouterV2).WETH();
     //     uint256 ETHBalance = address(this).balance;
     //     IWETH(WETH).deposit{value: ETHBalance}();
@@ -1333,18 +1333,18 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
     //     ERC20(address(this)).transfer(address(v2LP), divV1ETH);
     //     v2LP.mint(address(this));
         
-    //     require(ERC20(nyanV2LP).balanceOf(address(this)) > 0, "LP generation failed");
-    //     lpTokensGenerated = ERC20(nyanV2LP).balanceOf(address(this));
+    //     require(ERC20(kseedV2LP).balanceOf(address(this)) > 0, "LP generation failed");
+    //     lpTokensGenerated = ERC20(kseedV2LP).balanceOf(address(this));
     //     isETHLGEOver = true;
     // }
     
-    /** @notice Allows an LGE participant to claim a portion of NyanV2/ETH LP held by the contract.
+    /** @notice Allows an LGE participant to claim a portion of kseedV2/ETH LP held by the contract.
       */
     function claimETHLP() public {
-        require(isETHLGEOver, "ETH LGE is still ongoing");
-        require(userETHLGE[msg.sender].kseedContributed > 0);
+        require(isETHLGEOver, "ETH/KSEED LGE is still ongoing");
+        require(userETHLGE[msg.sender].kSEEDContributed > 0);
         require(!userETHLGE[msg.sender].claimed);
-        uint256 claimableLP = userETHLGE[msg.sender].kseedContributed.mul(lpTokensGenerated).div(totalkSeedSupplied);
+        uint256 claimableLP = userETHLGE[msg.sender].kSEEDContributed.mul(lpTokensGenerated).div(totalkSeedSupplied);
         ERC20(kseedV2LP).transfer(msg.sender, claimableLP);
         string memory tier;
         if (userETHLGE[msg.sender].ETHContributed < 3000000000000000000) {
@@ -1371,9 +1371,9 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
       */
     function claimETHLPAndStake() public {
         require(isETHLGEOver, "ETH LGE is still ongoing");
-        require(userETHLGE[msg.sender].kseedContributed > 0);
+        require(userETHLGE[msg.sender].kSEEDContributed > 0);
         require(!userETHLGE[msg.sender].claimed);
-        uint256 claimableLP = userETHLGE[msg.sender].kseedContributed.mul(lpTokensGenerated).div(totalkSeedSupplied);
+        uint256 claimableLP = userETHLGE[msg.sender].kSEEDContributed.mul(lpTokensGenerated).div(totalkSeedSupplied);
         string memory tier;
         if (userETHLGE[msg.sender].ETHContributed < 3000000000000000000) {
             tier = "COMMON";
@@ -1392,25 +1392,25 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
         }
         KushNFT(kushNFT).createNFT(msg.sender, tier);
         
-        userStake[msg.sender].stakedkSeedV2LP = userStake[msg.sender].stakedkSeedV2LP.add(claimableLP);
+        userStake[msg.sender].stakedkseedV2LP = userStake[msg.sender].stakedkseedV2LP.add(claimableLP);
         userStake[msg.sender].blockStaked = block.number;
-        //Notify CatnipV2 contract
-        kKUSHV2(kkushV2).kseedV2LPStaked(msg.sender, userStake[msg.sender].stakedkSeedV2LP);
+        //Notify kKush 2.0 contract
+        kKushV2(kkushV2).kseedV2LPStaked(msg.sender, userStake[msg.sender].stakedkseedV2LP);
         if (isVotingStakingLive) {
-          kSeedVoting(votingContract).kseedV2LPStaked(userStake[msg.sender].stakedkSeedV2LP, msg.sender);
+          kseedVoting(votingContract).kseedV2LPStaked(userStake[msg.sender].stakedkseedV2LP, msg.sender);
         }
         userETHLGE[msg.sender].claimed = true;
     }
     
-    // /** @notice Sets an address for the Nyan V1 LP contract.
-    //   * @param _nyanV1LP Address of the Nyan V1 LP contract
+    // /** @notice Sets an address for the kSEED V1 LP contract.
+    //   * @param _kseedV1LP Address of the kSEED V1 LP contract
     //   */
-    // function setNyanV1LPAddress(address _nyanV1LP) public _onlyOwner {
-    //     nyanV1LP = _nyanV1LP;
+    // function setkseedV1LPAddress(address _kseedV1LP) public _onlyOwner {
+    //     kseedV1LP = _kseedV1LP;
     // }
     
-    // /** @notice Sets an address for the NyanNFT contract.
-    //   * @param _nyanNFT Address of the NyanNFT contract
+    // /** @notice Sets an address for the kseedNFT contract.
+    //   * @param _kseedNFT Address of the kseedNFT contract
     //   */
     function setKushNFTAddress(address _kushNFT) public _onlyOwner {
         kushNFT = _kushNFT;
@@ -1423,11 +1423,11 @@ contract kSeedV2 is ERC20, kSeedV2DataLayout, Proxiable {
         kkushV2 = _kkushV2;
     }
     
-    // /** @notice Sets an address for the DNyan V2 contract.
-    //   * @param _dNyanV2 Address of the DNyan V2 contract
+    // /** @notice Sets an address for the Dkseed V2 contract.
+    //   * @param _dkseedV2 Address of the Dkseed V2 contract
     //   */
-    // function setDNyanV2(address _dNyanV2) public _onlyOwner {
-    //     dNyanV2 = _dNyanV2;
+    // function setDkseedV2(address _dkseedV2) public _onlyOwner {
+    //     dkseedV2 = _dkseedV2;
     // }
 
     /** @notice Sets if the Voting contract is live.

@@ -56,7 +56,7 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
 import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router01.sol';
 import './KushFundInterface.sol';
-//import './Connector.sol';
+import './Connector.sol';
 
 
 contract kSEEDVoting {
@@ -489,7 +489,7 @@ contract kSEEDVoting {
       currentBids[_address].strings,
       // //   currentBids[_address].bytesArr,
       currentBids[_address].chain,
-      currentBids[_address].vote
+      currentBids[_address].votes
     );
   }
 
@@ -513,7 +513,7 @@ contract kSEEDVoting {
       bidChains[id].addresses,
       bidChains[id].integers,
       bidChains[id].strings
-      // bidChains[id].bytesArr
+      // //   idChains[id].bytesArr
     );
   }
 
@@ -561,8 +561,9 @@ contract kSEEDVoting {
       currentBids[topBidAddress].addresses,
       currentBids[topBidAddress].integers,
       currentBids[topBidAddress].strings,
-      currentBids[topBidAddress].bytesArr
+      // //   currentBids[topBidAddress].bytesArr
     );
+    
 
     for (uint256 c = 0; c < currentBids[topBidAddress].chain.length; c++) {
       connectorContract.executeBid(
@@ -571,7 +572,7 @@ contract kSEEDVoting {
         bidChains[currentBids[topBidAddress].chain[c]].addresses,
         bidChains[currentBids[topBidAddress].chain[c]].integers,
         bidChains[currentBids[topBidAddress].chain[c]].strings,
-        bidChains[currentBids[topBidAddress].chain[c]].bytesArr
+        // bidChains[currentBids[topBidAddress].chain[c]].bytesArr
       );
     }
     //move voting round stuff to modifier
@@ -589,8 +590,8 @@ contract kSEEDVoting {
   }
 
   function executeBidNow() public _onlyOwner {
-    NConnector connectorContract = NConnector(connectorAddress);
-    NFund fundContract = NFund(fundAddress);
+    Connector connectorContract = Connector(connectorAddress);
+    KushFund fundContract = KushFund(fundAddress);
     connectorContract.executeBid(
       currentBids[topBidAddress].functionCode,
       currentBids[topBidAddress].functionName,
@@ -630,7 +631,7 @@ contract kSEEDVoting {
     _onlyConnector
     _updatePeriods
   {
-    NFund fundContract = NFund(fundAddress);
+    KushFund fundContract = KushFund(fundAddress);
     //Check that isDistributing is false
     require(!isDistributing, 'Already in distribution period');
     require(
@@ -676,7 +677,7 @@ contract kSEEDVoting {
       rewardsPool.add(kkushSupply);
     }
 
-    uint256 numerator = _kkushAmount.mul(currentDistributionAmount);
+    uint256 numerator = _kKushLPAmount.mul(currentDistributionAmount);
     require(numerator > rewardsPool);
     uint256 claimedAmount = numerator.div(rewardsPool);
     IERC20(currentDistributionAddress).safeTransfer(msg.sender, claimedAmount);

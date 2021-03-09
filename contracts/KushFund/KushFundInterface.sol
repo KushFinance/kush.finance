@@ -1,6 +1,6 @@
 pragma solidity ^0.6.6;
 
-interface ERC20 {
+interface KushFund {
   /**
    * @dev Returns the amount of tokens in existence.
    */
