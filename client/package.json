@@ -15,6 +15,7 @@
     "dot-env": "0.0.1",
     "erc20-meta-token": "^0.3.8",
     "node-sass": "^4.14.1",
+    "rc-util": "^5.8.1",
     "react": "16.13.1",
     "react-dom": "16.11.0",
     "react-redux": "^7.2.1",
