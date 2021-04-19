@@ -8,8 +8,7 @@ contract WidgetInterface {
 
 pragma solidity ^0.6.6;
 pragma experimental ABIEncoderV2;
-
-import './KushFundInterface.sol';
+import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 import './UniswapV2Interface.sol';
 import './WETHInterface.sol';
 import './YearnInterface.sol';
@@ -114,7 +113,7 @@ contract Connector {
     string[] memory strings,
     bytes32[] memory bytesArr
   ) internal {
-    ERC20 erc20 = ERC20(_addresses[0]);
+        ERC20 erc20 = ERC20(_addresses[0]);
     if (keccak256(bytes(functionName)) == keccak256(bytes('totalSupply'))) {
       erc20.totalSupply();
     }

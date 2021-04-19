@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'https://api.thegraph.com/subgraphs/name/uniswap'
+});
 
 export default function Wallet(props) {
 
@@ -16,6 +21,21 @@ export default function Wallet(props) {
   const kushOGInstance = useSelector((state) => state.kushOGInstance)
   const web3 = useSelector(state => state.web3Instance);
   const accounts = useSelector(state => state.accounts);
+
+  const [ethPrice, setEthPrice] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data: { data } } = await api.post('/uniswap-v2', {
+        query: `{
+          bundle(id: "1" ) {
+            ethPrice
+          }
+         }`
+      })
+      setEthPrice(data.bundle.ethPrice);
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -42,14 +62,132 @@ export default function Wallet(props) {
     })();
   }, [kseedInstance, kushInstance, kushOGInstance, web3]);
 
+  const [kseedPrice, setKseedPrice] = useState(null);
+  const [kkushPrice, setKkushPrice] = useState(null);
+  const [kushOGPrice, setKushOGPrice] = useState(null);
+
+  useEffect(() => {
+    const update = async () => {
+      if (!ethPrice) {
+        return null;
+      }
+      const { data: { data } } = await api.post('/uniswap-v2', {
+        query: `{
+          pair(id: "0xdcff4c70131b476595b449c7db17cd92663aa513"){
+              token0 {
+                id
+                symbol
+                name
+                derivedETH
+              }
+              token1 {
+                id
+                symbol
+                name
+                derivedETH
+              }
+              reserve0
+              reserve1
+              reserveUSD
+              trackedReserveETH
+              token0Price
+              token1Price
+              volumeUSD
+              txCount
+          }
+         }`
+      });
+      setKseedPrice(data.pair.token1Price * ethPrice);
+      setTimeout(update, 10000);
+    };
+
+    update();
+  }, [ethPrice]);
+
+  useEffect(() => {
+    const update = async () => {
+      if (!ethPrice) {
+        return null;
+      }
+      const { data: { data } } = await api.post('/uniswap-v2', {
+        query: `{
+          pair(id: "0xdd0e143868b34d97355f249a4ddffbee03fd0481"){
+              token0 {
+                id
+                symbol
+                name
+                derivedETH
+              }
+              token1 {
+                id
+                symbol
+                name
+                derivedETH
+              }
+              reserve0
+              reserve1
+              reserveUSD
+              trackedReserveETH
+              token0Price
+              token1Price
+              volumeUSD
+              txCount
+          }
+         }`
+      });
+      setKkushPrice(data.pair.token1Price * ethPrice);
+      setTimeout(update, 10000);
+    };
+
+    update();
+  }, [ethPrice]);
+
+  useEffect(() => {
+    const update = async () => {
+      if (!ethPrice) {
+        return null;
+      }
+      const { data: { data } } = await api.post('/uniswap-v2', {
+        query: `{
+          pair(id: "0xd4c7d60713d444c5bced429b1c41e5966e7375af"){
+              token0 {
+                id
+                symbol
+                name
+                derivedETH
+              }
+              token1 {
+                id
+                symbol
+                name
+                derivedETH
+              }
+              reserve0
+              reserve1
+              reserveUSD
+              trackedReserveETH
+              token0Price
+              token1Price
+              volumeUSD
+              txCount
+          }
+         }`
+      });
+      setKushOGPrice(data.pair.token1Price * ethPrice);
+      setTimeout(update, 10000);
+    };
+
+    update();
+  }, [ethPrice]);
+
   return (
     <div className={`wallet ${props.show && 'show'}`}>
       <h1>Wallet</h1>
       <div className='wallet--content'>
         <div className='coinTitle'>
-          <div className='flex align-end'>
+          <div className='flex align-center'>
             <h2 className='m0'>kSEED</h2>
-            {/* <span>USD 10.0</span> */}
+            <span>USD {kseedPrice && kseedPrice.toFixed(2)}</span>
           </div>
           <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
             <svg
@@ -77,9 +215,9 @@ export default function Wallet(props) {
         </div>
 
         <div className='coinTitle'>
-          <div className='flex align-end'>
+          <div className='flex align-center'>
             <h2 className='m0'>kKUSH</h2>
-            {/* <span>USD 10.0</span> */}
+            <span>USD {kkushPrice && kkushPrice.toFixed(2)}</span>
           </div>
           <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x538b4b507d57bf9ebd8847ec395b7b061c150181" target="_blank" rel="noopener noreferrer">
             <svg
@@ -103,9 +241,9 @@ export default function Wallet(props) {
           Total Supply <span className="walletPrice"> {parseFloat(kushTotalSupply).toFixed(2)} </span>
         </div>
          <div className='coinTitle'>
-          <div className='flex align-end'>
+          <div className='flex align-center'>
             <h2 className='m0'>kOG</h2>
-            
+            <span>USD {kushOGPrice && kushOGPrice.toFixed(2)}</span>
           </div>
           <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x8DdF8Af6A26D316Ac07269dd490BBFb31718A3d4" target="_blank" rel="noopener noreferrer">
             <svg
