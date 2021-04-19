@@ -189,7 +189,7 @@ export default function Wallet(props) {
             <h2 className='m0'>kSEED</h2>
             <span>USD {kseedPrice && kseedPrice.toFixed(2)}</span>
           </div>
-          <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x3f09400313e83d53366147e3ea0e4e2279d80850" target="_blank" rel="noopener noreferrer">
+          <a href="https://1inch.exchange/#/r/0x6ED8CD17EE5453E17eb731a6B2004aF53eA1f26a/ETH/kSEED" target="_blank" rel="noopener noreferrer">
             <svg
               width='25'
               height='25'
