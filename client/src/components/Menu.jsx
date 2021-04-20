@@ -7,9 +7,10 @@ import KushIMG from '../assets/kSeedLogo.png'
 import KushArtIMG from '../assets/Deal.png'
 import RPGlogo from '../assets/RPGlogo.png'
 
-const Address = (props) => {
+const Address = (props = {}) => {
+    const { isNew } = props;
     return (
-        <div className="menu--link">
+        <div className={`menu--link ${isNew ? 'new' : ''}`}>
             <Link 
                 onClick={props.handleChangePage}
                 to={props.href}
@@ -47,13 +48,13 @@ export default function Menu(props) {
                 <img src={KushIMG} alt="about"></img>
                 <span>About</span>
             </Address>
-            <div className="menu--link blocked">
+            <Address isNew href="#KushART" handleChangePage={()=>{window.open('https://opensea.io/collection/kushart-by-kush-finance-1', '_blank').focus()}}>
                 <img src={KushArtIMG} alt="Kush Art"></img>
                 <span> KushART </span>
-                <div className="show-phone">
-                    <span>Coming soon</span>
+                <div className="show-phone red">
+                    <span>New!</span>
                 </div>
-            </div>
+            </Address>
             <div className="menu--link blocked">
                 <img src={RPGlogo} alt="about"></img>
                 <span> KushRPG </span>
