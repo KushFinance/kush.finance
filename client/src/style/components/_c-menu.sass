@@ -61,6 +61,28 @@
                 font-size: 1.2rem
                 width: 100%
                 text-align: center
+        &.new
+            &::before
+                content: ''
+                width: 100%
+                position: absolute
+                left: 0
+                bottom: 0
+                height: 40px
+                background-color: #F11D00
+                border-bottom-left-radius: 10px
+                border-bottom-right-radius: 10px 
+            &::after
+                content: 'New!'
+                position: absolute
+                left: 50%
+                transform: translateX(-50%)
+                bottom: 6px
+                color: white
+                font-weight: 600
+                font-size: 1.2rem
+                width: 100%
+                text-align: center
         .show-phone
             display: none
             background-color: #F1CB00
